@@ -1,0 +1,5 @@
+RewriteEngine on
+
+RewriteRule !\.(js|ico|gif|jpg|jpeg|png|css|html|ttf|woff)$ index.php
+
+ErrorDocument 404 /404.html

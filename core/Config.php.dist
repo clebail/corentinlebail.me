@@ -1,0 +1,24 @@
+<?php
+class Core_Config {
+	public static function getConfigValue($path) {
+		$config = array();
+		
+		$config["debug/enable"] = true;
+		$config["debug/fileName"] = "/home/corentinlebail.me/www/logs/debug.log";
+		
+		$config["pdo/dns"] = "mysql:host=localhost;dbname=corentinlebail.me";
+		$config["pdo/user"] = "root";
+		$config["pdo/password"] = "root";
+		
+		$config["cache/enable"] = false;
+		$config["cache/host"] = "127.0.0.1";
+		$config["cache/port"] = 11211;
+		$config["cache/expire"] = 60*60;
+		
+		if(isset($config[$path])) {
+			return $config[$path];
+		}
+		
+		return null;
+	}
+}

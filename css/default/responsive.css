@@ -1,0 +1,325 @@
+/**
+ * MOBILE VERSION (MEDIA QUERIES)
+ */
+@media only screen and (max-width: 480px) {
+	#searchbox .split {
+		min-width: 100%;
+	}
+	#searchbox .right.split {
+		margin-top: 6px;
+	}
+}
+
+@media only screen and (max-width: 580px) {
+	.header .search input[type="text"]{
+		width: 300px;
+	}
+}
+
+@media only screen and (min-width: 680px) {
+	header h1.sticky {
+	    color: #FFF;
+	    font-size: 11px;
+	    padding: 3px 6px;
+	    background: #1fb5ac;
+	    display: inline-block;
+	    vertical-align: middle;
+	    margin-top: 10px;
+	    float: left;
+	    margin-bottom: 0;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	/**
+	 * GLOBAL
+	 * -------------------------------------------------------
+	 */
+	.goto {
+		float: none;
+	}
+	.goto.sticky {
+		top: 0;
+		z-index: 999;
+		width: 100%;
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		border-radius: 0;
+	}
+	.goto.sticky select {
+		width: 100%;
+		margin-top: 6px;
+	}
+
+	/**
+	 * LAYOUT
+	 * -------------------------------------------------------
+	 */
+	header {
+		padding: 0;
+		text-align: center;
+	}
+	header a#logo {
+		float: none;
+		display: inline-block;
+		margin: 15px 0;
+	}
+	header #login {
+		margin-top: 0;
+	}
+	header a.navigation,
+	header a.logout {
+		float: left;
+		background-position: 0 0;
+		margin: 11px 0 0 0;
+	}
+	header a.navigation {
+		margin-left: 5px;
+	}
+	header a.logout {
+		float: right;
+		margin-right: 5px;
+	}
+	#wrapper {
+		background: #FFF;
+		padding: 0 15px;
+	}
+	
+	.header h1 {
+		padding-bottom: 0;
+	}
+	
+	.header .right {
+		float: none;
+		margin-top: 0;
+		margin-bottom: 20px;
+	}
+
+	/**
+	 * NAVIGATION
+	 * -------------------------------------------------------
+	 */
+	#navigation {
+		display: none;
+		margin-bottom: 15px;
+	}
+	#navigation.show {
+		display: block;
+	}
+	#navigation li a {
+		font-size: 14px;
+		display: block;
+		color: #FFF;
+		text-decoration: none;
+		background: #666;
+		padding: 12px 15px;
+		border-bottom: 1px solid #555;
+	}
+	#navigation li a:hover {
+		background: #555;
+	}
+	#navigation li ul li a {
+		padding-left: 30px;
+	}
+	#navigation li.cache a {
+		color: #666;
+	}
+	#navigation li.cache a:hover {
+		background: #666;
+	}
+
+	/**
+	 * FORM
+	 * -------------------------------------------------------
+	 */
+	.form-group {
+		display: block;
+	}
+	.form-control {
+		margin-top: 4px;
+	}
+	.form-group label,.form-control {
+		display: block;
+		text-align: left;
+		width: 100%;
+	}
+	
+	
+}
+
+/**
+ * DESKTOP VERSION (MEDIA QUERIES)
+ */
+@media only screen and (min-width: 800px) {
+	/**
+	 * LAYOUT
+	 * -------------------------------------------------------
+	 */
+	header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 1;
+	}
+	#wrapper {
+		margin-top: 70px;
+	}
+
+	/**
+	 * NAVIGATION
+	 * -------------------------------------------------------
+	 */
+	#navigation {
+		position: fixed;
+		top: 54px;
+		left: 0;
+		width: 100%;
+		z-index: 1;
+		display: none;
+		list-style: none;
+		background: #666;
+	}
+	#navigation:after {
+		content: '';
+		clear: both;
+		display: block;
+	}
+	#navigation li {
+		display: block;
+		position: relative;
+		float: left;
+	}
+	#navigation li ul {
+		display: none;
+	}
+	#navigation li a {
+		display: block;
+		padding: 12px 20px;
+		text-decoration: none;
+		white-space: nowrap;
+		color: #FFF;
+	}
+	#navigation li.cache a {
+		color: #666;
+	}
+	#navigation li a:hover {
+		background: #555;
+	}
+	#navigation li.cache a:hover {
+		background: #666;
+	}
+	#navigation li a.active {
+		background: #555;
+	}
+	#navigation li:hover ul {
+		display: block;
+		position: absolute;
+		z-index: 9999;
+	}
+	#navigation li:hover li {
+		float: none;
+	}
+	#navigation li:hover a {
+		background: #555;
+	}
+	#navigation li:hover li a:hover {
+		background: #444;
+	}
+	#navigation li ul li {
+		min-width: 200px;
+	}
+	#navigation li a.has-child {
+		cursor: default;
+	}
+}
+
+@media only screen and (min-width: 1100px) {
+	#searchbox .right.split {
+		min-width: 500px;
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+	.table td:hover a.edit {
+		top: calc(50% - 16px);
+	}
+	/**
+	 * FORCE TABLE TO NOT BE LIKE TABLES ANYMORE
+	 * -------------------------------------------------------
+	 */
+	.table,
+	.table tbody,
+	.table th,
+	.table td,
+	.table tr {
+		display: block;
+	}
+	.table .filter {
+		display: none !important;
+	}
+
+
+	/**
+	 * HIDE TABLE HEADERS
+	 * -------------------------------------------------------
+	 */
+	.table thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	.table tr {
+		border-top: 0;
+		margin-bottom: 25px;
+		border-bottom: 0;
+		background: #F9F9F9;
+		border-top: 1px solid #666;
+	}
+	.table tbody td {
+		border: 1px solid #DDD;
+		border-top: 0;
+		position: relative;
+		padding-left: 50%;
+		white-space: normal;
+		background: #F9F9F9;
+		text-align: left;
+		line-height: 24px;
+		min-height: 46px;
+	}
+	.table td:before {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 48%;
+		display: block;
+		height: 100%;
+		padding: 10px !important;
+		white-space: nowrap;
+		text-align: left;
+		font-weight: bold;
+		background: #FFF;
+		border-right: 1px solid #EEE;
+		color: #444;
+		white-space: normal;
+	}
+	.table tbody th {
+		background: #666;
+		border: 0;
+		padding: 10px;
+		color: #FFF;
+		display: block;
+		text-transform: uppercase;
+	}
+	.table tbody td.mini {
+		text-align: left;
+		width: auto;
+	}
+
+	/*
+	 * LABEL THE DATA
+	 * -------------------------------------------------------
+	 */
+	.table td:before {
+		content: attr(data-title);
+	}
+}

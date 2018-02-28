@@ -1,0 +1,9 @@
+<?php echo $this->callTemplate("page/head"); ?>
+<?php echo $this->callTemplate("page/header"); ?>
+<?php echo $this->callTemplate("page/navigation"); ?>
+<div id="wrapper">
+	<?php echo $this->callTemplate("page/breadcrumb"); ?>
+	<?php echo $this->callTemplate("page/body", $datas); ?>
+</div>
+<?php echo $this->callTemplate("page/footer"); ?>
+</html>
