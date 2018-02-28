@@ -37,6 +37,18 @@ abstract class Core_Vue_Abstract {
 		return $html;
 	}
 	
+	public function getTitle() {
+	    return "Clbfw";
+	}
+	
+	public function getDescription() {
+	    return "Clbfw";
+	}
+	
+	public function getKeywords() {
+	    return "Clbfw";
+	}
+	
 	protected function addJs($js, $id = null, $datas = null) {
 		$this->jss [] = array("src" => $js, "id" => $id, "datas" => $datas);
 	}

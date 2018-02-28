@@ -6,4 +6,16 @@ abstract class Home_Vue_Abstract extends Core_Vue_Abstract {
         $this->addCss("global.css");
         $this->addCss("responsive.css");
     }
+    
+    public function getTitle() {
+        return "Corentin Lebail";
+    }
+    
+    public function getDescription() {
+        return "Corentin Lebail";
+    }
+    
+    public function getKeywords() {
+        return "Corentin Lebail";
+    }
 }

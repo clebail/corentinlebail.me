@@ -2,11 +2,13 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="author" content="Speedinfo" />
-	<meta name="robots" content="noindex, nofollow">
+	<meta name="author" content="Corentin Lebail" />
+	<meta name="description" content="<?php echo $this->getDescription(); ?>" />
+	<meta name="keywords" content="<?php echo $this->getKeywords(); ?>" />
 	<link rel="icon" type="image/png" href="/images/favicon.png" />
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<title><?php echo $this->getTitle(); ?></title>
 	<?php echo $this->callTemplate("page/head/css"); ?>
 	<?php echo $this->callTemplate("page/head/js"); ?>
 <head>

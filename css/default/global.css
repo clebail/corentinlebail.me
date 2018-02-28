@@ -164,15 +164,15 @@ span.grey {
  */
 header {
 	width: 100%;
-	background: #3A414C;
-	color: #FFF;
+	background: #B2DFDB;
+	color: rgba(0,0,0,.87);
 	text-align: right;
 	padding: 10px 30px 8px;
 	overflow: visible;
 }
 
 header a {
-	color: #FFF;
+	color: rgba(0,0,0,.87);
 }
 
 header a:hover {
