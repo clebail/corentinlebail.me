@@ -11,4 +11,16 @@ class Home_Login_Create_Vue_Index extends Home_Vue_Abstract {
 	public function renderBody($datas) {
 		echo $this->callTemplate("login/create/index", $datas);
 	}
+	
+	public function getTitle() {
+	    return "Corentin Lebail - Demande d'ouverture de compte";
+	}
+	
+	public function getDescription() {
+	    return "Demande d'ouverture de compte sur le site Corentin Lebail";
+	}
+	
+	public function getKeywords() {
+	    return "ouverture compte Corentin Lebail";
+	}
 }

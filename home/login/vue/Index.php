@@ -10,4 +10,16 @@ class Home_Login_Vue_Index extends Home_Vue_Abstract {
 	public function renderBody($datas) {
 		echo $this->callTemplate("login/index", $datas);
 	}
+	
+	public function getTitle() {
+	    return "Corentin Lebail - Login";
+	}
+	
+	public function getDescription() {
+	    return "Login sur le site Corentin Lebail";
+	}
+	
+	public function getKeywords() {
+	    return "login Corentin Lebail";
+	}
 }
