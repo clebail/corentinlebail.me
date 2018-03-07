@@ -198,26 +198,10 @@ header #login {
 	margin-top: 10px;
 }
 
-header a.navigation,header a.new-client,header a.about {
+header .navigation {
 	display: inline-block;
 	text-align: left;
-	margin: 5px 20px 0 0;
-}
-
-header a.new-client {
-	background-position: -66px -13px;
-}
-
-header a.about {
-	background-position: -63px -207px;
-}
-
-header a.about {
-	margin-right: 0;
-}
-
-header a.user {
-	margin-right: 10px;
+	margin-top: 5px;
 }
 
 header:after {
@@ -444,57 +428,6 @@ select.big {
 input.disabled,select.disabled,textarea.disabled {
 	background-color: #F9F9F9;
 	color: #999;
-}
-
-/**
- * LOGIN BOX
- * -------------------------------------------------------
- */
-#login-box {
-	background-color: #F9F9F9;
-	margin: 190px auto 25px;
-	padding: 0 35px 15px;
-	max-width: 500px;
-	border-top: 4px solid #ABC672;
-	border-bottom: 4px solid #EEE;
-}
-
-#login-box h1 {
-	margin: 25px 0;
-}
-
-#login-box .form-group {
-	font-size: 13px;
-}
-
-#login-box .input-label {
-	display: block;
-	padding-bottom: 4px;
-}
-
-#login-box .input-text {
-	margin-bottom: 15px;
-}
-
-#login-box .form-buttons {
-	text-align: right;
-}
-
-#login-box a {
-	color: #BD8A5D;
-}
-
-#login-box a:hover {
-	text-decoration: none;
-}
-
-#login-box .button {
-	margin-left: 10px;
-}
-
-#login-box .error {
-	color: #ABC672;
-	margin-bottom: 20px;
 }
 
 /**
@@ -871,9 +804,9 @@ button::-moz-focus-inner,input::-moz-focus-inner {
 
 .button.red {
 	/* Red button */
-	color: #FFF;
-	background: #ABC672;
-	border: 1px solid #ABC672;
+	color: rgba(0, 0, 0, 0.87);
+	background: #B2DFDB;
+	border: 1px solid #B2DFDB;
 }
 
 .button.red:hover {
@@ -1852,20 +1785,6 @@ td .checkbox .switch {
     margin-top: 8px;
 }
 
-/**
- * CAROUSSEL
- * ------------------------------------------------------- 
- */
- 
-  .carrousel .image {
-  	text-align: center;
-  }
- 
- .carrousel .image img {
- 	max-width: 100%;
- 	max-height: 100px;
- }
- 
  /**
  * ERROR
  * --------------------------------------------------------------------------
@@ -1878,81 +1797,159 @@ td .checkbox .switch {
 	margin: auto;
 }
 
- /**
- * TRANSPORTEUR
+/**
+ * GRID
  * --------------------------------------------------------------------------
  */
- 
-.transporteur {
-	margin-bottom: 50px;
-}
-
-.transporteur .table {
-	width: auto;
-}
-
-.transporteur .table td {
-	padding: 5px;
-}
-
-.transporteur .poid,
-.transporteur .prix  {
-	text-align: right;
-}
-
-.transporteur.group {
+.group {
 	clear: both;
 	padding: 0px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0;
 	zoom: 1; /* For IE 6/7 */
 }
-.transporteur.group:before,
-.transporteur.group:after {
+.group:before,
+.group:after {
 	content: '';
 	display: table;
 }
-.transporteur.group:after {
+.group:after {
 	clear: both;
 }
-.transporteur .deux {
+.col {
 	display: block;
 	float: left;
 	margin: 0 0 0 1.6%;
-	position: relative;
+}
+.col.last-line {
+	margin-bottom: 0;
+}
+.col:first-child {
+	margin-left: 0;
+}
+.col-1 {
+	width: 6.866%;
+}
+.col-2 {
+	width: 15.33%;
+}
+.col-3 {
+	width: 23.8%;
+}
+.col-4 {
+	width: 32.26%;
+}
+.col-5 {
+	width: 40.73%;
+}
+.col-6 {
 	width: 49.2%;
 }
-.transporteur .deux:first-child {
-	margin-left: 0;
+.col-7 {
+	width: 57.66%;
+}
+.col-8 {
+	width: 66.13%;
+}
+.col-9 {
+	width: 74.6%;
+}
+.col-10 {
+	width: 83.06%;
+}
+.col-11 {
+	width: 91.53%;
+}
+.col-12 {
+	width: 100%;
+}
+.same-height {
+	flex: 1;
+	display: flex;
+	flex-direction: row;
+	position: relative;
+}
+.same-height .block {
+	margin-bottom: 20px;
+}
+.same-height:last-child .block {
+	margin-bottom: 0;
+	position: relative;
 }
 
 /**
- * POPUP EDITION DES MODES D'EXPE
- * --------------------------------------------------------------------------
+ * REGISTER
+ * -------------------------------------------------------
  */
- #popupEditCommande .recap {
- 	font-size: 16px;
- 	margin-bottom: 15px; 
- }
- 
- #popupEditCommande .table {
- 	margin-bottom: 15px;
- }
-	
-#popupEditCommande .table th,
-#popupEditCommande .table td {
-	padding: 6px;
+
+.register {
+	margin-top: 120px;
 }
 
-#popupEditCommande .table tr.selected td {
-	font-weight: bold;
-	font-size: 14px;
+.register .col {
+	border: 1px solid #DDD;
+	padding: 15px;
 }
 
-
-#popupEditCommande .table .center {
-	text-align: center;
+.register .content {
+	margin-top: 40px;
+	height: 200px;
 }
 
+.register input#login,
+.register input#password {
+	display: block;
+    margin-bottom: 10px;
+    background: #F0F1F2;
+    color: #3A414C;
+    -webkit-appearance: none;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    border: none;
+    outline: none;
+    padding: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
 
+.register a.button.red {
+	display: inline-block;
+}
+.register.create {
+	margin-top: 0;
+}
 
+.register.create .col,
+.register .group.button  {
+	border: none;
+}
+
+.register.create fieldset {
+    padding: 15px;
+    border: 1px solid #DDD;
+    background: #FFF;
+    border-radius: 3px;
+    margin-top: 25px;
+}
+
+.register.create fieldset legend {
+    padding: 10px;
+    border: 1px solid #DDD;
+    background-color: #FCFCFC;
+    text-transform: uppercase;
+}
+
+.register.create fieldset label {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.register .group.button .col {
+	text-align: left;
+}

@@ -1,0 +1,28 @@
+<div id="wrapper">
+	<div class="group register same-height">
+		<div class="col col-6">
+			<h2>Vous n'avez pas de compte</h2>
+			<div class="content">
+				Vous devez posséder un compte pour consulter les informations masqués.
+			</div>
+			<a href="<?php echo Home_Login_Create_Controller_Index::getUrl("index", "index"); ?>" class="button red">
+    			Demande d'ouverture de compte
+    		</a>
+		</div>
+		<div class="col col-6">
+        	<form action="<?php echo Home_Login_Controller_Index::getUrl("index", "post"); ?>" method="post">
+        		<h2>Vous avez déjà un compte</h2>
+        		<div class="content">
+            		<input type="text" placeholder="Votre email" class="input-text" name="login" id="login" autofocus<?php echo isset($datas["content"]) ? " value='{$datas["content"]["login"]}'" : ""; ?>>
+        			<input type="password" placeholder="Votre mot de passe"  class="input-text" name="password" id="password">
+        			<?php if(isset($datas["error"])):?>
+        			<div class="error">
+        				Connexion impossible, vérifier votre email / mot de passe
+        			</div>
+        			<?php endif;?>
+        		</div>
+        		<input type="submit" value="S'identifier" class="button red">
+        	</form>
+		</div>
+	</div>
+</div>

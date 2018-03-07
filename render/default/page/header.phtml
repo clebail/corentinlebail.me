@@ -1,3 +1,14 @@
 <header>
 	<a id="logo" href="<?php echo Home_Controller_Index::getUrl(); ?>">Corentin Lebail</a>
+	<div class="navigation">
+    	<?php if(Home_Modele_Index::isLoggedIn()): ?>
+    	<a href="<?php echo Home_Controller_Index::getUrl("index", "logout"); ?>" class="logout" title="Se déconnecter">
+    		<i class="material-icons">power_settings_new</i>
+    	</a>
+    	<?php else:?>
+    	<a  href="<?php echo Home_Login_Controller_Index::getUrl(); ?>" class="signin" title="S'identifier">
+    		<i class="material-icons">https</i>
+    	</a>
+    	<?php endif; ?>
+    </div>
 </header>

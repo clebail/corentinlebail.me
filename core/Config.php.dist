@@ -15,6 +15,8 @@ class Core_Config {
 		$config["cache/port"] = 11211;
 		$config["cache/expire"] = 60*60;
 		
+		$config["customer/salt"] = "test_";
+		
 		if(isset($config[$path])) {
 			return $config[$path];
 		}
