@@ -1930,6 +1930,13 @@ td .checkbox .switch {
 	border: none;
 }
 
+.register.create h1,
+.register.create h3 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+
 .register.create fieldset {
     padding: 15px;
     border: 1px solid #DDD;
@@ -1951,6 +1958,11 @@ td .checkbox .switch {
     font-size: 14px;
 }
 
+.register.create fieldset .col {
+    padding: 10px;
+}
+
 .register .group.button .col {
 	text-align: left;
+	padding-left: 0;
 }

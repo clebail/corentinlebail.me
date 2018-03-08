@@ -1,7 +1,8 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <div id="wrapper">
-	<h1>Demande d'ouverture de compte</h1>
-	<h2>L'ouverture d'un compte pour vous permettra de consulter les informations masqués.</h2>
 	<div class="group register create">
+		<h1>Demande d'ouverture de compte</h1>
+		<h3>L'ouverture d'un compte pour vous permettra de consulter les informations masqués.</h3>
 		<div class="col col-12">
 			<form method="post" action="<?php echo Home_Login_Create_Controller_Index::getUrl("index", "create"); ?>">
     			<fieldset>
@@ -51,7 +52,7 @@
     						<label for="comments">Commentaires <em>*</em></label>
     					</div>
     					<div class="col col-10">
-    						<textarea name="comments" rows="10" placeholder="Merci de détailler la raison de votre demande d'ouverture de compte" data-validation="required"><?php echo (isset($datas["error"]) ? $datas["content"]["comments"] : ""); ?></textarea>
+    						<textarea name="comments" rows="8" placeholder="Merci de détailler la raison de votre demande d'ouverture de compte" data-validation="required"><?php echo (isset($datas["error"]) ? $datas["content"]["comments"] : ""); ?></textarea>
     					</div>
     				</div>
     				<?php if(isset($datas["error"])):?>
@@ -62,8 +63,8 @@
     			</fieldset>
     			<div class="group button">
     				<div class="col col-12">
-    					<div class="g-recatcha">
-    					</div>
+    					<div class="g-recaptcha" data-sitekey="<?php echo Core_Config::getConfigValue("captcha/siteKey"); ?>"></div>
+    					<br />
     					<input type="submit" class="button red" value="Valider">
     				</div>
     			</div>

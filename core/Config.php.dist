@@ -17,6 +17,10 @@ class Core_Config {
 		
 		$config["customer/salt"] = "test_";
 		
+		$config["captcha/siteKey"] = "6Ld8xC8UAAAAAFNKYSwQgqvFpd9miPv1xlBofs5P";
+		$config["captcha/secretKey"] = "6Ld8xC8UAAAAACAMumZPiHE-NdFBwO4e76IAmmTt";
+		$config["captcha/endpoint"] = "https://www.google.com/recaptcha/api/siteverify";
+		
 		if(isset($config[$path])) {
 			return $config[$path];
 		}
