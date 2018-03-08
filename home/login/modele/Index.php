@@ -6,7 +6,7 @@ class Home_Login_Modele_Index extends Core_Login_Modele_Index{
 	    $sql = "
             SELECT u.id
             FROM USER AS u
-            WHERE u.email = :email AND u.password = :password AND ative = 1
+            WHERE u.email = :email AND u.password = :password AND active = 1
         ";
 	    
 	    $stmt = $db->getPdo()->prepare($sql);

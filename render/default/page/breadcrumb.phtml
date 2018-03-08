@@ -1,10 +1,5 @@
 <ul id="breadcrumb">
-<?php $lastElement = end($this->breadCrumbs); ?>
 <?php foreach($this->breadCrumbs as $k => $breadCrumb): ?>
-<?php if($breadCrumb == $lastElement): ?>
-	<li><?php echo $breadCrumb['key']; ?>
-<?php else: ?>
 	<li><a href="<?php echo $breadCrumb['url']; ?>"><?php echo $breadCrumb['key']; ?></a></li>
-<?php endif; ?>
 <?php endforeach; ?>
 </ul>

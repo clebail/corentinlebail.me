@@ -239,7 +239,7 @@ footer a:hover {
 	list-style: none;
 	font-size: 13px;
 	color: #999;
-	margin: 15px 0;
+	margin: 15px 0 45px 0;
 }
 
 #breadcrumb li {
@@ -249,6 +249,9 @@ footer a:hover {
 
 #breadcrumb li a {
 	color: #999;
+	line-height: 24px;
+    text-decoration: none;
+    padding-right: 4px;
 }
 
 #breadcrumb li a:hover {
@@ -267,6 +270,11 @@ footer a:hover {
 	content: '';
 	display: block;
 	clear: both;
+}
+
+#breadcrumb li a i {
+    font-size: 20px;
+    vertical-align: -5px;
 }
 
 /**
@@ -347,7 +355,6 @@ input[type="text"],input[type="password"],input[type="email"],textarea,select
 	border-bottom: solid 1px #EEE;
 	border-right: solid 1px #EEE;
 	outline: none;
-	/*max-width: 700px;*/
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -357,38 +364,34 @@ input[type="text"],input[type="password"],input[type="email"],textarea,select
 	background: #FFF;
 }
 
-input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus,textarea:focus,select:focus
-	{
-	border: 1px solid rgba(82, 168, 236, 0.8);
-	/*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px
-		rgba(82, 168, 236, 0.6);
-	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px
-		rgba(82, 168, 236, 0.6);
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px
-		rgba(82, 168, 236, 0.6);*/
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus,select:focus {
+	border: 1px solid #EDE7F6;
 }
 
-input[type="text"],input[type="password"],input[type="email"],textarea {
-	-webkit-appearance: none;
-    display: block;
+input[type="text"],
+input[type="password"],
+input[type="email"],textarea {
+	display: block;
+    margin-bottom: 10px;
+    background: #F0F1F2;
+    color: #3A414C;
+    -webkit-appearance: none;
     width: 100%;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
-    color: #444;
     font-weight: normal;
-    border-top: solid 1px #CCC;
-    border-left: solid 1px #CCC;
-    border-bottom: solid 1px #EEE;
-    border-right: solid 1px #EEE;
+    border: none;
     outline: none;
-    padding: 6px 8px;
-    background: #FFF;
+    padding: 10px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 
 select {
@@ -803,9 +806,8 @@ button::-moz-focus-inner,input::-moz-focus-inner {
 }
 
 .button.red {
-	/* Red button */
-	color: rgba(0, 0, 0, 0.87);
 	background: #E57373;
+	color: #FFF;
 	border: 1px solid #E57373;
 }
 
@@ -1882,10 +1884,6 @@ td .checkbox .switch {
  * -------------------------------------------------------
  */
 
-.register {
-	margin-top: 120px;
-}
-
 .register .col {
 	border: 1px solid #DDD;
 	padding: 15px;
@@ -1894,28 +1892,6 @@ td .checkbox .switch {
 .register .content {
 	margin-top: 40px;
 	height: 200px;
-}
-
-.register input#login,
-.register input#password {
-	display: block;
-    margin-bottom: 10px;
-    background: #F0F1F2;
-    color: #3A414C;
-    -webkit-appearance: none;
-    width: 100%;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    font-weight: normal;
-    border: none;
-    outline: none;
-    padding: 10px;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
 }
 
 .register a.button.red {
@@ -1959,7 +1935,7 @@ td .checkbox .switch {
 }
 
 .register.create fieldset .col {
-    padding: 10px;
+    padding: 5px;
 }
 
 .register .group.button .col {
