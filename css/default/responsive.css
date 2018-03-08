@@ -67,18 +67,10 @@
 	header #login {
 		margin-top: 0;
 	}
-	header a.navigation,
-	header a.logout {
+	header .navigation {
 		float: left;
 		background-position: 0 0;
 		margin: 11px 0 0 0;
-	}
-	header a.navigation {
-		margin-left: 5px;
-	}
-	header a.logout {
-		float: right;
-		margin-right: 5px;
 	}
 	#wrapper {
 		background: #FFF;
@@ -144,7 +136,39 @@
 		width: 100%;
 	}
 	
+	/**
+	 * GRID
+	 * -------------------------------------------------------
+	 */
+	.col {
+		margin: 0;
+		margin-bottom: 10px;
+	}
+	.col-1,
+	.col-2,
+	.col-3,
+	.col-4,
+	.col-5,
+	.col-6,
+	.col-7,
+	.col-8,
+	.col-9,
+	.col-10,
+	.col-11,
+	.col-12 {
+		width: 100%;
+	}
 	
+	.same-height {
+		display:block;
+	}
+	.same-height .block,
+	.same-height:last-child .block {
+		margin-bottom: 20px;
+	}
+	.same-height:last-child .block:last-child {
+		margin-bottom: 0;
+	}
 }
 
 /**
@@ -321,5 +345,22 @@
 	 */
 	.table td:before {
 		content: attr(data-title);
+	}
+	
+	.github {
+		display: none;
+	}
+	
+	#wrapper {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	
+	header a#logo {
+		margin-left: 0;
+	}
+	
+	header .navigation {
+		margin-right: 0;
 	}
 }

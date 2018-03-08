@@ -186,7 +186,7 @@ header a#logo {
 	text-decoration: none;
 	padding-right: 25px;
 	display: inline-block;
-	margin: 8px 0;
+	margin: 8px 0 8px 150px;
 }
 
 header a#logo:hover {
@@ -201,7 +201,7 @@ header #login {
 header .navigation {
 	display: inline-block;
 	text-align: left;
-	margin-top: 5px;
+	margin: 5px 150px 0 0;
 }
 
 header:after {
@@ -212,6 +212,8 @@ header:after {
 
 #wrapper {
 	padding: 0 30px;
+	margin-right: 150px;
+	margin-left: 150px;
 }
 
 footer {
