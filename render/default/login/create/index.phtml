@@ -12,7 +12,7 @@
     						<label for="firstname">Prénom <em>*</em></label>
     					</div>
     					<div class="col col-10">
-    						<input type="text" name="firstname" data-validation="required" value="<?php echo (isset($datas["error"]) ? $datas["content"]["firstname"] : ""); ?>"/>
+    						<input type="text" id="firstname" name="firstname" data-validation="required" value="<?php echo (isset($datas["error"]) ? $datas["content"]["firstname"] : ""); ?>"/>
     					</div>
     				</div>
     				<div class="group">
@@ -20,7 +20,7 @@
     						<label for="lastname">Nom <em>*</em></label>
     					</div>
     					<div class="col col-10">
-    						<input type="text" name="lastname" data-validation="required" value="<?php echo (isset($datas["error"]) ? $datas["content"]["lastname"] : ""); ?>" />
+    						<input type="text" id="lastname"  name="lastname" data-validation="required" value="<?php echo (isset($datas["error"]) ? $datas["content"]["lastname"] : ""); ?>" />
     					</div>
     				</div>
     				<div class="group">
@@ -28,7 +28,7 @@
     						<label for="email">Email <em>*</em></label>
     					</div>
     					<div class="col col-10">
-    						<input type="text" name="email" data-validation="required" value="<?php echo (isset($datas["error"]) ? $datas["content"]["email"] : ""); ?>" />
+    						<input type="text" id="email"  name="email" data-validation="required" value="<?php echo (isset($datas["error"]) ? $datas["content"]["email"] : ""); ?>" />
     					</div>
     				</div>
     				<div class="group">
@@ -36,7 +36,7 @@
     						<label for="password">Mot de passe <em>*</em></label>
     					</div>
     					<div class="col col-10">
-    						<input type="password" name="password" data-validation="required" />
+    						<input type="password" id="password"  name="password" data-validation="required" />
     					</div>
     				</div>
     				<div class="group">
@@ -44,7 +44,7 @@
     						<label for="password2">Resaisir le mot de passe <em>*</em></label>
     					</div>
     					<div class="col col-10">
-    						<input type="password" name="password2" data-validation="confirmation" data-validation-confirm="password" />
+    						<input type="password" id="password2"  name="password2" data-validation="confirmation" data-validation-confirm="password" />
     					</div>
     				</div>
     				<div class="group">
@@ -52,7 +52,7 @@
     						<label for="comments">Commentaires <em>*</em></label>
     					</div>
     					<div class="col col-10">
-    						<textarea name="comments" rows="8" placeholder="Merci de détailler la raison de votre demande d'ouverture de compte" data-validation="required"><?php echo (isset($datas["error"]) ? $datas["content"]["comments"] : ""); ?></textarea>
+    						<textarea  id="comments" name="comments" rows="8" placeholder="Merci de détailler la raison de votre demande d'ouverture de compte" data-validation="required"><?php echo (isset($datas["error"]) ? $datas["content"]["comments"] : ""); ?></textarea>
     					</div>
     				</div>
     				<?php if(isset($datas["error"])):?>
@@ -72,7 +72,7 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
+<script>
     $.validate({
     	lang: "fr",
     	decimalSeparator: '.',
