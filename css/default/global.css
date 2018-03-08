@@ -164,7 +164,7 @@ span.grey {
  */
 header {
 	width: 100%;
-	background: #B2DFDB;
+	background: #B39DDB;
 	color: rgba(0,0,0,.87);
 	text-align: right;
 	padding: 10px 30px 8px;
@@ -805,12 +805,13 @@ button::-moz-focus-inner,input::-moz-focus-inner {
 .button.red {
 	/* Red button */
 	color: rgba(0, 0, 0, 0.87);
-	background: #B2DFDB;
-	border: 1px solid #B2DFDB;
+	background: #E57373;
+	border: 1px solid #E57373;
 }
 
 .button.red:hover {
-	background: rgba(31, 181, 172, .9);
+	background: #F44336;
+	color: #FFF;
 }
 
 /**

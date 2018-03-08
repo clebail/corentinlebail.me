@@ -3,48 +3,79 @@
 	<h2>L'ouverture d'un compte pour vous permettra de consulter les informations masqués.</h2>
 	<div class="group register create">
 		<div class="col col-12">
-			<fieldset>
-				<Legend>Vos informations</Legend>
-				<div class="group">
-					<div class="col col-2">
-						<label for="firstname">Prénom</label>
-					</div>
-					<div class="col col-10">
-						<input type="text" name="firstname" />
-					</div>
-				</div>
-				<div class="group">
-					<div class="col col-2">
-						<label for="lastname">Nom</label>
-					</div>
-					<div class="col col-10">
-						<input type="text" name="lastname" />
-					</div>
-				</div>
-				<div class="group">
-					<div class="col col-2">
-						<label for="email">Email</label>
-					</div>
-					<div class="col col-10">
-						<input type="text" name="email" />
-					</div>
-				</div>
-				<div class="group">
-					<div class="col col-2">
-						<label for="password">Mot de passe</label>
-					</div>
-					<div class="col col-10">
-						<input type="password" name="password" />
-					</div>
-				</div>
-			</fieldset>
-			<div class="group button">
-				<div class="col col-12">
-					<div class="g-recatcha">
-					</div>
-					<a href="#" type="submit" class="button red">Valider</a>
-				</div>
-			</div>
+			<form method="post" action="<?php echo Home_Login_Create_Controller_Index::getUrl("index", "create"); ?>">
+    			<fieldset>
+    				<Legend>Vos informations</Legend>
+    				<div class="group">
+    					<div class="col col-2">
+    						<label for="firstname">Prénom <em>*</em></label>
+    					</div>
+    					<div class="col col-10">
+    						<input type="text" name="firstname" data-validation="required" value="<?php echo (isset($datas["error"]) ? $datas["content"]["firstname"] : ""); ?>"/>
+    					</div>
+    				</div>
+    				<div class="group">
+    					<div class="col col-2">
+    						<label for="lastname">Nom <em>*</em></label>
+    					</div>
+    					<div class="col col-10">
+    						<input type="text" name="lastname" data-validation="required" value="<?php echo (isset($datas["error"]) ? $datas["content"]["lastname"] : ""); ?>" />
+    					</div>
+    				</div>
+    				<div class="group">
+    					<div class="col col-2">
+    						<label for="email">Email <em>*</em></label>
+    					</div>
+    					<div class="col col-10">
+    						<input type="text" name="email" data-validation="required" value="<?php echo (isset($datas["error"]) ? $datas["content"]["email"] : ""); ?>" />
+    					</div>
+    				</div>
+    				<div class="group">
+    					<div class="col col-2">
+    						<label for="password">Mot de passe <em>*</em></label>
+    					</div>
+    					<div class="col col-10">
+    						<input type="password" name="password" data-validation="required" />
+    					</div>
+    				</div>
+    				<div class="group">
+    					<div class="col col-2">
+    						<label for="password2">Resaisir le mot de passe <em>*</em></label>
+    					</div>
+    					<div class="col col-10">
+    						<input type="password" name="password2" data-validation="confirmation" data-validation-confirm="password" />
+    					</div>
+    				</div>
+    				<div class="group">
+    					<div class="col col-2">
+    						<label for="comments">Commentaires <em>*</em></label>
+    					</div>
+    					<div class="col col-10">
+    						<textarea name="comments" rows="10" placeholder="Merci de détailler la raison de votre demande d'ouverture de compte" data-validation="required"><?php echo (isset($datas["error"]) ? $datas["content"]["comments"] : ""); ?></textarea>
+    					</div>
+    				</div>
+    				<?php if(isset($datas["error"])):?>
+        			<div class="error">
+        				<?php echo $datas["error"]; ?>
+        			</div>
+        			<?php endif;?>
+    			</fieldset>
+    			<div class="group button">
+    				<div class="col col-12">
+    					<div class="g-recatcha">
+    					</div>
+    					<input type="submit" class="button red" value="Valider">
+    				</div>
+    			</div>
+    		</form>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+    $.validate({
+    	lang: "fr",
+    	decimalSeparator: '.',
+    	modules : 'security'
+    });
+</script>
+<

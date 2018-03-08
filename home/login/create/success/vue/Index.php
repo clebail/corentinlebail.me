@@ -1,5 +1,5 @@
 <?php
-class Home_Login_Create_Vue_Index extends Home_Vue_Abstract {
+class Home_Login_Create_Success_Vue_Index extends Home_Vue_Abstract {
     protected function createBreadCrumbs($datas) {
         $breadCrumbs[] = array("key" => "Accueil", "url" => Home_Controller_Index::getUrl());
         $breadCrumbs[] = array("key" => "Identification", "url" => Home_Login_Controller_Index::getUrl());
@@ -10,12 +10,10 @@ class Home_Login_Create_Vue_Index extends Home_Vue_Abstract {
     
     public function __construct($params) {
         parent::__construct($params);
-        
-        $this->addJs("/js/jquery.form-validator.min.js");
     }
     
 	public function renderBody($datas) {
-		echo $this->callTemplate("login/create/index", $datas);
+		echo $this->callTemplate("login/create/success", $datas);
 	}
 	
 	public function getTitle() {
