@@ -204,6 +204,11 @@ header .navigation {
 	margin: 5px 150px 0 0;
 }
 
+header .navigation a {
+	text-decoration: none;
+	margin-left: 5px;
+}
+
 header:after {
 	content: '';
 	display: block;
@@ -1944,3 +1949,70 @@ td .checkbox .switch {
 	text-align: left;
 	padding-left: 0;
 }
+
+/**
+ * HOME
+ * -------------------------------------------------------
+ */
+ 
+.home img {
+	display: block;
+	margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+} 
+ 
+.home .presentation h1 {
+	padding-bottom: 15px;
+	border-bottom: 1px solid #DDD;
+}
+ 
+.home .papers {
+	margin: 25px 5rem 0 5rem;
+}
+
+.home .papers h2 {
+	color: #B39DDB;
+    border-bottom: 1px solid #DDD;
+    padding-bottom: 15px;
+    margin-top: 50px;
+    margin-bottom: 0;
+}
+ 
+.home .papers li a {
+	display: flex;
+	padding: 5px;
+	transition: padding-left .5s, color .5s;
+	text-decoration: none;
+	width: 100%;
+	justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    border-bottom: 1px solid #DDD;
+    padding-bottom: 15px;
+    margin-top: 5px;
+}
+
+.home .papers li a:hover {
+	color: #E57373;
+	padding-left: 1rem;
+}
+
+.home .papers li a .title {
+	color: #000;
+	font-weight: bold;
+}
+
+.home .papers li a:hover .title {
+	color: #E57373;
+}
+
+.home .papers li a .date {
+	color: #999;
+}
+
+
+
+
+
+	

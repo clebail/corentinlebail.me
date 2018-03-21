@@ -1,2 +1,33 @@
-<div>
+<div class="home">
+	<div class="group">
+    	<div class="col col-2">
+    		<img src="/images/moi.jpg">
+    	</div>
+    	<div class="col col-10">
+    		<div class="presentation">
+    			<h1>Chef de projet en développement logiciel</h1>
+    			<p>
+    				A 10 ans, avec le premier ordinateur de ma mère, un Amstrad PC 1640, j'ai conçue mon premier jeu vidéo. Ce n'était pas une très grande réussite, mais je venais, sans le savoir, d'attrapé le virus !
+    				<br />
+    				Je n'ai depuis jamais cesser, que soit dans un but professionnel ou personnel, de prendre du plaisir à écrire un programme fiable et efficasse.
+    			</p>
+    		</div>
+    	</div>
+    </div>
+    <div class="papers">
+    	<?php foreach($datas as $year => $papers): ?>
+    	<h2><?php echo $year; ?></h2>
+    	<ul>
+    		<?php foreach($papers as $idPaper => $paper): ?>
+    			<li>
+    				<a href="<?php echo Home_Paper_Controller_Index::getUrl("index", "index", array($idPaper, urlencode($paper["title"]))); ?>">
+    					<span class="title"><?php echo $paper["title"]; ?></span>
+    					<time class="date"><?php echo $paper["date"]; ?></time>
+    				</a>
+    			</li>
+    		<?php endforeach; ?>
+    	</ul>
+    	<?php endforeach; ?>
+    </div>
 </div>
+

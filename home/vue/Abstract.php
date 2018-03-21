@@ -12,10 +12,10 @@ abstract class Home_Vue_Abstract extends Core_Vue_Abstract {
     }
     
     public function getDescription() {
-        return "Corentin Lebail";
+        return "Corentin Lebail site personnel résumé";
     }
     
     public function getKeywords() {
-        return "Corentin Lebail";
+        return "Corentin Lebail site personnel résumé";
     }
 }

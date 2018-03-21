@@ -55,23 +55,17 @@ class Core_Clbfw {
 			foreach($items as $item) {
 				if(strlen($item) != 0) {
 					if(!$classNameIsFinish) {
-						if(($posP = strpos($item, ".")) !== false) {
+						if($item == "p") {
 							$classNameIsFinish = true;
-							$onObjetAction = true;
-			
-							$values["baseClassName"].=$s.ucfirst(strtolower(substr($item, 0, $posP)));
-						}else {
-							$values["baseClassName"].=$s.ucfirst(strtolower($item));
+						}else if(substr($item, 0 ,1) == "_") {
+						    $values["action"] = substr($item, 1);
+						} else {
+						    $values["baseClassName"].=$s.ucfirst(strtolower($item));
 						}
 					}else {
 						if($onObjetAction) {
 							$onObjetAction = false;
-							if(($posU = strpos($item, "_")) !== false) {
-								$values["objet"] = substr($item, 0, $posU);
-								$values["action"] = substr($item, $posU + 1);
-							}else {
-								$values["action"] = $item;
-							}
+							
 						}else {
 							if ($item == 'search') {
 								$inSearch = true;
@@ -98,6 +92,8 @@ class Core_Clbfw {
 			
 			Core_Cache::set($key, $values);
 		}
+		
+		Core_Clbfw::log($values);
 		
 		$baseClassName = $values["baseClassName"];
 		$objet  = $values["objet"];
@@ -180,9 +176,6 @@ class Core_Clbfw {
 		    self::syslog("{$key} are not in cache, get it");
 			
 			$items = explode("_", $calledClass);
-			if($items[0] == "Admin") {
-				$items[0] = ucfirst(strtolower(Core_Config::getConfigValue("admin/base")));
-			}
 			unset($items[count($items)-1]);
 		
 			$url = "";
@@ -198,13 +191,12 @@ class Core_Clbfw {
 			$objet = strtolower(self::removeAccents($objet));
 			$action = self::removeAccents($action);
 		
-			$url.=".php";
-			if($objet != "index" || count($params) != 0) {
-				$url.="/".$objet."_".$action."/";
-			}else {
-				if($action != "index" || count($params) != 0) {
-					$url.="/".$action."/";
-				}
+			if($objet != "index") {
+				$url.="/".$objet;
+			}
+			
+			if($action != "index") {
+			    $url.="/_".$action;
 			}
 			
 			Core_Cache::set($key, $url);
@@ -212,21 +204,24 @@ class Core_Clbfw {
 	
 		$s="";
 	
-		foreach($params as $key => $param) {
-			if(!is_array($param)) {
-				$p = $param;
-				if(strpos($param, "/") !== false) {
-					$p = "B64_".base64_encode($p);
-				}else {
-					$p = rawurlencode($p);
-				}
-				if($p == "") {
-					$p=0;
-				}
-	
-				$url.=$s.$p;
-				$s="/";
-			}
+		if(count($params)) {
+		    $url.="/p/";
+            foreach($params as $key => $param) {
+        		if(!is_array($param)) {
+        			$p = $param;
+        			if(strpos($param, "/") !== false) {
+        				$p = "B64_".base64_encode($p);
+        			}else {
+        				$p = rawurlencode($p);
+        			}
+        			if($p == "") {
+        				$p=0;
+        			}
+        
+        			$url.=$s.$p;
+        			$s="/";
+        		}
+        	}
 		}
 	
 		if(!empty($hash)) {
