@@ -12,10 +12,10 @@ abstract class Home_Vue_Abstract extends Core_Vue_Abstract {
     }
     
     public function getDescription() {
-        return "Corentin Lebail site personnel résumé";
+        return "Corentin Lebail chef de projet en développement logiciel - site personnel";
     }
     
     public function getKeywords() {
-        return "Corentin Lebail site personnel résumé";
+        return "Corentin,Lebail,c,cpp,c++,java,developpement,php,javascript";
     }
 }
