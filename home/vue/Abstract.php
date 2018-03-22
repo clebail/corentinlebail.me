@@ -7,15 +7,15 @@ abstract class Home_Vue_Abstract extends Core_Vue_Abstract {
         $this->addCss("responsive.css");
     }
     
-    public function getTitle() {
+    public function getTitle($datas) {
         return "Corentin Lebail";
     }
     
-    public function getDescription() {
+    public function getDescription($datas) {
         return "Corentin Lebail chef de projet en développement logiciel - site personnel";
     }
     
-    public function getKeywords() {
+    public function getKeywords($datas) {
         return "Corentin,Lebail,c,cpp,c++,java,developpement,php,javascript";
     }
 }

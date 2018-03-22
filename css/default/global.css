@@ -204,9 +204,12 @@ header .navigation {
 	margin: 5px 150px 0 0;
 }
 
-header .navigation a {
-	text-decoration: none;
-	margin-left: 5px;
+header .navigation li {
+	display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    position: relative;
+    margin: 0 15px 0 0;
 }
 
 header:after {
@@ -2011,8 +2014,221 @@ td .checkbox .switch {
 	color: #999;
 }
 
+/**
+ * PAPER
+ * -------------------------------------------------------
+ */
+.paper {
+	margin: 25px 5rem 0 5rem;
+}
 
+.paper h2 {
+	text-align: center;
+	margin: 50px 0;
+}
 
+.paper .content {
+	margin-bottom: 25px;
+	padding-bottom: 25px;
+	border-bottom: 1px solid #DDD;
+} 
 
+.paper .comments {
+	margin-top: 15px;
+	padding: 15px 15px 0 15px;
+	border: 1px solid #DDD;
+	margin-bottom: 15px;
+}
 
-	
+.paper .comments .summary {
+	padding-bottom: 15px;
+	border-bottom: 2px solid #EEE;
+	margin-bottom: 15px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.paper .comments .summary .nb {
+	font-weight: bold;
+}
+
+.paper .comments .saisie dl:not(.login) input {
+	border: 1px solid #EEE;
+	background-color: #FFF;
+}
+
+.paper .comments .saisie dt {
+	position: relative;
+}
+
+.paper .comments .saisie a:not(.reply) {
+	display: inline-block;
+	width: 100%;
+	text-align: right;
+	color: #000;
+	text-decoration: none;
+}
+
+.paper .comments .saisie dt ul {
+	width: 450px;
+    padding: 35px 25px;
+    position: absolute;
+    z-index: 3;
+    top: 26px;
+    right: -9px;
+    color: #3A414C;
+    background: #FFF;
+    -moz-box-shadow: 1px 2px 4px 0px #CCC;
+    -webkit-box-shadow: 1px 2px 4px 0px #CCC;
+    -o-box-shadow: 1px 2px 4px 0px #CCC;
+    box-shadow: 1px 2px 4px 0px #CCC;
+    display: none;
+}
+
+.paper .comments .saisie dt:hover ul {
+	display: block;	
+}
+.paper .comments .saisie dt li {
+	margin: 0 0 25px 0;
+}
+.paper .comments .saisie dt li:last-child {
+	margin-bottom: 0;
+}
+.paper .comments .saisie dt li:first-child {
+    font-size: 22px;
+}
+.paper .comments .saisie dt li:first-child i {
+    vertical-align: -3px;
+}
+.paper .comments .saisie dt li input[type='password'] {
+    width: 350px;
+    max-width: 100%;
+}
+.paper .comments .saisie dt li input:not([type='submit']) {
+    background: #F0F1F2;
+    color: #3A414C;
+}
+.paper .comments .saisie dt li input {
+    -webkit-appearance: none;
+    display: inline-block;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    border: none;
+    outline: none;
+    padding: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.paper .comments .saisie dt li input[type='submit'] {
+    width: auto;
+    margin-left: 6px;
+}
+
+.paper .comments .saisie .login .error {
+	margin-bottom: 5px;
+}
+
+.paper .comments .saisie .new-comment {
+	position: relative;
+}
+
+.paper .comments .saisie .new-comment input[type='text'] {
+	padding-right: 30px;
+}
+
+.paper .comments .saisie .new-comment a {
+	position: absolute;
+	right: 4px;
+	top: 6px;
+}
+
+.paper .comments .history .new-comment a {
+	right: 14px;
+	top: 28px;
+}
+
+.paper .comments .history .avatar {
+	width: 50px;
+	max-width: 100%;
+	float: left;
+}
+
+.paper .comments .history .comment,
+.paper .comments .history .new-comment {
+	display: block;
+	vertical-align: top;
+	padding-left: 5px;
+	width: auto;
+	overflow:hidden;
+	padding-right: 30px;
+	position: relative;
+}
+
+.paper .comments .history .new-comment {
+	padding-right: 10px;
+}
+
+.paper .comments .history .new-comment input {
+	border: 1px solid #DDD;
+	background: #FFF;
+}
+
+.paper .comments .history .comment .name,
+.paper .comments .history .new-comment .name {
+	display: inline-block;
+	color: #B39DDB;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.paper .comments .history .comment .date {
+	display: inline-block;
+	font-size: 11px;
+	margin-left: 10px;
+}
+
+.paper .comments .history .comment .date a {
+	color: #999;
+}
+
+.paper .comments .history .comment .date a:before {
+	content: '•';
+	margin-right: 10px;
+}
+
+.paper .comments .history .comment .content {
+	border: none;
+	display: block;
+	margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+.paper .comments .history li {
+	min-height: 50px;
+}
+
+.paper .comments .history li:not(last-child) {
+	margin-bottom: 15px;
+}
+
+.paper .comments .history .comment .reply {
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	display: none;
+}
+
+.paper .comments .history li:hover {
+	background: #F8F8F8;
+}
+
+.paper .comments .history li:hover .reply {
+	display: inline;
+}

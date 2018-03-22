@@ -8,9 +8,12 @@ class Home_Login_Create_Modele_Index extends Core_Modele_Abstract {
         if(isset($this->params["post"]["g-recaptcha-response"])) {
             if($this->validRecaptcha($this->params["post"]["g-recaptcha-response"])) {
                 try {
+                    $hash = md5($this->params["post"]["firstname"]." ".$this->params["post"]["lastname"]);
+                    $avatarpath = Core_Config::getConfigValue("avatars/path").$hash.".png";
+                   
                     $sql = "
-                        INSERT INTO USER (firstname, lastname, email, password, comments)
-                        VALUES (:firstname, :lastname, :email, :password, :comments)
+                        INSERT INTO USER (firstname, lastname, email, password, comments, avatar)
+                        VALUES (:firstname, :lastname, :email, :password, :comments, :avatar)
                     ";
                     
                     $stmt = $db->getPdo()->prepare($sql);
@@ -21,7 +24,11 @@ class Home_Login_Create_Modele_Index extends Core_Modele_Abstract {
                         ":email" => $this->params["post"]["email"],
                         ":password" => md5(Core_Config::getConfigValue("customer/salt").$this->params["post"]["password"]),
                         ":comments" => $this->params["post"]["comments"],
+                        ":avatar" => $hash.".png",
                     ));
+                    
+                    $avatar = $this->createAvatar($hash);
+                    imagepng($avatar, $avatarpath);
                     
                     $ok = $stmt->rowCount() == 1;
                 }catch(Exception $e) {
@@ -68,5 +75,44 @@ class Home_Login_Create_Modele_Index extends Core_Modele_Abstract {
         }
         
         return false;
+    }
+    
+    private function createAvatar($hash) {
+        $arrayOfSquare = array();
+        preg_match_all('/(\w)(\w)/', $hash, $chars);
+        
+        foreach ($chars[1] as $i => $char) {
+            $index = (int) ($i / 3);
+            $data = (bool) round(hexdec($char) / 10);
+            $items = [
+                0 => [0, 4],
+                1 => [1, 3],
+                2 => [2],
+            ];
+            
+            
+            foreach ($items[$i % 3] as $item) {
+                $arrayOfSquare[$index][$item] = $data;
+            }
+            ksort($arrayOfSquare[$index]);
+        }
+        $color = array_map(function ($data) {
+            return hexdec($data) * 16;
+        }, array_reverse($chars[1]));
+        
+        $generatedImage = imagecreatetruecolor(100, 100);
+        $background = imagecolorallocate($generatedImage, 0, 0, 0);
+        imagecolortransparent($generatedImage, $background);
+        $gdColor = imagecolorallocate($generatedImage, $color[0], $color[1], $color[2]);
+        
+        foreach($arrayOfSquare as $lineKey => $lineValue) {
+            foreach($lineValue as $colKey => $colValue) {
+                if(true === $colValue) {
+                    imagefilledrectangle($generatedImage, $colKey * 20, $lineKey * 20, ($colKey + 1) * 20, ($lineKey + 1) * 20, $gdColor);
+                }
+            }
+        }
+        
+        return $generatedImage;
     }
 }

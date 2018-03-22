@@ -93,8 +93,6 @@ class Core_Clbfw {
 			Core_Cache::set($key, $values);
 		}
 		
-		Core_Clbfw::log($values);
-		
 		$baseClassName = $values["baseClassName"];
 		$objet  = $values["objet"];
 		$action  = $values["action"];

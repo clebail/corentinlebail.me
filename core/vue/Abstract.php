@@ -37,15 +37,15 @@ abstract class Core_Vue_Abstract {
 		return $html;
 	}
 	
-	public function getTitle() {
+	public function getTitle($datas) {
 	    return "Clbfw";
 	}
 	
-	public function getDescription() {
+	public function getDescription($datas) {
 	    return "Clbfw";
 	}
 	
-	public function getKeywords() {
+	public function getKeywords($datas) {
 	    return "Clbfw";
 	}
 	

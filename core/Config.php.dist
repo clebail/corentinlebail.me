@@ -21,6 +21,9 @@ class Core_Config {
 		$config["captcha/secretKey"] = "6Ld8xC8UAAAAACAMumZPiHE-NdFBwO4e76IAmmTt";
 		$config["captcha/endpoint"] = "https://www.google.com/recaptcha/api/siteverify";
 		
+		$config["avatars/relativepath"] = "/images/avatars/";
+		$config["avatars/path"] = "/home/corentinlebail.me/www".$config["avatars/relativepath"];
+		
 		if(isset($config[$path])) {
 			return $config[$path];
 		}

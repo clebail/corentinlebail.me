@@ -1,0 +1,48 @@
+<?php if(Home_Modele_Index::isLoggedIn()): ?>
+<div class="new-comment">
+	<input type="text" placeholder="participer à la discution ..." />
+	<a href="" title="valider" style="display:none" class="save">
+		<i class="material-icons">done</i>
+	</a>
+</div>
+<?php else: ?>
+<dl class="login">
+	<dt>
+		<a href="#" title="Vous de vez vous identifier pour laisser un commentaire">
+			<i class="material-icons">https</i>
+		</a>
+		<ul>
+			<li>
+				<i class="material-icons">https</i> Idendification
+			</li>
+			<li>
+				<div class="error" style="display: none">
+					Connexion impossible, merci de vérifier vos identifiants
+				</div>
+				<form method="post">
+					<input type="text" name="login" placeholder="Identifiant">
+					<input type="password" name="password" placeholder="Mot de passe">
+					<input type="submit" class="button red" value="OK">
+				</form>
+			</li>
+		</ul>
+	</dt>
+</dl>
+<?php endif; ?>
+<ul class="history">
+	<?php foreach($datas["comments"] as $idComment => $comment): ?>
+	<li style="padding-left: <?php echo $comment["rang"]*50; ?>px" data-rang="<?php echo $comment["rang"]; ?>" data-id="<?php echo $comment["id"]; ?>">
+		<img class="avatar" src="<?php echo Core_Config::getConfigValue("avatars/relativepath").$comment["avatar"]; ?>">
+		<span class="comment">
+			<span class="name"><?php echo $comment["firstname"]; ?> <?php echo $comment["lastname"]; ?></span>
+			<span class="date"><?php echo $comment["date"]; ?></span>
+			<span class="content"><?php echo $comment["content"]; ?></span>
+			<?php if(Home_Modele_Index::isLoggedIn()): ?>
+				<a href="#" class="reply" title="Répondre">
+					<i class="material-icons">reply</i>
+				</a>
+			<?php endif; ?>
+		</span>
+	</li>
+	<?php endforeach; ?>
+</ul>

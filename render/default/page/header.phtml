@@ -1,18 +1,7 @@
 <header>
 	<a id="logo" href="<?php echo Home_Controller_Index::getUrl(); ?>">Corentin Lebail</a>
 	<div class="navigation">
-		<a href="/" title="A propos">
-			<i class="material-icons">account_circle</i>
-		</a>
-    	<?php if(Home_Modele_Index::isLoggedIn()): ?>
-    	<a href="<?php echo Home_Controller_Index::getUrl("index", "logout"); ?>" class="logout" title="Se déconnecter">
-    		<i class="material-icons">power_settings_new</i>
-    	</a>
-    	<?php else:?>
-    	<a  href="<?php echo Home_Login_Controller_Index::getUrl(); ?>" class="signin" title="S'identifier">
-    		<i class="material-icons">https</i>
-    	</a>
-    	<?php endif; ?>
+		<?php echo $this->callTemplate("page/header/navigation")?>	
     </div>
     <a href="https://github.com/clebail" class="github">
     	<img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png" alt="Fork me on GitHub">

@@ -24,18 +24,19 @@ DROP TABLE IF EXISTS `COMMENTS`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `COMMENTS` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idParent` int(11) NOT NULL,
+  `idParent` int(11) DEFAULT NULL,
   `idPaper` int(11) NOT NULL,
   `idWriter` int(11) NOT NULL,
   `content` text NOT NULL,
+  `dateAdd` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `parentId` (`idParent`),
   KEY `paperId` (`idPaper`),
   KEY `userId` (`idWriter`),
-  CONSTRAINT `COMMENTS_ibfk_1` FOREIGN KEY (`idParent`) REFERENCES `COMMENTS` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `COMMENTS_ibfk_2` FOREIGN KEY (`idPaper`) REFERENCES `PAPERS` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `COMMENTS_ibfk_3` FOREIGN KEY (`idWriter`) REFERENCES `USER` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `COMMENTS_ibfk_3` FOREIGN KEY (`idWriter`) REFERENCES `USER` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `COMMENTS_ibfk_4` FOREIGN KEY (`idPaper`) REFERENCES `PAPERS` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `COMMENTS_ibfk_5` FOREIGN KEY (`idParent`) REFERENCES `COMMENTS` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -55,7 +56,7 @@ CREATE TABLE `PAPERS` (
   UNIQUE KEY `title` (`title`),
   KEY `writer` (`idWriter`),
   CONSTRAINT `PAPERS_ibfk_1` FOREIGN KEY (`idWriter`) REFERENCES `USER` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,10 +73,11 @@ CREATE TABLE `USER` (
   `lastname` varchar(100) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `firstname` varchar(100) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `comments` text,
+  `avatar` varchar(255) DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -87,4 +89,4 @@ CREATE TABLE `USER` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-21 18:09:28
+-- Dump completed on 2018-03-22 17:05:10

@@ -1,10 +1,119 @@
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = '//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.12';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<h1><?php echo $this->params[1]; ?></h1>
-<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+<div class="paper">
+	<h2><?php echo $datas["date"]; ?></h2>
+	<h1><?php echo $datas["title"]; ?></h1>
+	<div class="content">
+		<?php echo $datas["content"]; ?>
+	</div>
+	<div class="comments">
+		<div class="summary">
+			<span class="nb"><?php echo $this->callTemplate("paper/summary/content", $datas); ?></span>
+		</div>
+		<div class="saisie">
+			<?php echo $this->callTemplate("paper/saisie/content", $datas); ?>
+		</div>
+	</div>
+</div>
+<script>
+	$(".login a").click(function(e) {
+		e.preventDefault();
+	});
+
+	$(".login form input[type='submit']").click(function(e) {
+		e.preventDefault();
+
+		$(".paper .saisie .login .error").hide();
+		
+		$.ajax({
+			url: "<?php echo Home_Ajax_Paper_Controller_Index::getUrl("index", "login"); ?>",
+			type: 'POST',
+			data: { idPaper: <?php echo $this->params[0]; ?>, login: $(".login form input[name='login']").val(), password: $(".login form input[name='password']").val() },
+			dataType: "JSON",
+			success: function(data) {
+				if(data["error"]) {
+					$(".paper .comments .saisie .login .error").show();
+					$(".login form input[name='password']").val("");
+				}else {
+					$(".paper .comments .saisie dt ul").hide();
+					
+					$(".paper .comments .saisie").html(data["saisie"]);
+					$(".paper .comments .summary .nb").html(data["summary"]);
+					$("header .navigation").html(data["navigation"]);
+				}
+			},
+			beforeSend: function() {
+				$('#loading').show();
+			},
+			complete: function() {
+				$('#loading').hide();
+			}
+		});
+	});
+
+	$(document).on("keyup", ".paper .saisie .new-comment input[type='text']", function() {
+		var text = $(this).val();
+		var parent = $(this).parent();
+		$(this).data("timeout", setTimeout(function() {
+			var a = parent.find("a.save");
+			if(text.length == 0) {
+				a.fadeOut();
+			} else {
+				a.fadeIn();
+			}
+		}, 500));
+	});
+
+	$(document).on("click", ".paper .saisie .new-comment a.save", function(e) {
+		e.preventDefault();
+		var text = $(this).parent().find("input[type='text']");
+
+		console.log(text);
+
+		$.ajax({
+			url: "<?php echo Home_Ajax_Paper_Controller_Index::getUrl("index", "addComment"); ?>",
+			type: 'POST',
+			data: { idPaper: <?php echo $this->params[0]; ?>, idParent: text.attr("data-idparent"), comment: text.val() },
+			dataType: "JSON",
+			success: function(data) {
+				$(".paper .comments .saisie").html(data["saisie"]);
+				$(".paper .comments .summary .nb").html(data["summary"]);
+			},
+			beforeSend: function() {
+				$('#loading').show();
+			},
+			complete: function() {
+				$('#loading').hide();
+			}
+		});
+	});
+
+	$(document).on("click", ".paper .comments .history .comment a.reply", function(e) {
+		var li = $(this).closest("li");
+		
+		$.ajax({
+			url: "<?php echo Home_Ajax_Paper_Controller_Index::getUrl("index", "reply"); ?>",
+			type: 'POST',
+			data: { rang: li.attr("data-rang"), idParent: li.attr("data-id") },
+			success: function(data) {
+				$(data).insertAfter(li);
+				
+			},
+			beforeSend: function() {
+				$('#loading').show();
+			},
+			complete: function() {
+				$('#loading').hide();
+			}
+		});
+	});
+</script>
+
+
+
+
+
+
+
+
+
+
+

@@ -2,11 +2,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Corentin Lebail" />
-<meta name="description" content="<?php echo $this->getDescription(); ?>" />
-<meta name="keywords" content="<?php echo $this->getKeywords(); ?>" />
+<meta name="description" content="<?php echo $this->getDescription($datas); ?>" />
+<meta name="keywords" content="<?php echo $this->getKeywords($datas); ?>" />
 <link rel="icon" type="image/png" href="/images/favicon.png" />
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<title><?php echo $this->getTitle(); ?></title>
+<title><?php echo $this->getTitle($datas); ?></title>
 <?php echo $this->callTemplate("page/head/css"); ?>
 <?php echo $this->callTemplate("page/head/js"); ?>

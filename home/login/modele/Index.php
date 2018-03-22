@@ -4,7 +4,7 @@ class Home_Login_Modele_Index extends Core_Login_Modele_Index{
 	    $db =Core_Dbaccess::getInstance();
 	    
 	    $sql = "
-            SELECT u.id
+            SELECT u.id, u.firstname, u.lastname, u.avatar
             FROM USER AS u
             WHERE u.email = :email AND u.password = :password AND active = 1
         ";

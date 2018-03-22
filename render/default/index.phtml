@@ -20,7 +20,7 @@
     	<ul>
     		<?php foreach($papers as $idPaper => $paper): ?>
     			<li>
-    				<a href="<?php echo Home_Paper_Controller_Index::getUrl("index", "index", array($idPaper, urlencode($paper["title"]))); ?>">
+    				<a href="<?php echo Home_Paper_Controller_Index::getUrl("index", "index", array($idPaper)); ?>">
     					<span class="title"><?php echo $paper["title"]; ?></span>
     					<time class="date"><?php echo $paper["date"]; ?></time>
     				</a>
