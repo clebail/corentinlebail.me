@@ -121,6 +121,6 @@ class Home_Paper_Modele_Index extends Core_Modele_Abstract {
             return "<a href='#' title='{$date}'>Il y a {$diff->s} secondes</a>";
         }
         
-        return 0;
+        return "<a href='#' title='{$date}'>A l'instant</a>";;
     }
 }

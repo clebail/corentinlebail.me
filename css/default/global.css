@@ -2223,6 +2223,8 @@ td .checkbox .switch {
 	top: 2px;
 	right: 2px;
 	display: none;
+	color: #000;
+	decoration: none;
 }
 
 .paper .comments .history li:hover {
