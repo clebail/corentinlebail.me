@@ -1,0 +1,52 @@
+<div class="paper-admin">
+	<h1>Administration des articles - <?php echo $datas["title"]; ?>
+		<div class="right">
+			<a href="#" title="Supprimer">
+				<i class="material-icons">delete_forever</i>
+			</a>
+		</div>
+	</h1>
+	<div class="group">
+		<div class="col col-6 edit">
+			<form method="post" action="<?php echo Home_Paper_Admin_Edit_Controller_Index::getUrl("index", "save"); ?>">
+				<input type="hidden" name="id" value="<?php echo $this->params["0"]; ?>">
+				<label>Titre</label>
+				<input type="text" name="title" value="<?php echo htmlentities($datas["title"])?>" class="ctrl">
+				<label>Date</label>
+				<input type="text" name="dateAdd" value="<?php echo $datas["date"]; ?>" class="ctrl">
+				<label>Contenu</label>
+				<textarea name="content" rows="50" class="ctrl"><?php echo htmlentities($datas["origContent"], ENT_QUOTES); ?></textarea>
+				<input type="submit" name="Valider" class="button red">
+			</form>
+		</div>
+		<div class="col col-6 paper content">
+			<?php echo $this->callTemplate("paper/paper", $datas); ?>
+		</div>
+	</div>
+</div>
+<script>
+	$(".paper-admin .edit .ctrl").keyup(function() {
+		window.clearTimeout($(this).data("timeout"));
+		
+		$(this).data("timeout", setTimeout(function() {
+			var title = $(".paper-admin .edit input[name='title']").val();
+			var dateAdd = $(".paper-admin .edit input[name='dateAdd']").val();
+			var content = $(".paper-admin .edit textarea[name='content']").val();
+
+			$.ajax({
+				url: "<?php echo Home_Ajax_Paper_Admin_Controller_Index::getUrl("index", "render"); ?>",
+				type: 'POST',
+				data: { title: title, dateAdd: dateAdd, content: content },
+				success: function(data) {
+					$(".paper-admin .paper.content").html(data);
+				},
+				beforeSend: function() {
+					$('#loading').show();
+				},
+				complete: function() {
+					$('#loading').hide();
+				}
+			});
+		}, 1000));
+	});
+</script>

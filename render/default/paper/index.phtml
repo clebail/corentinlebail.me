@@ -1,9 +1,5 @@
 <div class="paper">
-	<h2><?php echo $datas["date"]; ?></h2>
-	<h1><?php echo $datas["title"]; ?></h1>
-	<div class="content">
-		<?php echo $datas["content"]; ?>
-	</div>
+	<?php echo $this->callTemplate("paper/paper", $datas); ?>
 	<div class="comments">
 		<div class="summary">
 			<span class="nb"><?php echo $this->callTemplate("paper/summary/content", $datas); ?></span>

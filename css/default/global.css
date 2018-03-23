@@ -70,6 +70,11 @@ h1 {
 	padding-bottom: 20px;
 }
 
+h1 .right {
+	float: right;
+	position: relative;
+}
+
 h2 {
 	font-family: Arial, Helvetica, sans-serif;
 	color: #757575;
@@ -2234,3 +2239,35 @@ td .checkbox .switch {
 .paper .comments .history li:hover .reply {
 	display: inline;
 }
+
+/**
+ * PAPER ADMIN
+ * -------------------------------------------------------
+ */
+ 
+.paper-admin label {
+	display: block;
+	font-weight: bold;
+}
+
+.paper-admin .right a {
+	color: #000;
+	text-decoration: none;
+}
+
+.paper-admin .right a i {
+	font-size: 30px;
+}
+
+.paper-admin .paper {
+	background: #F8F8F8;
+	margin: 0 10px;
+}
+
+
+
+
+
+
+
+

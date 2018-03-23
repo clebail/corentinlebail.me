@@ -1,0 +1,25 @@
+<div class="paper-admin">
+	<h1>Administration des articles
+		<div class="right">
+			<a href="#" class="button red">Nouvel article</a>
+		</div>
+	</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Titre</th>
+				<th>Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($datas as $paper): ?>
+			<tr>
+				<td><a href="<?php echo Home_Paper_Admin_Controller_Index::getUrl("edit", "index", array($paper["id"]))?>"><?php echo $paper["id"]; ?></a></td>
+				<td><?php echo $paper["title"]; ?></td>
+				<td><?php echo $paper["dateAdd"]; ?></td>
+			</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+</div>
