@@ -1967,12 +1967,27 @@ td .checkbox .switch {
 	display: block;
 	margin-left: auto;
     margin-right: auto;
+    margin-top: 20px;
     max-width: 100%;
 } 
  
 .home .presentation h1 {
 	padding-bottom: 15px;
 	border-bottom: 1px solid #DDD;
+}
+
+.home .presentation {
+	font-size: 14px;
+	text-align: justify;
+    text-justify: inter-word;
+}
+
+.home .presentation .content {
+	margin-right: 5rem;
+}
+
+.home .presentation p {
+	margin-bottom: 5px;
 }
  
 .home .papers {

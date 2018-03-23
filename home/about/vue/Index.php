@@ -5,7 +5,7 @@ class Home_About_Vue_Index extends Home_Vue_Abstract {
     }
     
     public function getDescription($datas) {
-        return "Corentin Lebail chef de projet en développement logiciel - a propos";
+        return "Corentin Lebail chef et lead developpeur en génie logiciel - a propos";
     }
     
     public function renderBody($datas) {
