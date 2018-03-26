@@ -14,6 +14,7 @@ class Home_Modele_Index extends Core_Modele_Abstract {
         $sql = "
             SELECT p.id, p.title, p.dateAdd
             FROM PAPERS AS p
+            WHERE active = 1
             ORDER BY p.dateAdd DESC
         ";
         

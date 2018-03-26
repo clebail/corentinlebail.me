@@ -4,7 +4,7 @@ class Home_Paper_Admin_Modele_Index extends Core_Modele_Abstract {
         $db = Core_Dbaccess::getInstance();
         $ret = array();
         
-        $sql = "SELECT id, title, dateAdd FROM PAPERS ORDER BY dateAdd DESC";
+        $sql = "SELECT id, title, dateAdd, active FROM PAPERS ORDER BY dateAdd DESC";
             
         $stmt = $db->getPdo()->prepare($sql);
         

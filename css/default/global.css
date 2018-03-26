@@ -2263,6 +2263,7 @@ td .checkbox .switch {
 .paper-admin label {
 	display: block;
 	font-weight: bold;
+	margin-top: 15px;
 }
 
 .paper-admin .right a {

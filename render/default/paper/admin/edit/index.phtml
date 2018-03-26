@@ -14,6 +14,11 @@
 				<input type="text" name="title" value="<?php echo htmlentities($datas["title"])?>" class="ctrl">
 				<label>Date</label>
 				<input type="text" name="dateAdd" value="<?php echo $datas["date"]; ?>" class="ctrl">
+				<label>Actif</label>
+				<div class="checkbox">
+					<input type="checkbox" name="active" class="ctrl"<?php echo ($datas["active"] == 1 ? " checked" : ""); ?>>
+					<div class="switch"></div>
+				</div>
 				<label>Contenu</label>
 				<textarea name="content" rows="50" class="ctrl"><?php echo htmlentities($datas["origContent"], ENT_QUOTES); ?></textarea>
 				<input type="submit" name="Valider" class="button red">
