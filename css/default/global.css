@@ -1990,7 +1990,8 @@ td .checkbox .switch {
 	margin-bottom: 5px;
 }
  
-.home .papers {
+.home .papers,
+.about {
 	margin: 25px 5rem 0 5rem;
 }
 
@@ -2002,7 +2003,8 @@ td .checkbox .switch {
     margin-bottom: 0;
 }
  
-.home .papers li a {
+.home .papers li a,
+.about li a {
 	display: flex;
 	padding: 5px;
 	transition: padding-left .5s, color .5s;
@@ -2016,21 +2018,25 @@ td .checkbox .switch {
     margin-top: 5px;
 }
 
-.home .papers li a:hover {
+.home .papers li a:hover,
+.about li a:hover {
 	color: #E57373;
 	padding-left: 1rem;
 }
 
-.home .papers li a .title {
+.home .papers li a .title,
+.about li a .title {
 	color: #000;
 	font-weight: bold;
 }
 
-.home .papers li a:hover .title {
+.home .papers li a:hover .title,
+.about li a:hover .title {
 	color: #E57373;
 }
 
-.home .papers li a .date {
+.home .papers li a .date,
+.about li a .info {
 	color: #999;
 }
 

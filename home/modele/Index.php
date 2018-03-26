@@ -31,4 +31,8 @@ class Home_Modele_Index extends Core_Modele_Abstract {
         
         return $ret;
     }
+    
+    public static function rot5($str) {
+        return strtr($str, "0123456789", "5678901234");
+    }    
 }

@@ -1,4 +1,56 @@
 <div class="about">
 	<h1>A propos</h1>
+	<h2>Informations</h2>
+	<ul>
+		<li>
+			<a href="https://github.com/clebail" target="blank">
+				<span class="title">Github</span>
+				<span class="info">clebail</time>
+			</a>
+		</li>
+		<li>
+			<a href="#" target="blank">
+				<span class="title">Télephone</span>
+				<span class="info rot5"><?php echo Home_Modele_Index::rot5("06 50 81 56 10"); ?></time>
+			</a>
+		</li>
+		<li>
+			<a href="mailto:<?php echo str_rot13("corentin.lebail@gmail.com"); ?>" target="blank" class="rot13-a">
+				<span class="title">E-mail</span>
+				<span class="info rot13"><?php echo str_rot13("corentin.lebail@gmail.com"); ?></time>
+			</a>
+		</li>
+	</ul>
 </div>
+<script>
+	$(".rot5").each(function() {
+		var str = $(this).html();
+		var s = [];
 
+		for(i=0;i<str.length;i++){
+	        idx = str.charCodeAt(i);
+	        if(idx >= 48 && idx <= 57){
+	            if(idx <= 52) {
+	                s[i] = String.fromCharCode(((idx+ 5)));
+	            }else{
+	                s[i]=String.fromCharCode(((idx- 5)));
+	            }
+	        }else{
+	            s[i]=String.fromCharCode(idx);
+	        }
+	    }
+
+		str = s.join('');
+	    $(this).html(str);
+	    $(this).closest("a.rot5-a").attr("href", "mailto:"+str);
+	});
+
+	$(".rot13").each(function() {
+		var str = $(this).html();
+
+		str = str.replace(/[a-zA-Z]/g,function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);});
+
+		$(this).html(str);
+		$(this).closest("a.rot13-a").attr("href", "mailto:"+str);
+	});
+	</script>
