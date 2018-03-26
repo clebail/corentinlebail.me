@@ -2294,16 +2294,19 @@ td .checkbox .switch {
 
 #social-network a {
 	text-decoration: none;
-	transition: padding-left .5s;
-}
-
-#social-network a:hover {
-	padding-left: 1rem;
+	transition: padding-left .5s, background .5s;
 }
 
 #social-network img {
 	background: #B39DDB;
 }
 
+#social-network a:hover {
+	padding-left: 1rem;
+}
+
+#social-network a:hover img {
+	background: #E57373;
+}
 
 
