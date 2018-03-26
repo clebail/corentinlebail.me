@@ -1971,12 +1971,14 @@ td .checkbox .switch {
     max-width: 100%;
 } 
  
-.home .presentation h1 {
+.home .presentation h1,
+.about .presentation h1 {
 	padding-bottom: 15px;
 	border-bottom: 1px solid #DDD;
 }
 
-.home .presentation {
+.home .presentation,
+.about .presentation {
 	font-size: 14px;
 	text-align: justify;
     text-justify: inter-word;
@@ -1986,7 +1988,8 @@ td .checkbox .switch {
 	margin-right: 5rem;
 }
 
-.home .presentation p {
+.home .presentation p,
+.about .presentation p {
 	margin-bottom: 5px;
 }
  
@@ -2001,6 +2004,10 @@ td .checkbox .switch {
     padding-bottom: 15px;
     margin-top: 50px;
     margin-bottom: 0;
+}
+
+.about h3.informations {
+	margin-top: 50px;	
 }
  
 .home .papers li a,
