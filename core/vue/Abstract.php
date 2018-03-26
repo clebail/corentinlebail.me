@@ -49,6 +49,14 @@ abstract class Core_Vue_Abstract {
 	    return "Clbfw";
 	}
 	
+	public function getCurrentUrl() {
+	    return Core_Controller_Abstract::getUrl("index", "index", array(), true);
+	}
+	
+	public function showSocialNetwork() {
+	    return true;
+	}
+	
 	protected function addJs($js, $id = null, $datas = null) {
 		$this->jss [] = array("src" => $js, "id" => $id, "datas" => $datas);
 	}

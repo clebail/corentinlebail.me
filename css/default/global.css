@@ -2280,10 +2280,30 @@ td .checkbox .switch {
 	margin: 0 10px;
 }
 
+/**
+ * SOCIAL NETWORK
+ * -------------------------------------------------------
+ */
+#social-network {
+	position: fixed;
+	top: 50%;
+	left: 0;
+	margin-left: 2rem;
+	transform: translateY(-50%);
+}
 
+#social-network a {
+	text-decoration: none;
+	transition: padding-left .5s;
+}
 
+#social-network a:hover {
+	padding-left: 1rem;
+}
 
-
+#social-network img {
+	background: #B39DDB;
+}
 
 
 

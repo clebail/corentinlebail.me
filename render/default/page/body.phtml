@@ -1,2 +1,17 @@
 <div id='loading' style='display: none;'></div>
+<?php if($this->showSocialNetwork()): ?>
+<div id="social-network">
+	<a href="http://www.facebook.com/sharer.php?u=<?php echo $this->getCurrentUrl(); ?>" target="_blank">
+		<img src="/images/social-facebook-30x30.png"> 
+  	</a>
+  	<br />
+  	<a href="https://plus.google.com/share?url=<?php echo $this->getCurrentUrl(); ?>" target="_blank">
+		<img src="/images/social-googleplus-30x30.png"> 
+  	</a>
+	<br />
+	<a href="http://twitter.com/share?url=<?php echo $this->getCurrentUrl(); ?>" target="_blank">
+		<img src="/images/social-twitter-30x30.png">
+	</a>	
+</div>
+<?php endif; ?>
 <?php $this->renderBody($datas); ?>

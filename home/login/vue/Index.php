@@ -22,4 +22,8 @@ class Home_Login_Vue_Index extends Home_Vue_Abstract {
 	public function getKeywords($datas) {
 	    return "login Corentin Lebail";
 	}
+	
+	public function showSocialNetwork() {
+	    return false;
+	}
 }

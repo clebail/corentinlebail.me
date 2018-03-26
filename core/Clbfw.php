@@ -167,7 +167,7 @@ class Core_Clbfw {
 		mail($to, $sujet, $htmlMessage, $headers, "-f{$from}");
 	}
 	
-	public static function getUrl($calledClass, $objet = "index", $action = "index", $params = array(), $hash = "") {
+	public static function getUrl($calledClass, $objet = "index", $action = "index", $params = array(), $full = false) {
 		$key = self::makeCachePrefix()."#getUrl#{$calledClass}_{$objet}_{$action}";
 		
 		if(($url = Core_Cache::get($key)) == false) {
@@ -226,6 +226,10 @@ class Core_Clbfw {
 			$url.="#{$hash}";
 		}
 	
+		if($full) {
+		    $url = (isset($_SERVER['HTTPS']) ? "https" : "http")."://{$_SERVER["HTTP_HOST"]}".$url;
+		}
+		
 		return $url;
 	}
 	

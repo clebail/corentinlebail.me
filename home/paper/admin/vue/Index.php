@@ -14,4 +14,8 @@ class Home_Paper_Admin_Vue_Index extends Home_Vue_Abstract {
     public function renderBody($datas) {
         echo $this->callTemplate("paper/admin/index", $datas);
     }
+    
+    public function showSocialNetwork() {
+        return false;
+    }
 }

@@ -39,11 +39,11 @@ abstract class Core_Controller_Abstract {
 	 * @param string $objet
 	 * @param string $action
 	 * @param array $params
-	 * @param string $hash
+	 * @param boolean $full
 	 * 
 	 * @return string l'url d'accès au controller concerné
 	 */
-	 public static function getUrl($objet = "index", $action = "index", $params = array(), $hash = "") {
-		return Core_Clbfw::getUrl(get_called_class(), $objet, $action, $params, $hash);
+	 public static function getUrl($objet = "index", $action = "index", $params = array(), $full = false) {
+	     return Core_Clbfw::getUrl(get_called_class(), $objet, $action, $params, $full);
 	}
 }
