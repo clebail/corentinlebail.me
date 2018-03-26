@@ -1,7 +1,7 @@
 <div class="paper-admin">
 	<h1>Administration des articles
 		<div class="right">
-			<a href="#" class="button red">Nouvel article</a>
+			<a href="#popupAddPaper" class="button red addPaperLink openpopup">Nouvel article</a>
 		</div>
 	</h1>
 	<table class="table">
@@ -10,16 +10,57 @@
 				<th>Id</th>
 				<th>Titre</th>
 				<th>Date</th>
+				<th>Actif</th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php foreach($datas as $paper): ?>
 			<tr>
-				<td><a href="<?php echo Home_Paper_Admin_Controller_Index::getUrl("edit", "index", array($paper["id"]))?>"><?php echo $paper["id"]; ?></a></td>
+				<td>
+					<a href="<?php echo Home_Paper_Admin_Controller_Index::getUrl("edit", "index", array($paper["id"]))?>"><?php echo $paper["id"]; ?></a>
+				</td>
 				<td><?php echo $paper["title"]; ?></td>
 				<td><?php echo $paper["dateAdd"]; ?></td>
+				<td><?php echo ($paper["active"] == 1 ? "X" : ""); ?></td>
 			</tr>
 			<?php endforeach; ?>
 		</tbody>
 	</table>
 </div>
+<div id="popupAddPaper" class="modal-box zoom-anim-dialog mfp-hide">
+	<h2>Nouvel article</h2>
+	<form method="post" action="<?php echo Home_Paper_Admin_Controller_Index::getUrl("index", "add"); ?>">
+		<div class="form-group">
+			<div class="form-label">
+				<label>Titre <em>*</em></label>
+			</div>
+			<div class="form-control">
+				<input type="text" name="titre" data-validation="required" />
+			</div>
+		</div>
+		<div class="mfp-actions">
+			<a href="#" class="button deleteButtonNon cancel">Annuler</a>
+			<input type="submit" class="button red" value="Enregistrer">
+		</div>
+	</form>
+</div>
+<script>
+	$.validate({
+		lang: "fr",
+		decimalSeparator: '.'
+	});
+
+	$(".paper-admin .right a").click(function(e) {
+		$.magnificPopup.open({
+			items: {
+				src: $(this).attr("href"),
+			},
+			modal: true,
+			type: 'inline',
+			midClick: true, // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
+			mainClass: 'my-mfp-zoom-in',
+			focus: 'input',
+			removalDelay: 300,
+		});
+	});
+</script>

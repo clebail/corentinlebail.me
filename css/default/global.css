@@ -2293,6 +2293,11 @@ td .checkbox .switch {
 	margin: 0 10px;
 }
 
+.paper-admin .table a {
+	display: block;
+	width: 100%;
+}
+
 /**
  * SOCIAL NETWORK
  * -------------------------------------------------------

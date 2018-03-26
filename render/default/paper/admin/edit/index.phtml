@@ -1,7 +1,7 @@
 <div class="paper-admin">
 	<h1>Administration des articles - <?php echo $datas["title"]; ?>
 		<div class="right">
-			<a href="#" title="Supprimer">
+			<a href="#popupDeletePaper" class="deletePaperLink openpopup" title="Supprimer">
 				<i class="material-icons">delete_forever</i>
 			</a>
 		</div>
@@ -29,6 +29,17 @@
 		</div>
 	</div>
 </div>
+<div id="popupDeletePaper" class="modal-box zoom-anim-dialog mfp-hide">
+	<h2>Suppression d'article</h2>
+	<h3>Etes vous sûre de vouloir supprimer cet article ?</h3>
+	<form method="post" action="<?php echo Home_Paper_Admin_Controller_Index::getUrl("index", "delete"); ?>">
+		<input type="hidden" name="id" value="<?php echo $this->params[0]; ?>" />
+		<div class="mfp-actions">
+			<a href="#" class="button deleteButtonNon cancel">Non</a>
+			<input type="submit" class="button red" value="Oui">
+		</div>
+	</form>
+</div>
 <script>
 	$(".paper-admin .edit .ctrl").keyup(function() {
 		window.clearTimeout($(this).data("timeout"));
@@ -53,5 +64,19 @@
 				}
 			});
 		}, 1000));
+	});
+
+	$(".paper-admin .right a").click(function(e) {
+		$.magnificPopup.open({
+			items: {
+				src: $(this).attr("href"),
+			},
+			modal: true,
+			type: 'inline',
+			midClick: true, // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
+			mainClass: 'my-mfp-zoom-in',
+			focus: 'input',
+			removalDelay: 300,
+		});
 	});
 </script>
