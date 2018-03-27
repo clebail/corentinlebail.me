@@ -11,7 +11,21 @@
 	<br />
 	<a href="http://twitter.com/share?url=<?php echo $this->getCurrentUrl(); ?>" target="_blank">
 		<img src="/images/social-twitter-30x30.png">
+	</a>
+	<br />
+	<a href="mailto:<?php echo str_rot13("corentin.lebail@gmail.com"); ?>" class="rot13-a" data-mail="<?php echo str_rot13("corentin.lebail@gmail.com"); ?>" target="_blank">
+		<img src="/images/icon-30x30-contact-letter.png">
 	</a>	
 </div>
 <?php endif; ?>
 <?php $this->renderBody($datas); ?>
+<script>
+$("#social-network .rot13-a").each(function() {
+	var str = $(this).attr("data-mail");
+
+	str = str.replace(/[a-zA-Z]/g,function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);});
+
+	$(this).attr("href", "mailto:"+str);
+	$(this).attr("data-mail", "");
+});
+</script>

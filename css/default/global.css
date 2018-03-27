@@ -1977,25 +1977,26 @@ td .checkbox .switch {
 	border-bottom: 1px solid #DDD;
 }
 
-.home .presentation,
-.about .presentation {
-	font-size: 14px;
+.home .presentation .content,
+.about .presentation .content,
+.paper .content {
+	font-size: 16px;
+	line-height: 20px;
 	text-align: justify;
-    text-justify: inter-word;
 }
 
 .home .presentation .content {
-	margin-right: 5rem;
+	margin-right: 6rem;
 }
 
 .home .presentation p,
 .about .presentation p {
-	margin-bottom: 5px;
+	margin-bottom: 15px;
 }
  
 .home .papers,
 .about {
-	margin: 25px 5rem 0 5rem;
+	margin: 25px 6rem 0 6rem;
 }
 
 .home .papers h2 {

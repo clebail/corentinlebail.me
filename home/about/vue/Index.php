@@ -6,11 +6,11 @@ class Home_About_Vue_Index extends Home_Vue_Abstract {
         
         return $breadCrumbs;
     }public function getTitle($datas) {
-        return "Corentin Lebail - A propos";
+        return "A propos - Corentin Lebail";
     }
     
     public function getDescription($datas) {
-        return "Corentin Lebail chef et lead developpeur en génie logiciel - a propos";
+        return "Corentin Lebail chef de projet et lead developpeur en génie logiciel - a propos";
     }
     
     public function renderBody($datas) {

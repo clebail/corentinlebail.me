@@ -3,7 +3,27 @@
 	<div class="presentation">
 		<h2>Chef de projet et lead developpeur en génie logiciel</h2>
 		<div class="content">
-			<p>	blabla</p>
+			<p>
+			Fort de 20 ans d'expérience, je suis aujourd'hui expert en développement et management de projet.
+			Ayant plusieurs projets d'envergure à mon actif, dans des domaines incluant les ERPs, les sites web ecommerce ou encore l'intégration et la gestion des données,
+			j'ai acquis une expérience pratique dans toutes les étapes du développement d'applications d'entreprise, avec la capacité à comprendre les besoins des clients,
+			de communiquer efficacement et d'adapter mes méthodes à l'environnement de travail.
+			Ma capacité à transformer une idée humaine en un logiciel fiable et performant, combiné à ma soif de connaissances dans les nouvelles technlogies et ma percevérance fasse à un problème difficile,
+			fait de moi une pièce maîtresse dans tous les projets auxquels je participe.
+			</p>
+			<p>
+			J'essaie au maximum de rester en veille technologique, j'aime coder et je suis toujours ouvert à l'apprentissage de nouvelles choses.
+			Je suis passionné par les logiciels Open Source, donc, même si la vie de famille me laisse moins de temps qu'auparavant, je contribue à ma façon en publiant du code sur la plate-forme GitHub.
+			Comme par exemple un petit logiciel de simulation de boucles de batteries qui me permet de remplacer mon infect métronome lorsque je joue de la guitare.
+			</p>
+			<p>
+			Je travaille  actuellement  à Seyssinet-Pariset, dans l'agglomération grenobloise, où je suis chef de projet dans une entreprise d'édition de logiciels de gestion.
+			Je suis en poste depuis 2013 et je suis en charge des applications web et de notre plate-forme d'échange de données.
+			Je suis particulièrement fier de cette plate-forme d'échange, capable de gérer tous les flux entre les sites ecommerce de nos clients et nos logiciels de gestion, tout cela de manière entièrement sécurisée et automatique.
+			</p>
+			<p>
+			N'hésitez pas à prendre contact avec moi si vous voulez en savoir plus, et encore merci pour votre visite.
+			</p>
 		</div>
 	</div>
 	<h3 class="informations">Informations</h3>
@@ -26,27 +46,20 @@
 				<span class="info rot13"><?php echo str_rot13("corentin.lebail@gmail.com"); ?></time>
 			</a>
 		</li>
+		<li>
+			<a href="/doc/cv.pdf" target="blank">
+				<span class="title">Mon cv</span>
+				<span class="info"></time>
+			</a>
+		</li>
 	</ul>
 </div>
 <script>
 	$(".rot5").each(function() {
 		var str = $(this).html();
-		var s = [];
 
-		for(i=0;i<str.length;i++){
-	        idx = str.charCodeAt(i);
-	        if(idx >= 48 && idx <= 57){
-	            if(idx <= 52) {
-	                s[i] = String.fromCharCode(((idx+ 5)));
-	            }else{
-	                s[i]=String.fromCharCode(((idx- 5)));
-	            }
-	        }else{
-	            s[i]=String.fromCharCode(idx);
-	        }
-	    }
-
-		str = s.join('');
+		str = str.replace(/[0-9]/g,function(c){return String.fromCharCode(57>=(c=c.charCodeAt(0)+5)?c:c-10);});
+		
 	    $(this).html(str);
 	    $(this).closest("a.rot5-a").attr("href", "mailto:"+str);
 	});
