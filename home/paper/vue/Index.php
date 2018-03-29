@@ -1,5 +1,13 @@
 <?php
 class Home_Paper_Vue_Index extends Home_Vue_Abstract {
+    public function __construct($params) {
+        parent::__construct($params);
+        
+        $this->addJs("/js/highlight.min.js");
+        
+        $this->addCss("highlight.min.css");
+    }
+    
     protected function createBreadCrumbs($datas) {
         $breadCrumbs[] = array("key" => "<i class='material-icons'>home</i>", "url" => Home_Controller_Index::getUrl());
         $breadCrumbs[] = array("key" => $datas["title"], "url" => Home_Paper_Controller_Index::getUrl("index", "index", $this->params));

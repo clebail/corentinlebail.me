@@ -3,7 +3,10 @@ class Home_Paper_Admin_Edit_Vue_Index extends Home_Vue_Abstract {
     public function __construct($params) {
         parent::__construct($params);
         
-        $this->addJs("/js/jquery.magnific-popup.min.js");    
+        $this->addJs("/js/jquery.magnific-popup.min.js");
+        $this->addJs("/js/highlight.min.js");
+        
+        $this->addCss("highlight.min.css");
     }
     
     protected function createBreadCrumbs($datas) {

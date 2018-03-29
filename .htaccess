@@ -1,7 +1,8 @@
 RewriteEngine on
 
-RewriteRule ^$ /home [R=301,L]
+RewriteRule ^$ /home/ [R=301,L]
 RewriteRule ^sitemap.xml$ /home/sitemap/ [L] 
 RewriteRule !\.(js|ico|gif|jpg|jpeg|png|css|html|ttf|woff)$ index.php
 
 ErrorDocument 404 /404.html
+
