@@ -2340,6 +2340,7 @@ td .checkbox .switch {
 	top: 50%;
 	left: 0;
 	margin-left: 2rem;
+	width: 30px;
 	transform: translateY(-50%);
 }
 

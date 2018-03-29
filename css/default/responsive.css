@@ -70,7 +70,7 @@
 	header .navigation {
 		float: left;
 		background-position: 0 0;
-		margin: 11px 0 0 0;
+		margin: 11px 0 0 10px;
 	}
 	#wrapper {
 		background: #FFF;
@@ -168,6 +168,35 @@
 	}
 	.same-height:last-child .block:last-child {
 		margin-bottom: 0;
+	}
+	
+	.home .presentation .content {
+		margin-right: 0;
+	}
+	
+	.home .papers,
+	.about,
+	.paper {
+		margin: 25px 0 0 0;
+	}
+	
+	#social-network {
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: 0;
+		margin-bottom: 5px;
+		margin-left: 0;
+		width: auto;
+		display: inline-block;
+		top: auto;
+	}
+	
+	#social-network a {
+		transition: none;
+	}
+	
+	#social-network a:hover {
+		padding-left: 0;
 	}
 }
 
