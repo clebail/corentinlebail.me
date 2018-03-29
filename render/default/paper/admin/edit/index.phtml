@@ -55,6 +55,10 @@
 				data: { title: title, dateAdd: dateAdd, content: content },
 				success: function(data) {
 					$(".paper-admin .paper.content").html(data);
+
+					$(".paper-admin .paper .content pre code").each(function(i, block) {
+					    hljs.highlightBlock(block);
+					});
 				},
 				beforeSend: function() {
 					$('#loading').show();
