@@ -2068,12 +2068,10 @@ td .checkbox .switch {
 }
 
 .paper .content blockquote p {
-	padding-left: 15px;
-	font-style: italic;
-}
-
-.paper .content blockquote p:before {
-	content: '— ';
+	background: #000;
+	color: #FFF;
+	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+	padding: 5px;
 }
 
 .paper .content img {
