@@ -2080,7 +2080,8 @@ td .checkbox .switch {
 	margin: auto;
 }
 
-.paper .content p {
+.paper .content p,
+.paper .content ul {
 	margin-bottom: 15px;	
 }
 
@@ -2111,6 +2112,14 @@ td .checkbox .switch {
     overflow: auto;
     margin-bottom: 10px;	
     border: none;
+}
+
+.paper .content ul {
+	list-style: inherit;
+}
+
+.paper .content li {
+	margin-left: 25px;
 }
 
 .paper .comments {
