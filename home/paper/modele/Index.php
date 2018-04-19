@@ -3,16 +3,23 @@ class Home_Paper_Modele_Index extends Core_Modele_Abstract {
     public function getContent() {
         $db = Core_Dbaccess::getInstance();
         $parseDown = new Home_Paper_Modele_Parsedown();
+        $userId = 0;
+        
+        $session = Core_Session::getInstance();
+        if($session->hasData(Core_Login_Controller_Index::SESSION_DATA_NAME)) {
+            $userData = $session->getData(Core_Login_Controller_Index::SESSION_DATA_NAME);
+            $userId = $userData["login"]["id"];
+        }
         
         $sql = "
             SELECT p.title, p.dateAdd, p.content
             FROM PAPERS AS p
-            WHERE p.id = :idPaper
+            WHERE p.id = :idPaper AND (p.active = 1 OR :userId = 1)
         ";
         
         $stmt = $db->getPdo()->prepare($sql);
         
-        $stmt->execute(array("idPaper" => $this->params[0]));
+        $stmt->execute(array("idPaper" => $this->params[0], ":userId" => $userId));
         
         $ret = array();
         if($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

@@ -2122,6 +2122,12 @@ td .checkbox .switch {
 	margin-left: 25px;
 }
 
+.paper .content pre.algo {
+	background-color: rgb(240, 240, 240);
+	padding: 8px;
+	margin: 8px 8px 10px 8px;
+}
+
 .paper .comments {
 	margin-top: 15px;
 	padding: 15px 15px 0 15px;
