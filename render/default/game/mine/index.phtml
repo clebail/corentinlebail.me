@@ -2,13 +2,56 @@
 	<h1>Jeu du démineur - version Corentin Lebail</h1>
 	<table id='main'>
 	</table>
+	<div class="highscore">
+		<div>
+    		<h2>Meilleurs scores</h2>
+        	<table class="table">
+        		<thead>
+        			<tr>
+        				<th>Joueur</th>
+        				<th>Temps</th>
+        				<th>le</th>
+        			</tr>
+        		</thead>
+        		<tbody>
+        			<?php foreach($datas as $highScore): ?>
+        			<tr>
+        				<td class="name"><?php echo $highScore["firstname"]." ".$highScore["lastname"]; ?></td>
+        				<td><?php echo $highScore["temps"]; ?></td>
+        				<td><?php echo $highScore["date"]; ?></td>
+        			</tr>
+        			<?php endforeach; ?>
+        		</tbody>
+        	</table>
+        </div>
+	</div>
 </div>
 <script>
+var display = "00:00:00";
+
 $(document).ready(function() {
 	var mine = new Mine($(".game-mine #main"), 20, 20);
 	$(".game-mine #main").on("loose", function(event, idx) { mine.decouvreAll(); mine.explode(idx); });
 	$(".game-mine #main").on("explodeEnd", function() { alert("Perdu !"); });
-	$(".game-mine #main").on("win", function() { alert("Gagné !"); });
+	$(".game-mine #main").on("win", function() {
+		 alert("Gagné !");
+		 <?php if(($userId = Home_Modele_Index::getCurrentUserId()) != null): ?>
+		 $.ajax({
+				url: "<?php echo Home_Ajax_Game_Mine_Controller_Index::getUrl("index", "setScore"); ?>",
+				type: 'POST',
+				data: { idUser: <?php echo $userId; ?>, temps: display },
+				dataType: "JSON",
+				success: function(data) {
+				},
+				beforeSend: function() {
+					$('#loading').show();
+				},
+				complete: function() {
+					$('#loading').hide();
+				}
+			});
+		 <?php endif; ?>
+	});
 });
 
 function Mine(table, nbX, nbY) {
@@ -50,7 +93,7 @@ function Mine(table, nbX, nbY) {
 	  $(table).html(html);
 	  $(table).addClass("mine");
 
-	  $(document).on("click", ".mine .game td", function() {
+	  $(document).on("click", ".game-mine .mine .game td", function() {
 	    var elt = $(this);
 	    var idx = parseInt(elt.attr("data-idx"));
 
@@ -63,15 +106,15 @@ function Mine(table, nbX, nbY) {
 	      elt.addClass("go");
 	      elt.removeClass("decouvre");
 	      clearTimeout(that.tId);
-	      $(document).off("click", ".mine .game td");
-	      $(document).off("contextmenu", ".mine .game td");
+	      $(document).off("click", ".game-mine .mine .game td");
+	      $(document).off("contextmenu", ".game-mine .mine .game td");
 	      $(table).trigger("loose", idx);
 	    }else {
 	      that.showCase(idx);
 	      if(that.win(that)) {
 	        clearTimeout(that.tId);
-	        $(document).off("click", ".mine .game td");
-	        $(document).off("contextmenu", ".mine .game td");
+	        $(document).off("click", ".game-mine .mine .game td");
+	        $(document).off("contextmenu", ".game-mine .mine .game td");
 	        $(table).trigger("win");
 	      }
 	    }
@@ -79,7 +122,7 @@ function Mine(table, nbX, nbY) {
 	    that.firstClick = false;
 	  });
 
-	  $(document).on("contextmenu", ".mine .game td", function(e) {
+	  $(document).on("contextmenu", ".game-mine .mine .game td", function(e) {
 	    e.preventDefault();
 	    var elt = $(this);
 	    var idx = parseInt(elt.attr("data-idx"));
@@ -97,7 +140,7 @@ function Mine(table, nbX, nbY) {
 	        that.nbDecouvre--;
 	      }
 
-	      $(".mine .indique span.nbMine").html(that.padLeft(that.nbDecouvre));
+	      $(".game-mine .mine .indique span.nbMine").html(that.padLeft(that.nbDecouvre));
 	    }
 
 	    that.firstClick = false;
@@ -118,7 +161,7 @@ function Mine(table, nbX, nbY) {
 	}
 
 	Mine.prototype.showCase = function(idx) {
-	  var elt = $(".mine .game td[data-idx='"+idx+"']");
+	  var elt = $(".game-mine .mine .game td[data-idx='"+idx+"']");
 
 	  if(!elt.hasClass("known")) {
 	    elt.addClass("known");
@@ -153,7 +196,7 @@ function Mine(table, nbX, nbY) {
 	Mine.prototype.win = function(that) {
 	  var result = true;
 
-	  $(".mine .game td:not(.known)").each(function(key, value) {
+	  $(".game-mine .mine .game td:not(.known)").each(function(key, value) {
 	    var idx = $(value).attr("data-idx");
 	    if(!that.mines[idx]["mine"]) {
 	      result = false;
@@ -213,7 +256,7 @@ function Mine(table, nbX, nbY) {
 	  }
 	  this.nbMine = this.nbDecouvre;
 
-	  $(".mine .indique span.nbMine").html(this.padLeft(this.nbDecouvre));
+	  $(".game-mine .mine .indique span.nbMine").html(this.padLeft(this.nbDecouvre));
 
 	  this.time = 0;
 	  this.tId = setTimeout(function () { that.timeOut(); }, 1000);
@@ -226,9 +269,9 @@ function Mine(table, nbX, nbY) {
 	  var h = parseInt(this.time / 3600, 10);
 	  var m = parseInt(this.time / 60, 10);
 	  var s = this.time % 60;
-	  var display = this.padLeft(h)+":"+this.padLeft(m)+":"+this.padLeft(s);
+	  display = this.padLeft(h)+":"+this.padLeft(m)+":"+this.padLeft(s);
 
-	  $(".mine .indique span.temps").html(display);
+	  $(".game-mine .mine .indique span.temps").html(display);
 	  this.tId = setTimeout(function () { that.timeOut(); }, 1000);
 	}
 
@@ -246,7 +289,7 @@ function Mine(table, nbX, nbY) {
 	  for(y=0;y<this.nbY;y++) {
 	    for(x=0;x<this.nbX;x++) {
 	      idx = y * this.nbX + x;
-	      var elt = $(".mine .game td[data-idx='"+idx+"']");
+	      var elt = $(".game-mine .mine .game td[data-idx='"+idx+"']");
 
 	      if(this.mines[idx]["mine"]) {
 	        elt.removeClass("known");
@@ -264,7 +307,7 @@ function Mine(table, nbX, nbY) {
 	}
 
 	Mine.prototype.explode = function(idx) {
-	  var elt = $(".mine .game td[data-idx='"+idx+"']");
+	  var elt = $(".game-mine .mine .game td[data-idx='"+idx+"']");
 	  var nb = 0;
 	  var x = Number(elt.css('background-position-x').replace(/[^0-9-]/g, ''));
 	  var diff = 2*x;

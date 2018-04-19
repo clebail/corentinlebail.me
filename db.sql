@@ -40,6 +40,22 @@ CREATE TABLE `COMMENTS` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `GAME_MINE_SCORE`
+--
+
+DROP TABLE IF EXISTS `GAME_MINE_SCORE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `GAME_MINE_SCORE` (
+  `idUser` int(11) NOT NULL,
+  `temps` varchar(8) NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idUser`),
+  CONSTRAINT `GAME_MINE_SCORE_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `USER` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `PAPERS`
 --
 
@@ -57,7 +73,7 @@ CREATE TABLE `PAPERS` (
   UNIQUE KEY `title` (`title`),
   KEY `writer` (`idWriter`),
   CONSTRAINT `PAPERS_ibfk_1` FOREIGN KEY (`idWriter`) REFERENCES `USER` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,4 +106,4 @@ CREATE TABLE `USER` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-26 10:08:04
+-- Dump completed on 2018-04-19 17:19:10

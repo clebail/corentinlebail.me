@@ -2394,3 +2394,24 @@ td .checkbox .switch {
 	color: #B39DDB;
 }
 
+
+/**
+ * GAME
+ * -------------------------------------------------------
+ */
+.game-mine .highscore {
+	margin-top: 25px;
+} 
+
+.game-mine .highscore > div {
+	margin: auto;
+	max-width: 600px;
+} 
+
+.game-mine .name {
+	color: #B39DDB;
+    font-weight: bold;
+}
+ 
+ 
+

@@ -4,6 +4,16 @@ class Home_Modele_Index extends Core_Modele_Abstract {
         return Core_Session::getInstance()->hasData(Core_Login_Controller_Index::SESSION_DATA_NAME);
     }
     
+    public static function getCurrentUserId() {
+        if(self::isLoggedIn()) {
+            $userData = Core_Session::getInstance()->getData(Core_Login_Controller_Index::SESSION_DATA_NAME);
+            
+            return $userData["login"]["id"];
+        }
+        
+        return null;
+    }
+    
     public function logout() {
         Core_Session::getInstance()->destroy();
     }
