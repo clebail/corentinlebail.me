@@ -1,0 +1,85 @@
+.game-mine table.mine {
+  border-collapse: collapse;
+  margin: auto;	
+}
+
+.game-mine .mine .indique td {
+  border: 1px solid #DDD;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.game-mine .mine .indique span {
+  color: #c0392b;
+  font-family: monospace;
+}
+
+.game-mine .mine tbody.game:before {
+    content: "-";
+    display: block;
+    line-height: 1em;
+    color: transparent;
+}
+
+.game-mine .mine .game td {
+  border: 1px solid #DDD;
+  width: 25px;
+  height: 25px;
+  background-color: #EEE;
+  text-align: center;
+  color: #FFF;
+}
+
+.game-mine .mine .game td[data-nb='1'] {
+  color: #1abc9c;
+}
+
+.game-mine .mine .game td[data-nb='2'] {
+  color: #f1c40f;
+}
+
+.game-mine .mine .game td[data-nb='3'] {
+  color: #f39c12;
+}
+
+.game-mine .mine .game td[data-nb='4'] {
+  color: #3498db;
+}
+
+.game-mine .mine .game td[data-nb='5'] {
+  color: #e74c3c;
+}
+
+.game-mine .mine .game td[data-nb='6'] {
+  color: ##9b59b6;
+}
+
+.game-mine .mine .game td[data-nb='7'] {
+  color: #34495e;
+}
+
+.game-mine .mine .game td[data-nb='8'] {
+  color: #bdc3c7;
+}
+
+.game-mine .mine .game td:hover {
+  background-color: #D0D0D0;
+}
+
+.game-mine .mine .game td.known {
+  background-color: #FFF;
+}
+
+.game-mine .mine .game td.go {
+  background: url(../../images/game/mine/tdm.png) no-repeat 1px 0px;
+}
+
+.game-mine .mine .game td.decouvre {
+  background: #EEE url(../../images/game/mine/bombe.png) no-repeat 4px -2px;
+}
+
+
+
+
