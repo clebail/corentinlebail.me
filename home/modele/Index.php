@@ -38,7 +38,7 @@ class Home_Modele_Index extends Core_Modele_Abstract {
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $dateAdd = Datetime::createFromFormat("Y-m-d H:i:s", $row["dateAdd"]);
             
-            $ret[$dateAdd->format("Y")][$row["id"]] = array("title" => $row["title"], "date" => $dateAdd->format("j")." ".$month[$dateAdd->format("n")]);
+            $ret[$dateAdd->format("Y")][$row["id"]] = array("title" => $row["title"], "date" => $dateAdd->format("j")." ".$month[$dateAdd->format("n")-1]);
         }
         
         return $ret;
