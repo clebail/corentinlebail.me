@@ -19,6 +19,8 @@ class Home_Modele_Index extends Core_Modele_Abstract {
     }
     
     public function getContent() {
+        $month = array("Jan", "Fév", "Mar", "Avr", "Mai", "Jui", "Jul", "Aou", "Sep", "Oct", "Nov", "Dec");
+        
         $db = Core_Dbaccess::getInstance();
         
         $sql = "
@@ -36,7 +38,7 @@ class Home_Modele_Index extends Core_Modele_Abstract {
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $dateAdd = Datetime::createFromFormat("Y-m-d H:i:s", $row["dateAdd"]);
             
-            $ret[$dateAdd->format("Y")][$row["id"]] = array("title" => $row["title"], "date" => $dateAdd->format("j M"));
+            $ret[$dateAdd->format("Y")][$row["id"]] = array("title" => $row["title"], "date" => $dateAdd->format("j")." ".$month[$dateAdd->format("n")]);
         }
         
         return $ret;
