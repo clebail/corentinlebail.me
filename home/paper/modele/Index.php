@@ -1,6 +1,7 @@
 <?php
 class Home_Paper_Modele_Index extends Core_Modele_Abstract {
     public function getContent() {
+        $month = array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
         $db = Core_Dbaccess::getInstance();
         $parseDown = new Home_Paper_Modele_Parsedown();
         $userId = 0;
@@ -26,7 +27,7 @@ class Home_Paper_Modele_Index extends Core_Modele_Abstract {
             $dateAdd = Datetime::createFromFormat("Y-m-d H:i:s", $row["dateAdd"]);
             self::getSince($dateAdd);
             
-            $ret["date"] = $dateAdd->format("j M Y");
+            $ret["date"] = $dateAdd->format("j")." ".$month[$dateAdd->format("n")-1]." ".$dateAdd->format("Y");
             $ret["title"] = $row["title"];
             $ret["content"] = $parseDown->text($row["content"]);
             

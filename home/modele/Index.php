@@ -19,7 +19,7 @@ class Home_Modele_Index extends Core_Modele_Abstract {
     }
     
     public function getContent() {
-        $month = array("Jan", "Fév", "Mar", "Avr", "Mai", "Jui", "Jul", "Aou", "Sep", "Oct", "Nov", "Dec");
+        $month = array("Jan", "Fév", "Mar", "Avr", "Mai", "Jui", "Jul", "Aou", "Sep", "Oct", "Nov", "Déc");
         
         $db = Core_Dbaccess::getInstance();
         
