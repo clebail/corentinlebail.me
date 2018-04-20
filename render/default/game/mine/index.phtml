@@ -14,13 +14,7 @@
         			</tr>
         		</thead>
         		<tbody>
-        			<?php foreach($datas as $highScore): ?>
-        			<tr>
-        				<td class="name"><?php echo $highScore["firstname"]." ".$highScore["lastname"]; ?></td>
-        				<td><?php echo $highScore["temps"]; ?></td>
-        				<td><?php echo $highScore["date"]; ?></td>
-        			</tr>
-        			<?php endforeach; ?>
+        			<?php echo $this->callTemplate("/game/mine/score/index", $datas)?>
         		</tbody>
         	</table>
         </div>
@@ -35,13 +29,13 @@ $(document).ready(function() {
 	$(".game-mine #main").on("explodeEnd", function() { alert("Perdu !"); });
 	$(".game-mine #main").on("win", function() {
 		 alert("Gagné !");
-		 <?php if(($userId = Home_Modele_Index::getCurrentUserId()) != null): ?>
+		 <?php if(Home_Modele_Index::isLoggedIn()): ?>
 		 $.ajax({
 				url: "<?php echo Home_Ajax_Game_Mine_Controller_Index::getUrl("index", "setScore"); ?>",
 				type: 'POST',
-				data: { idUser: <?php echo $userId; ?>, temps: display },
-				dataType: "JSON",
+				data: { temps: display },
 				success: function(data) {
+					$(".highscore tbody").html(data);
 				},
 				beforeSend: function() {
 					$('#loading').show();
