@@ -49,10 +49,10 @@
     				</div>
     				<div class="group">
     					<div class="col col-2">
-    						<label for="comments">Commentaires <em>*</em></label>
+    						<label for="comments">Commentaires</label>
     					</div>
     					<div class="col col-10">
-    						<textarea  id="comments" name="comments" rows="8" placeholder="Merci de détailler la raison de votre demande d'ouverture de compte" data-validation="required"><?php echo (isset($datas["error"]) ? $datas["content"]["comments"] : ""); ?></textarea>
+    						<textarea  id="comments" name="comments" rows="8" placeholder="Merci de détailler la raison de votre demande d'ouverture de compte"><?php echo (isset($datas["error"]) ? $datas["content"]["comments"] : ""); ?></textarea>
     					</div>
     				</div>
     				<?php if(isset($datas["error"])):?>
