@@ -12,7 +12,7 @@ abstract class Home_Vue_Abstract extends Core_Vue_Abstract {
     }
     
     public function getDescription($datas) {
-        return "Corentin Lebail chef et lead developpeur en génie logiciel - site personnel";
+        return "Corentin Lebail chef de projet et lead developpeur en génie logiciel - site personnel";
     }
     
     public function getKeywords($datas) {
