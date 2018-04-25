@@ -29,7 +29,7 @@
 	border: none;
 	padding: 0;
 	margin: 0;
-	display: inline-block;
+	display: table-cell;
 }
 
 .game-sokoban .soko .cell.mur {
