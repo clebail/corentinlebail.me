@@ -2012,7 +2012,8 @@ td .checkbox .switch {
 }
  
 .home .papers li a,
-.about li a {
+.about li a,
+.game li a {
 	display: flex;
 	padding: 5px;
 	transition: padding-left .5s, color .5s;
@@ -2027,19 +2028,22 @@ td .checkbox .switch {
 }
 
 .home .papers li a:hover,
-.about li a:hover {
+.about li a:hover,
+.game li a:hover {
 	color: #E57373;
 	padding-left: 1rem;
 }
 
 .home .papers li a .title,
-.about li a .title {
+.about li a .title,
+.game li a.title {
 	color: #000;
 	font-weight: bold;
 }
 
 .home .papers li a:hover .title,
-.about li a:hover .title {
+.about li a:hover .title,
+.game li a:hover .title {
 	color: #E57373;
 }
 

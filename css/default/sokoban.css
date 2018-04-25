@@ -1,0 +1,66 @@
+.game-sokoban .game-select {
+	display: table;
+	margin-bottom: 15px;
+	margin: auto;
+}
+
+.game-sokoban .game-select label {
+	display: table-cell;
+	width: 200px;
+	padding: 10px;
+	text-align: right;
+}
+
+.game-sokoban .game-select .select {
+	display: table-cell;
+	width: 200px;
+	padding: 10px;
+}
+
+.game-sokoban .soko {
+	display: table;
+	background-color: #FFECB3;
+	margin: auto;
+}
+
+.game-sokoban .soko .cell {
+	width: 64px;
+	height: 64px;
+	border: none;
+	padding: 0;
+	margin: 0;
+	display: inline-block;
+}
+
+.game-sokoban .soko .cell.mur {
+	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat 0 0;
+}
+
+.game-sokoban .soko .cell.caisse {
+	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat -64px 0;
+}
+
+.game-sokoban .soko .cell.destination.caisse {
+	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat -64px -64px;
+}
+
+.game-sokoban .soko .cell.destination {
+	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat 0 -64px;
+}
+
+.game-sokoban .soko .cell.joueur,
+.game-sokoban .soko .cell.joueur.destination {
+	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat 0 -128px;
+}
+
+.game-sokoban .soko .cell.joueur.gauche,
+.game-sokoban .soko .cell.joueur.gauche.destination {
+	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat -64px -128px;
+}
+
+.game-sokoban .soko .cell.joueur.droite,
+.game-sokoban .soko .cell.joueur.droite.destination {
+	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat -0px -192px;
+}
+
+

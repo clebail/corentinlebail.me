@@ -1,0 +1,254 @@
+<div class="game-sokoban">
+	<div class="game-select">
+    	<label for="selectNiveau">Sélection du niveau</label>
+        <div class="select">
+    		<select id="selectNiveau">
+    			<?php foreach($datas as $niveau): ?>
+            	<option value="<?php echo $niveau; ?>">Niveau <?php echo $niveau; ?></option>";
+    			<?php endforeach; ?>
+    		</select>
+    	</div>
+    </div>
+	<div class="soko">
+	</div>
+</div>
+<script>
+	var canPlay = false;
+	var soko;
+	
+	$("#selectNiveau").change(function() {
+		loadNiveau($(this).val());
+	});
+	
+	function loadNiveau(niveau) {
+		$.ajax({
+			url: "<?php echo Home_Ajax_Game_Sokoban_Controller_Index::getUrl("index", "getNiveau"); ?>",
+			type: 'POST',
+			data: { niveau: niveau },
+			dataType: 'JSON',
+			success: function(data) {						
+				soko.init(data);
+				canPlay = true;
+			},
+			beforeSend: function() {
+			},
+			complete: function() {
+			}
+		});
+	}
+	
+	$(document).ready(function() {
+		soko = new Soko($(".soko"));
+		loadNiveau(1);
+	});
+	
+	$(document).keydown(function(event) {
+		if(canPlay) {
+			if(event.which == 37) { //gauche
+				if(soko.canPushGauche()) {
+					soko.pushGauche();
+				}
+			
+				if(soko.canGoGauche()) {
+					soko.gauche();
+				}
+			}else if(event.which == 38) { //haut
+				if(soko.canPushHaut()) {
+					soko.pushHaut();
+				}
+			
+				if(soko.canGoHaut()) {
+					soko.haut();
+				}
+			}else if(event.which == 39) { //droite
+				if(soko.canPushDroite()) {
+					soko.pushDroite();
+				}
+			
+				if(soko.canGoDroite()) {
+					soko.droite();
+				}
+			}else if(event.which == 40) { //bas
+				if(soko.canPushBas()) {
+					soko.pushBas();
+				}
+			
+				if(soko.canGoBas()) {
+					soko.bas();
+				}
+			}
+		}
+	});
+	
+	function Soko(container) {
+		this.container = container;
+	}
+	
+	Soko.prototype.init = function(data) {
+		var x, y;
+		var body = "";
+		
+		this.nbDestination = 0;
+		this.nbCaisseOk = 0;
+		
+		for(y=0;y<data["nbRow"];y++) {
+			for(x=0;x<data["nbCol"];x++) {
+				var clazz = "";
+				var car = data["data"][y][x];
+				if(car == "#") {
+					clazz = "mur";
+				} else if(car == "$") {
+					clazz = "caisse";
+				} else if(car == ".") {
+					clazz = "destination";
+					this.nbDestination++;
+				} else if(car == "*") {
+					clazz = "caisse destination";
+					this.nbDestination++;
+					this.nbCaisseOk++;
+				} else if(car == "@") {
+					clazz = "joueur";
+					this.joueur = {x: x, y: y};
+				} else if(car == "+") {
+					clazz = "joueur destination";
+					this.joueur = {x: x, y: y};
+				}
+			
+				body += "<div id='cell-"+x+"-"+y+"' class='cell "+clazz+"'></div>";
+			}
+			body += "<br />";
+		}
+		
+		this.container.html(body);
+	}
+	
+	Soko.prototype.canGoGauche = function() {
+		return this.canGo(this.getCell(this.joueur["x"]-1, this.joueur["y"]));
+	}
+	
+	Soko.prototype.canGoHaut = function() {
+		return this.canGo(this.getCell(this.joueur["x"], this.joueur["y"]-1));
+	}
+	
+	Soko.prototype.canGoDroite = function() {
+		return this.canGo(this.getCell(this.joueur["x"]+1, this.joueur["y"]));
+	}
+	
+	Soko.prototype.canGoBas = function() {
+		return this.canGo(this.getCell(this.joueur["x"], this.joueur["y"]+1));
+	}
+	
+	Soko.prototype.canPushGauche = function() {
+		var gauche = this.getCell(this.joueur["x"]-1, this.joueur["y"]);
+		var gauche1 = this.getCell(this.joueur["x"]-2, this.joueur["y"]);
+		
+		return this.hasCaisse(gauche) && this.canGo(gauche1);
+	}
+	
+	Soko.prototype.canPushHaut = function() {
+		var haut = this.getCell(this.joueur["x"], this.joueur["y"]-1);
+		var haut1 = this.getCell(this.joueur["x"], this.joueur["y"]-2);
+		
+		return this.hasCaisse(haut) && this.canGo(haut1);
+	}
+	
+	Soko.prototype.canPushDroite = function() {
+		var droite = this.getCell(this.joueur["x"]+1, this.joueur["y"]);
+		var droite1 = this.getCell(this.joueur["x"]+2, this.joueur["y"]);
+		
+		return this.hasCaisse(droite) && this.canGo(droite1);
+	}
+	
+	Soko.prototype.canPushBas = function() {
+		var bas = this.getCell(this.joueur["x"], this.joueur["y"]+1);
+		var bas1 = this.getCell(this.joueur["x"], this.joueur["y"]+2);
+		
+		return this.hasCaisse(bas) && this.canGo(bas1);
+	}
+	
+	Soko.prototype.gauche = function() {
+		this.resetJoueur();
+		
+		this.joueur["x"]--;
+		
+		this.getCell(this.joueur["x"], this.joueur["y"]).addClass("joueur gauche");
+	}
+	
+	Soko.prototype.haut = function() {
+		this.resetJoueur();
+		
+		this.joueur["y"]--;
+		
+		this.getCell(this.joueur["x"], this.joueur["y"]).addClass("joueur");
+	}
+	
+	Soko.prototype.droite = function() {
+		this.resetJoueur();
+		
+		this.joueur["x"]++;
+		
+		this.getCell(this.joueur["x"], this.joueur["y"]).addClass("joueur droite");
+	}
+	
+	Soko.prototype.bas = function() {
+		this.resetJoueur();
+		
+		this.joueur["y"]++;
+		
+		this.getCell(this.joueur["x"], this.joueur["y"]).addClass("joueur");
+	}
+	
+	Soko.prototype.pushGauche = function() {
+		this.push(this.getCell(this.joueur["x"]-1, this.joueur["y"]), this.getCell(this.joueur["x"]-2, this.joueur["y"]));
+	}
+	
+	Soko.prototype.pushHaut = function() {
+		this.push(this.getCell(this.joueur["x"], this.joueur["y"]-1), this.getCell(this.joueur["x"], this.joueur["y"]-2));
+	}
+	
+	Soko.prototype.pushDroite = function() {
+		this.push(this.getCell(this.joueur["x"]+1, this.joueur["y"]), this.getCell(this.joueur["x"]+2, this.joueur["y"]));
+	}
+	
+	Soko.prototype.pushBas = function() {
+		this.push(this.getCell(this.joueur["x"], this.joueur["y"]+1), this.getCell(this.joueur["x"], this.joueur["y"]+2));
+	}
+	
+	Soko.prototype.resetJoueur = function() {
+		this.getCell(this.joueur["x"], this.joueur["y"]).removeClass("joueur gauche droite");
+	}
+	
+	Soko.prototype.push = function(cellSrc, cellDst) {
+		this.nbCaisseOk -= this.isDestination(cellSrc) ? 1 : 0;
+		cellSrc.removeClass("caisse");
+		cellDst.addClass("caisse");
+		this.nbCaisseOk += this.isDestination(cellDst) ? 1 : 0;
+		
+		if(this.nbCaisseOk == this.nbDestination) {
+			canPlay = false;
+			
+			setTimeout(function() { alert("Niveau réussi bravo !") }, 500);
+		}
+	}
+	
+	Soko.prototype.getCell = function(x, y) {
+		return $("#cell-"+x+"-"+y)
+	}
+	
+	Soko.prototype.isMur = function(cell) {
+		return cell.hasClass("mur");
+	}
+	
+	Soko.prototype.isDestination = function(cell) {
+		return cell.hasClass("destination");
+	}
+	
+	Soko.prototype.hasCaisse = function(cell) {
+		return cell.hasClass("caisse");
+	}
+	
+	Soko.prototype.canGo = function(cell) {
+		return !this.isMur(cell) && !this.hasCaisse(cell);
+	}
+</script>
+

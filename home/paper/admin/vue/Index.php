@@ -25,4 +25,8 @@ class Home_Paper_Admin_Vue_Index extends Home_Vue_Abstract {
     public function showSocialNetwork() {
         return false;
     }
+    
+    public function asAnalytics() {
+        return false;
+    }
 }

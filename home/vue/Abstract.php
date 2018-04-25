@@ -18,4 +18,8 @@ abstract class Home_Vue_Abstract extends Core_Vue_Abstract {
     public function getKeywords($datas) {
         return "Corentin,Lebail,c,cpp,c++,java,developpement,php,javascript";
     }
+    
+    public function asAnalytics() {
+        return true;
+    }
 }
