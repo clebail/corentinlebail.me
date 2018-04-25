@@ -2,7 +2,7 @@
 class Home_Ajax_Game_Sokoban_Modele_Index extends Core_Modele_Abstract {
     public function getNiveau($niveau) {
         $ok = array(' ', '#', '$', '.', '*', '@', '+');
-        $result = array("nbRow" => 0, "nbCol" => 0, "data" => array());
+        $result = array("nbRow" => 0, "nbCol" => 0, "data" => array(), "scores" => array());
         
         if(($handle = fopen(Core_Clbfw::getBaseDirname()."/data/game/sokoban/level".str_pad($niveau, 4, "0", STR_PAD_LEFT).".xsb", "r")) !== false) {
             while(($line = fgets($handle)) !== false) {
@@ -21,6 +21,60 @@ class Home_Ajax_Game_Sokoban_Modele_Index extends Core_Modele_Abstract {
             }
             
             fclose($handle);
+        }
+        
+        $result["scores"] = $this->getScores($niveau);
+        
+        return $result;
+    }
+    
+    public function setScore($niveau, $nbMove, $nbPush) {
+        $db = Core_Dbaccess::getInstance();
+        
+        $sql = "
+            INSERT INTO GAME_SOKOBAN_SCORE (niveau, idUser, nbMove, nbPush)
+            VALUES (:niveau, :idUser, :nbMove, :nbPush)
+            ON DUPLICATE KEY UPDATE `date` = IF(:nbMove < nbMove OR :nbPush < nbPush, :date, `date`), nbMove = IF(:nbMove < nbMove OR :nbPush < nbPush, :nbMove, nbMove), nbPush = IF(:nbMove < nbMove OR :nbPush < nbPush, :nbPush, nbPush)
+        ";
+        
+        $stmt = $db->getPdo()->prepare($sql);
+        
+        try {
+            $stmt->execute(array(
+                ":niveau" => $niveau,
+                ":idUser" => Home_Modele_Index::getCurrentUserId(),
+                ":nbMove" => $nbMove,
+                ":nbPush" => $nbPush,
+                ":date" => (new Datetime())->format("Y-m-d H:i:s"),
+            ));
+            
+            return $this->getScores($niveau);
+        }catch(Exception $e) {
+            Core_Clbfw::log($e->getMessage());
+        }
+    }
+    
+    private function getScores($niveau) {
+        $db = Core_Dbaccess::getInstance();
+        
+        $sql = "
+            SELECT u.firstname, u.lastname, gss.nbPush, gss.nbMove, gss.date
+            FROM GAME_SOKOBAN_SCORE AS gss
+            INNER JOIN USER AS u ON u.id = gss.iduser
+            WHERE gss.niveau = :niveau
+            ORDER BY CONCAT(LPAD(gss.nbPush, 10, '0'), '-', LPAD(gss.nbMove, 10, '0'))
+        ";
+        
+        $stmt = $db->getPdo()->prepare($sql);
+        
+        $stmt->execute(array(":niveau" => $niveau));
+        
+        $result = array();
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $date = Datetime::createFromFormat("Y-m-d H:i:s", $row["date"]);
+            $row["date"] = $date->format("d/m/Y H:i:s");
+            
+            $result[] = $row;
         }
         
         return $result;

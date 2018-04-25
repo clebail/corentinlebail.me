@@ -63,4 +63,18 @@
 	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat -0px -192px;
 }
 
+.game-sokoban .indique {
+	margin: auto;
+	margin-bottom: 15px;
+}
+
+.game-sokoban .indique th,
+.game-sokoban .indique td {
+	border: 1px solid #DDD;
+	width: 25px;
+	height: 25px;
+	text-align: center;
+	white-space: nowrap;
+	padding: 10px;
+}
 

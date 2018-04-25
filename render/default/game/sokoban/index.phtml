@@ -12,7 +12,36 @@
     <br />
     <br />
     <br />
+    <table class="indique">
+    	<thead>
+    		<tr>
+    			<th>Nombre de poussée</th>
+    			<th>Nombre de mouvement</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<td class="nbPush"></td>
+    		<td class="nbMove"></td>
+    	</tbody>
+    </table>
 	<div class="soko">
+	</div>
+	<div class="highscore">
+		<div>
+    		<h2>Meilleurs scores</h2>
+        	<table class="table">
+        		<thead>
+        			<tr>
+        				<th>Joueur</th>
+        				<th>Nombre de poussée</th>
+        				<th>Nombre de mouvement</th>
+        				<th>le</th>
+        			</tr>
+        		</thead>
+        		<tbody>
+        		</tbody>
+        	</table>
+        </div>
 	</div>
 </div>
 <script>
@@ -21,6 +50,7 @@
 	
 	$("#selectNiveau").change(function() {
 		loadNiveau($(this).val());
+		$("#selectNiveau").blur();
 	});
 	
 	function loadNiveau(niveau) {
@@ -30,7 +60,9 @@
 			data: { niveau: niveau },
 			dataType: 'JSON',
 			success: function(data) {						
-				soko.init(data);
+				soko.init(data, niveau);
+				$(".highscore tbody").html(data["scores"]);
+				$(".indique tbody td").html("0");
 				canPlay = true;
 			},
 			beforeSend: function() {
@@ -87,13 +119,16 @@
 		this.container = container;
 	}
 	
-	Soko.prototype.init = function(data) {
+	Soko.prototype.init = function(data, niveau) {
 		var x, y;
 		var body = "";
 		
 		this.nbDestination = 0;
 		this.nbCaisseOk = 0;
-		
+		this.niveau = niveau;
+		this.nbMove = 0;
+		this.nbPush = 0;
+
 		for(y=0;y<data["nbRow"];y++) {
 			body += "<div class='row'>";
 			for(x=0;x<data["nbCol"];x++) {
@@ -174,6 +209,8 @@
 		this.resetJoueur();
 		
 		this.joueur["x"]--;
+		this.nbMove++;
+		$(".indique .nbMove").html(this.nbMove);
 		
 		this.getCell(this.joueur["x"], this.joueur["y"]).addClass("joueur gauche");
 	}
@@ -182,6 +219,8 @@
 		this.resetJoueur();
 		
 		this.joueur["y"]--;
+		this.nbMove++;
+		$(".indique .nbMove").html(this.nbMove);
 		
 		this.getCell(this.joueur["x"], this.joueur["y"]).addClass("joueur");
 	}
@@ -190,6 +229,8 @@
 		this.resetJoueur();
 		
 		this.joueur["x"]++;
+		this.nbMove++;
+		$(".indique .nbMove").html(this.nbMove);
 		
 		this.getCell(this.joueur["x"], this.joueur["y"]).addClass("joueur droite");
 	}
@@ -198,6 +239,8 @@
 		this.resetJoueur();
 		
 		this.joueur["y"]++;
+		this.nbMove++;
+		$(".indique .nbMove").html(this.nbMove);
 		
 		this.getCell(this.joueur["x"], this.joueur["y"]).addClass("joueur");
 	}
@@ -227,11 +270,33 @@
 		cellSrc.removeClass("caisse");
 		cellDst.addClass("caisse");
 		this.nbCaisseOk += this.isDestination(cellDst) ? 1 : 0;
+		this.nbPush++;
+		$(".indique .nbPush").html(this.nbPush);
 		
 		if(this.nbCaisseOk == this.nbDestination) {
+			var that = this;
 			canPlay = false;
 			
-			setTimeout(function() { alert("Niveau réussi bravo !") }, 500);
+			setTimeout(function() { 
+				alert("Niveau réussi bravo !");
+
+				<?php if(Home_Modele_Index::isLoggedIn()): ?>
+				 $.ajax({
+						url: "<?php echo Home_Ajax_Game_Sokoban_Controller_Index::getUrl("index", "setScore"); ?>",
+						type: 'POST',
+						data: { niveau: that.niveau, nbMove: that.nbMove, nbPush: that.nbPush },
+						success: function(data) {
+							$(".highscore tbody").html(data);
+						},
+						beforeSend: function() {
+							$('#loading').show();
+						},
+						complete: function() {
+							$('#loading').hide();
+						}
+					});
+				 <?php endif; ?>
+			}, 500);
 		}
 	}
 	

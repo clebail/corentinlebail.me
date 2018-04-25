@@ -1,0 +1,8 @@
+<?php foreach($datas as $highScore): ?>
+<tr>
+	<td class="name"><?php echo $highScore["firstname"]." ".$highScore["lastname"]; ?></td>
+	<td><?php echo $highScore["nbPush"]; ?></td>
+	<td><?php echo $highScore["nbMove"]; ?></td>
+	<td><?php echo $highScore["date"]; ?></td>
+</tr>
+<?php endforeach; ?>
