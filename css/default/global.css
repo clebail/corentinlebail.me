@@ -2036,7 +2036,7 @@ td .checkbox .switch {
 
 .home .papers li a .title,
 .about li a .title,
-.game li a.title {
+.game li a .title {
 	color: #000;
 	font-weight: bold;
 }
