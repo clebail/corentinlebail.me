@@ -11,9 +11,9 @@
 	text-align: right;
 }
 
-.game-sokoban .game-select .select {
+.game-sokoban .game-select select {
 	display: table-cell;
-	width: 200px;
+	width: 300px;
 	padding: 10px;
 }
 
