@@ -32,7 +32,7 @@
         		<thead>
         			<tr>
         				<th>Joueur</th>
-        				<th>Nombre de poussée</th>
+        				<th>Nombre de poussées</th>
         				<th>Nombre de mouvement</th>
         				<th>le</th>
         			</tr>
@@ -85,6 +85,7 @@
 	
 	$(document).keydown(function(event) {
 		if(canPlay) {
+			event.preventDefault();
 			if(event.which == 37) { //gauche
 				if(soko.canPushGauche()) {
 					soko.pushGauche();
