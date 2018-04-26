@@ -8,6 +8,11 @@
     			<?php endforeach; ?>
     		</select>
     	</div>
+    	<div class="reload">
+    		<a href="#" title="Recharger">
+    			<i class="material-icons">autorenew</i>
+    		</a>
+    	</div>
     </div>
     <br />
     <br />
@@ -50,6 +55,13 @@
 	
 	$("#selectNiveau").change(function() {
 		loadNiveau($(this).val());
+		$(this).blur();
+	});
+
+	$(".game-select .reload a").click(function(e) {
+		e.preventDefault();
+
+		loadNiveau(soko.niveau);
 		$("#selectNiveau").blur();
 	});
 	

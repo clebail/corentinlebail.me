@@ -14,6 +14,14 @@ class Home_Game_Sokoban_Vue_Index extends Home_Vue_Abstract {
         return Home_Game_Sokoban_Controller_Index::getUrl("index", "index", array(), true);
     }
     
+    protected function createBreadCrumbs($datas) {
+        $breadCrumbs[] = array("key" => "<i class='material-icons'>home</i>", "url" => Home_Controller_Index::getUrl());
+        $breadCrumbs[] = array("key" => "Jeux", "url" => Home_Game_Controller_Index::getUrl());
+        $breadCrumbs[] = array("key" => "Sokoban", "url" => Home_Game_Sokoban_Controller_Index::getUrl());
+        
+        return $breadCrumbs;
+    }
+    
     public function getTitle($datas) {
         return "Sokoban - Corentin Lebail";
     }

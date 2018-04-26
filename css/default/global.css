@@ -2403,16 +2403,19 @@ td .checkbox .switch {
  * GAME
  * -------------------------------------------------------
  */
-.game-mine .highscore {
+.game-mine .highscore,
+.game-sokoban .highscore {
 	margin-top: 25px;
 } 
 
-.game-mine .highscore > div {
+.game-mine .highscore > div,
+.game-sokoban .highscore > div {
 	margin: auto;
 	max-width: 600px;
 } 
 
-.game-mine .name {
+.game-mine .name,
+.game-sokoban .name {
 	color: #B39DDB;
     font-weight: bold;
 }

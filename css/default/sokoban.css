@@ -11,6 +11,23 @@
 	text-align: right;
 }
 
+.game-sokoban .game-select .select,
+.game-sokoban .game-select .reload {
+	display: table-cell;
+}
+
+.game-sokoban .game-select .reload {
+	padding-left: 15px;
+	position: relative;
+}
+
+.game-sokoban .game-select .reload a {
+	position: absolute;
+	top: 5px;
+	color: #000;
+	text-decoration: none;
+}
+
 .game-sokoban .game-select select {
 	display: table-cell;
 	width: 300px;
@@ -24,8 +41,8 @@
 }
 
 .game-sokoban .soko .cell {
-	width: 64px;
-	height: 64px;
+	width: 32px;
+	height: 32px;
 	border: none;
 	padding: 0;
 	margin: 0;
@@ -37,30 +54,30 @@
 }
 
 .game-sokoban .soko .cell.caisse {
-	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat -64px 0;
+	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat -32px 0;
 }
 
 .game-sokoban .soko .cell.destination.caisse {
-	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat -64px -64px;
+	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat -32px -32px;
 }
 
 .game-sokoban .soko .cell.destination {
-	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat 0 -64px;
+	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat 0 -32px;
 }
 
 .game-sokoban .soko .cell.joueur,
 .game-sokoban .soko .cell.joueur.destination {
-	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat 0 -128px;
+	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat 0 -64px;
 }
 
 .game-sokoban .soko .cell.joueur.gauche,
 .game-sokoban .soko .cell.joueur.gauche.destination {
-	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat -64px -128px;
+	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat -32px -64px;
 }
 
 .game-sokoban .soko .cell.joueur.droite,
 .game-sokoban .soko .cell.joueur.droite.destination {
-	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat -0px -192px;
+	background: transparent url(../../images/game/sokoban/sprites.png) no-repeat -0px -96px;
 }
 
 .game-sokoban .indique {
