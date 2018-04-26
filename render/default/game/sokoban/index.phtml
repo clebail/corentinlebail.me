@@ -18,15 +18,9 @@
     <br />
     <br />
     <table class="indique">
-    	<thead>
-    		<tr>
-    			<th>Nombre de poussée</th>
-    			<th>Nombre de mouvement</th>
-    		</tr>
-    	</thead>
     	<tbody>
-    		<td class="nbPush"></td>
-    		<td class="nbMove"></td>
+    		<td>Poussées : <span class="nbPush">0</span></td>
+    		<td>Mouvements : <span class="nbMove">0</span></td>
     	</tbody>
     </table>
 	<div class="soko">
@@ -74,7 +68,7 @@
 			success: function(data) {						
 				soko.init(data, niveau);
 				$(".highscore tbody").html(data["scores"]);
-				$(".indique tbody td").html("0");
+				$(".indique tbody td span").html("0");
 				canPlay = true;
 			},
 			beforeSend: function() {

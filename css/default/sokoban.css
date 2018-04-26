@@ -83,6 +83,8 @@
 .game-sokoban .indique {
 	margin: auto;
 	margin-bottom: 15px;
+	width: 100%;
+	max-width: 600px;
 }
 
 .game-sokoban .indique th,
@@ -93,5 +95,10 @@
 	text-align: center;
 	white-space: nowrap;
 	padding: 10px;
+}
+
+.game-sokoban .indique span {
+	color: #c0392b;
+    font-family: monospace;
 }
 
