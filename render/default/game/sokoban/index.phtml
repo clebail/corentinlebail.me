@@ -142,7 +142,6 @@
 		var body = "";
 		
 		this.nbDestination = 0;
-		this.nbCaisseOk = 0;
 		this.niveau = niveau;
 		this.nbMove = 0;
 		this.nbPush = 0;
@@ -163,7 +162,6 @@
 				} else if(car == "*") {
 					clazz = "caisse destination";
 					this.nbDestination++;
-					this.nbCaisseOk++;
 				} else if(car == "@") {
 					clazz = "joueur";
 					this.joueur = {x: x, y: y};
@@ -283,6 +281,8 @@
 	}
 	
 	Soko.prototype.push = function(cellSrc, cellDst) {
+		var nbCaisseOk = 0;
+		
 		this.backup.unshift({
 			type: "push",
 			move: {
@@ -297,16 +297,15 @@
 			}
 		});
 		
-		this.nbCaisseOk -= this.isDestination(cellSrc) ? 1 : 0;
-		this.nbCaisseOk += this.isDestination(cellDst) ? 1 : 0;
-
 		cellSrc.removeClass("caisse");
 		cellDst.addClass("caisse");
+
+		nbCaisseOk = $(".cell.destination.caisse").length;
 		
 		this.nbPush++;
 		$(".indique .nbPush").html(this.nbPush);
 		
-		if(this.nbCaisseOk == this.nbDestination) {
+		if(nbCaisseOk == this.nbDestination) {
 			var that = this;
 			canPlay = false;
 			
@@ -373,9 +372,6 @@
 				var cellScr = this.getCell(backup["move"]["from"]["x"], backup["move"]["from"]["y"]);
 				var cellDst = this.getCell(backup["move"]["to"]["x"], backup["move"]["to"]["y"]);
 
-				this.nbCaisseOk += this.isDestination(cellSrc) ? 1 : 0;
-				this.nbCaisseOk -= this.isDestination(cellDst) ? 1 : 0;
-				
 				cellScr.addClass("caisse");
 				cellDst.removeClass("caisse");
 			}
