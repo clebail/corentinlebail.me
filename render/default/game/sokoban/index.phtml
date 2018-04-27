@@ -13,6 +13,11 @@
     			<i class="material-icons">autorenew</i>
     		</a>
     	</div>
+    	<div class="undo">
+    		<a href="#" title="Annuler">
+    			<i class="material-icons">&#xE166;</i>
+    		</a>
+    	</div>
     </div>
     <br />
     <br />
@@ -57,6 +62,12 @@
 
 		loadNiveau(soko.niveau);
 		$("#selectNiveau").blur();
+	});
+
+	$(".game-select .undo a").click(function(e) {
+		e.preventDefault();
+
+		soko.undo();
 	});
 	
 	function loadNiveau(niveau) {
@@ -135,6 +146,7 @@
 		this.niveau = niveau;
 		this.nbMove = 0;
 		this.nbPush = 0;
+		this.backup = [];
 
 		for(y=0;y<data["nbRow"];y++) {
 			body += "<div class='row'>";
@@ -160,7 +172,7 @@
 					this.joueur = {x: x, y: y};
 				}
 			
-				body += "<div id='cell-"+x+"-"+y+"' class='cell "+clazz+"'></div>";
+				body += "<div id='cell-"+x+"-"+y+"' class='cell "+clazz+"' data-x="+x+" data-y="+y+"></div>";
 			}
 			body += "</div>";
 		}
@@ -213,43 +225,19 @@
 	}
 	
 	Soko.prototype.gauche = function() {
-		this.resetJoueur();
-		
-		this.joueur["x"]--;
-		this.nbMove++;
-		$(".indique .nbMove").html(this.nbMove);
-		
-		this.getCell(this.joueur["x"], this.joueur["y"]).addClass("joueur gauche");
+		this.move(-1, 0, "gauche");
 	}
 	
 	Soko.prototype.haut = function() {
-		this.resetJoueur();
-		
-		this.joueur["y"]--;
-		this.nbMove++;
-		$(".indique .nbMove").html(this.nbMove);
-		
-		this.getCell(this.joueur["x"], this.joueur["y"]).addClass("joueur");
+		this.move(0, -1, "");
 	}
 	
 	Soko.prototype.droite = function() {
-		this.resetJoueur();
-		
-		this.joueur["x"]++;
-		this.nbMove++;
-		$(".indique .nbMove").html(this.nbMove);
-		
-		this.getCell(this.joueur["x"], this.joueur["y"]).addClass("joueur droite");
+		this.move(1, 0, "droite");
 	}
 	
 	Soko.prototype.bas = function() {
-		this.resetJoueur();
-		
-		this.joueur["y"]++;
-		this.nbMove++;
-		$(".indique .nbMove").html(this.nbMove);
-		
-		this.getCell(this.joueur["x"], this.joueur["y"]).addClass("joueur");
+		this.move(0, 1, "");
 	}
 	
 	Soko.prototype.pushGauche = function() {
@@ -271,12 +259,50 @@
 	Soko.prototype.resetJoueur = function() {
 		this.getCell(this.joueur["x"], this.joueur["y"]).removeClass("joueur gauche droite");
 	}
+
+	Soko.prototype.move = function(incx, incy, clazz) {
+		this.backup.unshift({
+			type: "move",
+			clazz: this.getCell(this.joueur["x"], this.joueur["y"]).attr("class"),
+			move: {
+				from: {
+					x: this.joueur["x"],
+					y: this.joueur["y"]
+				}
+			} 
+		});
+		this.resetJoueur();
+		
+		this.joueur["x"]+=incx;
+		this.joueur["y"]+=incy;
+
+		this.nbMove++;
+		$(".indique .nbMove").html(this.nbMove);
+		
+		this.getCell(this.joueur["x"], this.joueur["y"]).addClass("joueur "+clazz);
+	}
 	
 	Soko.prototype.push = function(cellSrc, cellDst) {
+		this.backup.unshift({
+			type: "push",
+			move: {
+				from: {
+					x: cellSrc.attr("data-x"),
+					y: cellSrc.attr("data-y")
+				},
+				to: {
+					x: cellDst.attr("data-x"),
+					y: cellDst.attr("data-y")
+				}
+			}
+		});
+		
 		this.nbCaisseOk -= this.isDestination(cellSrc) ? 1 : 0;
+		this.nbCaisseOk += this.isDestination(cellDst) ? 1 : 0;
+
 		cellSrc.removeClass("caisse");
 		cellDst.addClass("caisse");
-		this.nbCaisseOk += this.isDestination(cellDst) ? 1 : 0;
+		
 		this.nbPush++;
 		$(".indique .nbPush").html(this.nbPush);
 		
@@ -325,6 +351,38 @@
 	
 	Soko.prototype.canGo = function(cell) {
 		return !this.isMur(cell) && !this.hasCaisse(cell);
+	}
+
+	Soko.prototype.undo = function() {
+		var backup = this.backup.shift();
+
+		if(backup) {
+			if(backup["type"] == "move") {
+				this.resetJoueur();
+				this.nbMove--;
+
+				this.joueur["x"] = backup["move"]["from"]["x"];
+				this.joueur["y"] = backup["move"]["from"]["y"];
+				
+				this.getCell(this.joueur["x"], this.joueur["y"]).addClass(backup["clazz"]);
+				if(this.backup[0] && this.backup[0]["type"] == "push") {
+					this.undo();
+				}
+			} else {
+				this.nbPush--;
+				var cellScr = this.getCell(backup["move"]["from"]["x"], backup["move"]["from"]["y"]);
+				var cellDst = this.getCell(backup["move"]["to"]["x"], backup["move"]["to"]["y"]);
+
+				this.nbCaisseOk += this.isDestination(cellSrc) ? 1 : 0;
+				this.nbCaisseOk -= this.isDestination(cellDst) ? 1 : 0;
+				
+				cellScr.addClass("caisse");
+				cellDst.removeClass("caisse");
+			}
+
+			$(".indique .nbMove").html(this.nbMove);
+			$(".indique .nbPush").html(this.nbPush);
+		}
 	}
 </script>
 

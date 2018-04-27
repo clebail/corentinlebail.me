@@ -12,16 +12,20 @@
 }
 
 .game-sokoban .game-select .select,
-.game-sokoban .game-select .reload {
+.game-sokoban .game-select .reload,
+.game-sokoban .game-select .undo {
 	display: table-cell;
 }
 
-.game-sokoban .game-select .reload {
+.game-sokoban .game-select .reload,
+.game-sokoban .game-select .undo {
 	padding-left: 15px;
 	position: relative;
+	width: 40px;
 }
 
-.game-sokoban .game-select .reload a {
+.game-sokoban .game-select .reload a,
+.game-sokoban .game-select .undo a {
 	position: absolute;
 	top: 5px;
 	color: #000;

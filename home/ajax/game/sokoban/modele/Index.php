@@ -62,7 +62,7 @@ class Home_Ajax_Game_Sokoban_Modele_Index extends Core_Modele_Abstract {
             FROM GAME_SOKOBAN_SCORE AS gss
             INNER JOIN USER AS u ON u.id = gss.iduser
             WHERE gss.niveau = :niveau
-            ORDER BY CONCAT(LPAD(gss.nbPush, 10, '0'), '-', LPAD(gss.nbMove, 10, '0'))
+            ORDER BY CONCAT(LPAD(gss.nbPush, 10, '0'), '-', LPAD(gss.nbMove, 10, '0')) LIMIT 10
         ";
         
         $stmt = $db->getPdo()->prepare($sql);

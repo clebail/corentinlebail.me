@@ -1,0 +1,51 @@
+<div id="main" class="user">
+	<table class="table">
+		<theah>
+			<tr>
+				<th>Id</th>
+				<th>Avatar</th>
+				<th>Prénom</th>
+				<th>Nom</th>
+				<th>Email</th>
+				<th>Actif</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($datas as $data): ?>
+			<tr>
+				<td><?php echo $data["id"]; ?></td>
+				<td><img class="avatar" src="<?php echo Core_Config::getConfigValue("avatars/relativepath").$data["avatar"]; ?>"></td>
+				<td><?php echo $data["firstname"]; ?></td>
+				<td><?php echo $data["lastname"]; ?></td>
+				<td><?php echo $data["email"]; ?></td>
+				<td>
+					<div class="checkbox">
+    					<input type="checkbox" name="active" class="ctrl"<?php echo ($data["active"] == 1 ? " checked" : ""); ?> data-id="<?php echo $data["id"]; ?>" />
+    					<div class="switch"></div>
+    				</div>
+				</td>
+			</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+	<script>
+		$(".ctrl").click(function() {
+			var elt = $(this);
+			
+			$.ajax({
+				url: "<?php echo Home_Ajax_User_Controller_Index::getUrl("index", "active"); ?>",
+				type: 'POST',
+				data: { id: elt.attr("data-id"), active: elt.prop("checked") },
+				success: function(data) {
+					$(".highscore tbody").html(data);
+				},
+				beforeSend: function() {
+					$('#loading').show();
+				},
+				complete: function() {
+					$('#loading').hide();
+				}
+			});
+		});
+	</script>
+</div>
