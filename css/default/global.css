@@ -2334,6 +2334,12 @@ td .checkbox .switch {
 	display: inline;
 }
 
+.paper .anim object {
+	display: block;
+	max-width: 100%;
+	margin: auto;
+}
+
 /**
  * PAPER ADMIN
  * -------------------------------------------------------

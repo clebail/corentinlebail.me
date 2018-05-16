@@ -9,6 +9,11 @@
 		</div>
 	</div>
 </div>
+<?php if(!empty($datas["js"])): ?>
+<script>
+	<?php echo $datas["js"]; ?>
+</script>
+<?php endif; ?>
 <script>
 	$(".login a").click(function(e) {
 		e.preventDefault();

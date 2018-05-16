@@ -83,8 +83,10 @@
 				canPlay = true;
 			},
 			beforeSend: function() {
+				$('#loading').show();
 			},
 			complete: function() {
+				$('#loading').hide();
 			}
 		});
 	}

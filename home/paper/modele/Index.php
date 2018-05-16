@@ -13,7 +13,7 @@ class Home_Paper_Modele_Index extends Core_Modele_Abstract {
         }
         
         $sql = "
-            SELECT p.title, p.dateAdd, p.content
+            SELECT p.title, p.dateAdd, p.content, p.js
             FROM PAPERS AS p
             WHERE p.id = :idPaper AND (p.active = 1 OR :userId = 1)
         ";
@@ -30,6 +30,7 @@ class Home_Paper_Modele_Index extends Core_Modele_Abstract {
             $ret["date"] = $dateAdd->format("j")." ".$month[$dateAdd->format("n")-1]." ".$dateAdd->format("Y");
             $ret["title"] = $row["title"];
             $ret["content"] = $parseDown->text($row["content"]);
+            $ret["js"] = $row["js"];
             
             $ret["comments"] = array_slice(self::getComments($this->params[0]), 0, 20);
         }
