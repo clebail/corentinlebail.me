@@ -4,7 +4,7 @@
         <div class="select">
     		<select id="selectNiveau">
     			<?php foreach($datas as $niveau): ?>
-            	<option value="<?php echo $niveau; ?>">Niveau <?php echo $niveau; ?></option>";
+            	<option value="<?php echo $niveau; ?>">Niveau <?php echo $niveau; ?></option>
     			<?php endforeach; ?>
     		</select>
     	</div>
@@ -24,8 +24,10 @@
     <br />
     <table class="indique">
     	<tbody>
-    		<td>Poussées : <span class="nbPush">0</span></td>
-    		<td>Mouvements : <span class="nbMove">0</span></td>
+    		<tr>
+    			<td>Poussées : <span class="nbPush">0</span></td>
+    			<td>Mouvements : <span class="nbMove">0</span></td>
+    		</tr>
     	</tbody>
     </table>
 	<div class="soko">
