@@ -57,6 +57,10 @@ abstract class Core_Vue_Abstract {
 	    return true;
 	}
 	
+	public function getJSONLD($datas) {
+        return "";
+	}
+	
 	protected function addJs($js, $id = null, $datas = null) {
 		$this->jss [] = array("src" => $js, "id" => $id, "datas" => $datas);
 	}

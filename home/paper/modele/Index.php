@@ -28,8 +28,10 @@ class Home_Paper_Modele_Index extends Core_Modele_Abstract {
             self::getSince($dateAdd);
             
             $ret["date"] = $dateAdd->format("j")." ".$month[$dateAdd->format("n")-1]." ".$dateAdd->format("Y");
+            $ret["publishDate"] = $dateAdd->format("Y-m-d");
             $ret["title"] = $row["title"];
             $ret["content"] = $parseDown->text($row["content"]);
+            $ret["mdContent"] = htmlentities(strip_tags($row["content"]), ENT_QUOTES);
             $ret["js"] = $row["js"];
             
             $ret["comments"] = array_slice(self::getComments($this->params[0]), 0, 20);

@@ -30,4 +30,8 @@ class Home_Paper_Vue_Index extends Home_Vue_Abstract {
     public function getCurrentUrl() {
         return Home_Paper_Controller_Index::getUrl("index", "index", $this->params, true);
     }
+    
+    public function getJSONLD($datas) {
+        return $this->callTemplate("paper/jsonld/index", $datas);
+    }
 }
