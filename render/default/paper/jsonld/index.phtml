@@ -2,12 +2,26 @@
 {
     "@context" : "http://schema.org",
     "@type" : "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "<?php echo $this->getCurrentUrl(); ?>"
+    },
     "name" : "<?php echo $datas["title"]; ?>",
     "author" : {
         "@type" : "Person",
         "name" : "Corentin Lebail"
     },
+    "headline": "<?php echo $datas["title"]; ?>",
+    "image": "http://corentinlebail.me/images/moi.jpg",
     "datePublished" : "<?php echo $datas["publishDate"]; ?>",
-    "articleBody" : "<?php echo $datas["mdContent"]; ?>"
+    "dateModified": "<?php echo $datas["updateDate"]; ?>",
+    "publisher" : {
+        "@type" : "Organization",
+        "name" : "Corentin Lebail",
+        "logo" : {
+            "@type" : "ImageObject",
+            "url" : "http://corentinlebail.me/images/moi.jpg"
+        }
+    }
 }
 </script>

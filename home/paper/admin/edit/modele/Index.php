@@ -32,7 +32,7 @@ class Home_Paper_Admin_Edit_Modele_Index extends Core_Modele_Abstract {
         }
         $date = $date->format("Y-m-d");
         
-        $sql = "UPDATE PAPERS SET title = :title, content = :content, js = :js, dateAdd = :dateAdd, active = :active WHERE id = :id";
+        $sql = "UPDATE PAPERS SET title = :title, content = :content, js = :js, dateAdd = :dateAdd, dataUpdate = NOW(), active = :active WHERE id = :id";
         
         $stmt = $db->getPdo()->prepare($sql);
         
