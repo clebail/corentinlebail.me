@@ -136,6 +136,15 @@
 			}
 		}
 	});
+
+	$(".soko").mousedown(function(e) {
+		var offset = $(this).offset(); 
+		var x = Math.floor((e.pageX - offset.left) / 32);
+		var y = Math.floor((e.pageY - offset.top) / 32);
+		var chemin = soko.astar(x, y);
+
+		soko.anim(0, chemin);
+	});
 	
 	function Soko(container) {
 		this.container = container;
@@ -383,6 +392,193 @@
 			$(".indique .nbMove").html(this.nbMove);
 			$(".indique .nbPush").html(this.nbPush);
 		}
+	}
+
+	Soko.prototype.astar = function(x, y) {
+		var closedList = new List();
+		var openList = new SortedList();
+		
+		openList.insert(new Noeud(this.joueur["x"], this.joueur["y"], 0, 0, null));
+		while(openList.size() != 0) {
+			var u = openList.pop();
+			
+			if(u.x == x && u.y == y) {
+				closedList.insert(u);
+				return closedList.getChemin();
+			}
+			
+			var voisins = this.getVoisins(u);
+			for(var i=0;i<voisins.length;i++) {
+				var v = voisins[i];
+				var oi = openList.searchXY(v.attr("data-x"), v.attr("data-y"));
+				var ci = closedList.searchXY(v.attr("data-x"), v.attr("data-y"));
+				
+				if((oi == null || oi.cout >= u.cout) && (ci == null || ci.cout >= u.cout)) {
+					var n = new Noeud(v.attr("data-x"), v.attr("data-y"), u.cout + 1, u.cout + 1 + this.distance(v.attr("data-x"), v.attr("data-y"), x, y), u);
+					openList.insert(n);
+				}
+			}
+			closedList.insert(u);
+		}
+		
+		return [];
+	}
+
+	Soko.prototype.getVoisins = function(u) {
+		var voisins = [];
+		var cell;
+
+		if(this.canGo(cell = this.getCell(u.x, u.y - 1))) {
+			voisins.push(cell);
+		}
+		
+		if(this.canGo(cell = this.getCell(u.x + 1, u.y))) {
+			voisins.push(cell);
+		}
+		
+		if(this.canGo(cell = this.getCell(u.x, u.y + 1))) {
+			voisins.push(cell);
+		}
+		
+		if(this.canGo(cell = this.getCell(u.x - 1 , u.y))) {
+			voisins.push(cell);
+		}
+		
+		return voisins;
+	}
+
+	Soko.prototype.distance = function(x1, y1, x2, y2) {
+		return Math.sqrt(Math.pow(Math.abs(x1 - x2), 2) + Math.pow(Math.abs(y1 - y2), 2));
+	}
+
+	Soko.prototype.anim = function(step, chemin) {
+		var that = this;
+		
+		if(step < chemin.length) {
+			if(chemin[step] == "gauche") {
+				this.gauche();
+			}else if(chemin[step] == "haut") {
+				this.haut();
+			}else if(chemin[step] == "droite") {
+				this.droite();
+			}else {
+				this.bas();
+			}
+
+			setTimeout(function() {
+				that.anim(step+1, chemin);
+			}, 100);
+		}
+	}
+
+	function Noeud(x, y, cout, heuristique, parent) {
+		this.x = Number(x);
+		this.y = Number(y);
+		this.cout = Number(cout);
+		this.heuristique = Number(heuristique);
+		this.parent = parent;
+	}
+
+	Noeud.prototype.compare = function(other) {
+		return other.heuristique - this.heuristique;
+	}
+
+	function List() {
+		this.array = [];
+	}
+	
+	List.prototype.insert = function(element) {
+		this.array.push(element);
+	}
+	
+	List.prototype.size = function() {
+		return this.array.length;
+	}
+	
+	List.prototype.searchXY = function(x, y) {
+		var array = this.array;
+		var index = array.length - 1;
+		
+		while(index >= 0) {
+            if(array[index].x == x && array[index].y == y) {
+				return array[index];
+            }
+            index--;
+        }
+        
+        return null;
+	}
+	
+	List.prototype.getChemin = function() {
+		var result = [];
+		var current = this.array[this.array.length - 1];
+		var next = current.parent;
+		
+		while(next) {
+			if(next.x == current.x) {
+				if(next.y < current.y) {
+					result.splice(0, 0, "bas");
+				} else {
+					result.splice(0, 0, "haut");
+				}
+			} else {
+				if(next.x < current.x) {
+					result.splice(0, 0, "droite");
+				} else {
+					result.splice(0, 0, "gauche");
+				}
+			}
+			
+			current = next;
+			next = next.parent;
+		}
+		
+		return result;
+	}
+	
+	List.prototype.size = function() {
+		return this.array.length;
+	}
+	
+	List.prototype.log = function() {
+		console.log(this.array);
+	}
+	
+	function SortedList() {
+		List.call(this);
+	}
+	
+	SortedList.prototype.insert = function(element) {
+		var array = this.array;
+		var index = array.length;
+		
+		array.push(element);
+
+        while(index > 0) {
+            var i = index, j = --index;
+
+            if(array[i].compare(array[j]) < 0) {
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+	}
+	
+	SortedList.prototype.pop = function() {
+		if(this.array.length != 0) {
+			return this.array.pop();
+		}
+		
+		return null;
+	}
+	
+	SortedList.prototype.size = function() {
+		return List.prototype.size.apply(this);
+	}
+	
+	SortedList.prototype.searchXY = function(x, y) {
+		return List.prototype.searchXY.apply(this, arguments);
 	}
 </script>
 
