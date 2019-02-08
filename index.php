@@ -2,13 +2,6 @@
 require_once("core/Clbfw.php");
 require_once("core/Config.php");
 
-function __autoload($className) {
-	$classFileName = Core_Clbfw::getClassFileName($className);
-	if(file_exists($classFileName)) {
-	    require_once(Core_Clbfw::getClassFileName($className));
-	}
-}
-
 function shutDown() {
 	global $params;
 
@@ -46,8 +39,6 @@ $uri = trim($_SERVER["REQUEST_URI"]);
 
 if($uri == "" || $uri == "/") {
 	$uri = Home_Controller_Index::getUrl();
-}else if(strpos($uri, Core_Config::getConfigValue("admin/base")) == 0 || strpos($uri, Core_Config::getConfigValue("admin/base")) == 1) {
-	$uri = str_replace(Core_Config::getConfigValue("admin/base"), "admin", $uri);
 }
 
 ini_set('session.gc_maxlifetime', 36000);

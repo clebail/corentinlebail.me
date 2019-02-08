@@ -1,4 +1,5 @@
 <?php
+require_once("core/Autoload.php");
 require_once("core/Cache.php");
 
 class Core_Clbfw {
