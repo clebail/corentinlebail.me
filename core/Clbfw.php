@@ -42,6 +42,10 @@ class Core_Clbfw {
 			$classNameIsFinish = false;
 			$onObjetAction = false;
 			
+			if(($posPi = strpos($uri, "?")) !== false) {
+			    $uri = substr($uri, 0, $posPi);
+			}
+			
 			$items = explode("/", $uri);
 		
 			$values = array();
