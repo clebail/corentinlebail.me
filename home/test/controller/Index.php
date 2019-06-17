@@ -28,9 +28,18 @@ class Home_Test_Controller_Index extends Core_Controller_Abstract {
             $client->setAccessToken($accessToken);
             $plus = new Google_Service_Plus($client);
             $me = $plus->people->get("me");
+            
+            $emails = $me->getEmails();
+            $image = $me->getImage();
+            
+            echo "Infos :<br />";
+            echo "<img src='".$image["url"]."' class='avatar'/>";
+            echo $me->getDisplayName()." (".$emails[0]["value"].")";
+            
             echo "<pre>";
             print_r($me);
             echo "</pre>";
+            
         }
         
         phpinfo();
