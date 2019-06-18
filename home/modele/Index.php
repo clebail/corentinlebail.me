@@ -1,5 +1,7 @@
 <?php
 class Home_Modele_Index extends Core_Modele_Abstract {
+    const COOKIE_SESSION_NAME = "cookie";
+    
     public static function isLoggedIn() {
         return Core_Session::getInstance()->hasData(Home_Openid_Google_Modele_Index::ACCESS_TOKEN);
     }

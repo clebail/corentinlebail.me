@@ -2445,6 +2445,41 @@ td .checkbox .switch {
 	color: #B39DDB;
     font-weight: bold;
 }
- 
- 
+
+
+/**
+* COOKIES
+* -------------------------------------------------------
+*/
+
+#cookie_info {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background: #DDD;
+   	padding: 10px;
+    margin: 5px;
+    display: table;
+}
+
+#cookie_info span {
+	display: table-cell;
+}
+
+#cookie_info a {
+	display: table-cell;
+	text-align: center;
+}
+
+#cookie_info button {
+    background: #B39DDB;
+    border: 0;
+    font-weight: 500;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    margin: 0 auto;
+    cursor: pointer;
+} 
 

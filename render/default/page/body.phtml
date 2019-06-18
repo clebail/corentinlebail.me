@@ -7,13 +7,19 @@
   	<a href="http://twitter.com/share?url=<?php echo $this->getCurrentUrl(); ?>" target="_blank">
 		<img src="/images/twitter.png" width="30px">
 	</a>
-	<a href="http://www.linkedin.com/shareArticle?mini=true&url<?php echo $this->getCurrentUrl(); ?>" target="_blank">
+	<a href="http://www.linkedin.com/shareArticle?mini=true&url=<?php echo $this->getCurrentUrl(); ?>" target="_blank">
 		<img src="/images/linkedin.png" width="30px">
 	</a>
 	
 	<a href="mailto:<?php echo str_rot13("corentin.lebail@gmail.com"); ?>" class="rot13-a" data-mail="<?php echo str_rot13("corentin.lebail@gmail.com"); ?>" target="_blank">
 		<img src="/images/icon-30x30-contact-letter.png">
 	</a>	
+</div>
+<?php endif; ?>
+<?php if(!Core_Session::getInstance()->hasData(Home_Modele_Index::COOKIE_SESSION_NAME)): ?>
+<div id='cookie_info'>
+	<span>Ce site utilise des cookies pour collecter des données statistiques sur la navigation des utilisateurs. En poursuivant votre navigation sur ce site, vous en acceptez l'utilisation.</span>
+	<a href="#"><button>Ok</button></a> 
 </div>
 <?php endif; ?>
 <?php $this->renderBody($datas); ?>
@@ -26,4 +32,21 @@ $("#social-network .rot13-a").each(function() {
 	$(this).attr("href", "mailto:"+str);
 	$(this).attr("data-mail", "");
 });
+
+$("#cookie_info a").click(function(e) {
+	e.preventDefault();
+	$("#cookie_info").hide();
+
+	$.ajax({
+		url: "<?php echo Home_Ajax_Controller_Index::getUrl("index", "valideCookies"); ?>",
+		type: 'POST',
+		success: function(data) {
+		},
+		beforeSend: function() {
+		},
+		complete: function() {
+		}
+	});
+});
 </script>
+</body>
