@@ -17,9 +17,9 @@
 <ul class="history">
 	<?php foreach($datas["comments"] as $idComment => $comment): ?>
 	<li style="padding-left: <?php echo $comment["rang"]*50; ?>px" data-rang="<?php echo $comment["rang"]; ?>" data-id="<?php echo $comment["id"]; ?>">
-		<img class="avatar" src="<?php echo Core_Config::getConfigValue("avatars/relativepath").$comment["avatar"]; ?>">
+		<img class="avatar" src="<?php echo $comment["avatar"]; ?>">
 		<span class="comment">
-			<span class="name"><?php echo $comment["firstname"]; ?> <?php echo $comment["lastname"]; ?></span>
+			<span class="name"><?php echo $comment["name"]; ?></span>
 			<span class="date"><?php echo $comment["date"]; ?></span>
 			<span class="content"><?php echo $comment["content"]; ?></span>
 			<?php if(Home_Modele_Index::isLoggedIn()): ?>

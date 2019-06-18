@@ -50,7 +50,7 @@ class Home_Paper_Modele_Index extends Core_Modele_Abstract {
         $ret = array();
         
         $sql = "
-            SELECT c.id, u.firstname, u.lastname, u.avatar,
+            SELECT c.id, u.name, u.avatar,
             c.content, c.dateAdd
             FROM COMMENTS AS c
             INNER JOIN USER AS u ON u.id = c.idWriter
@@ -79,7 +79,7 @@ class Home_Paper_Modele_Index extends Core_Modele_Abstract {
         $ret = array();
         
         $sql = "
-            SELECT c.id, u.firstname, u.lastname, u.avatar,
+            SELECT c.id, u.name, u.avatar,
             c.content, c.dateAdd
             FROM COMMENTS AS c
             INNER JOIN USER AS u ON u.id = c.idWriter

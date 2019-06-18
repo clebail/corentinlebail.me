@@ -5,7 +5,9 @@ class Home_Ajax_Paper_Modele_Index extends Core_Modele_Abstract {
         
         $sql = "
             INSERT INTO COMMENTS (idParent, idPaper, idWriter, content)
-            VALUES(:idParent, :idPaper, :idWriter, :content)
+            SELECT :idParent, :idPaper, u.id, :content
+            FROM USER AS u
+            WHERE u.email = :email
         ";
         
         $stmt = $db->getPdo()->prepare($sql);
@@ -14,8 +16,8 @@ class Home_Ajax_Paper_Modele_Index extends Core_Modele_Abstract {
             $stmt->execute(array(
                 ":idParent" => isset($this->params["post"]["idParent"]) ? $this->params["post"]["idParent"] : NULL, 
                 ":idPaper" => $this->params["post"]["idPaper"],
-                ":idWriter" => Home_Modele_Index::getCurrentUserId(),
-                "content" => $this->params["post"]["comment"],
+                ":content" => $this->params["post"]["comment"],
+                ":email" => Home_Openid_Google_Modele_Index::getEmail(),
             ));
         } catch(Exception $e) {
             Core_Clbfw::log($e->getMessage());

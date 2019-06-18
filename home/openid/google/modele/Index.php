@@ -98,8 +98,8 @@ class Home_Openid_Google_Modele_Index extends Core_Modele_Abstract {
             
             $client = self::getGoogleClient();
             $client->setAccessToken($accessToken);
-            $plus = new Google_Service_Plus($client);
-            $me = $plus->people->get("me");
+            
+            $me = self::getMe($client);
             
             $image = $me->getImage();
             
@@ -107,6 +107,44 @@ class Home_Openid_Google_Modele_Index extends Core_Modele_Abstract {
         }
         
         return null;
+    }
+    
+    public static function getEmail() {
+        if(Core_Session::getInstance()->hasData(Home_Openid_Google_Modele_Index::ACCESS_TOKEN)) {
+            $accessToken = Core_Session::getInstance()->getData(Home_Openid_Google_Modele_Index::ACCESS_TOKEN);
+            
+            $client = self::getGoogleClient();
+            $client->setAccessToken($accessToken);
+            
+            $me = self::getMe($client);
+            
+            $email = $me->getEmails();
+            
+            return $email[0]["value"];
+        }
+        
+        return null;
+    }
+    
+    public static function getName() {
+        if(Core_Session::getInstance()->hasData(Home_Openid_Google_Modele_Index::ACCESS_TOKEN)) {
+            $accessToken = Core_Session::getInstance()->getData(Home_Openid_Google_Modele_Index::ACCESS_TOKEN);
+            
+            $client = self::getGoogleClient();
+            $client->setAccessToken($accessToken);
+            
+            $me = self::getMe($client);
+            
+            return $me->getDisplayName();
+        }
+        
+        return null;
+    }
+    
+    private static function getMe($client) {
+        $plus = new Google_Service_Plus($client);
+        
+        return $plus->people->get("me");
     }
 
     public function getContent() {
@@ -122,12 +160,32 @@ class Home_Openid_Google_Modele_Index extends Core_Modele_Abstract {
     }
     
     public function authenticate($code) {
+        $db = Core_Dbaccess::getInstance();
+        
         $ret = array();
         
         $client = self::getGoogleClient();
         
         $client->fetchAccessTokenWithAuthCode($code);
         $accessToken = $client->getAccessToken();
+        
+        $me = self::getMe($client);
+        $email = $me->getEmails();
+        $image = $me->getImage();
+        
+        $sql = "
+            INSERT INTO USER (email, name, avatar)
+            VALUES (:email, :name, :avatar)
+            ON DUPLICATE KEY UPDATE name=VALUES(name), avatar=VALUES(avatar)
+        ";
+        
+        $stmt = $db->getPdo()->prepare($sql);
+        
+        $stmt->execute(array(
+            ":email" => $email[0]["value"],
+            ":name" => $me->getDisplayName(),
+            ":avatar" => $image["url"],
+        ));
         
         Core_Session::getInstance()->setData(Home_Openid_Google_Modele_Index::ACCESS_TOKEN, $accessToken);
         

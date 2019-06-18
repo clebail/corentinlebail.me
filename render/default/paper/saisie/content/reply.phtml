@@ -1,7 +1,7 @@
 <li style="padding-left: <?php echo $datas["rang"]*50; ?>px" data-rang="<?php echo $datas["rang"]; ?>">
-	<img class="avatar" src="<?php echo Core_Config::getConfigValue("avatars/relativepath").$datas["avatar"]; ?>">
+	<img class="avatar" src="<?php echo $datas["avatar"]; ?>">
 	<span class="new-comment">
-		<span class="name"><?php echo $datas["firstname"]; ?> <?php echo $datas["lastname"]; ?></span>
+		<span class="name"><?php echo $datas["name"]; ?></span>
 		<input type="text" autofocus data-idParent="<?php echo $datas["idParent"]; ?>" />
 		<a href="" title="valider" style="display:none" class="save">
 			<i class="material-icons">done</i>

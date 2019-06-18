@@ -33,7 +33,9 @@ class Home_Ajax_Game_Sokoban_Modele_Index extends Core_Modele_Abstract {
         
         $sql = "
             INSERT INTO GAME_SOKOBAN_SCORE (niveau, idUser, nbMove, nbPush)
-            VALUES (:niveau, :idUser, :nbMove, :nbPush)
+            SELECT :niveau, u.id, :nbMove, :nbPush
+            FROM USER AS u
+            WHERE u.email = :email
             ON DUPLICATE KEY UPDATE `date` = IF(:nbMove < nbMove OR :nbPush < nbPush, :date, `date`), nbMove = IF(:nbMove < nbMove OR :nbPush < nbPush, :nbMove, nbMove), nbPush = IF(:nbMove < nbMove OR :nbPush < nbPush, :nbPush, nbPush)
         ";
         
@@ -42,10 +44,10 @@ class Home_Ajax_Game_Sokoban_Modele_Index extends Core_Modele_Abstract {
         try {
             $stmt->execute(array(
                 ":niveau" => $niveau,
-                ":idUser" => Home_Modele_Index::getCurrentUserId(),
                 ":nbMove" => $nbMove,
                 ":nbPush" => $nbPush,
                 ":date" => (new Datetime())->format("Y-m-d H:i:s"),
+                ":email" => Home_Openid_Google_Modele_Index::getEmail(),
             ));
             
             return $this->getScores($niveau);
@@ -58,7 +60,7 @@ class Home_Ajax_Game_Sokoban_Modele_Index extends Core_Modele_Abstract {
         $db = Core_Dbaccess::getInstance();
         
         $sql = "
-            SELECT u.firstname, u.lastname, gss.nbPush, gss.nbMove, gss.date
+            SELECT u.name, gss.nbPush, gss.nbMove, gss.date
             FROM GAME_SOKOBAN_SCORE AS gss
             INNER JOIN USER AS u ON u.id = gss.iduser
             WHERE gss.niveau = :niveau

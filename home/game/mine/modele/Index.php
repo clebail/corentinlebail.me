@@ -4,7 +4,7 @@ class Home_Game_Mine_Modele_Index extends Core_Modele_Abstract {
         $db = Core_Dbaccess::getInstance();
         
         $sql = "
-            SELECT u.firstname, u.lastname, gms.temps, gms.`date`
+            SELECT u.name, gms.temps, gms.`date`
             FROM GAME_MINE_SCORE AS gms
             INNER JOIN USER AS u ON u.id = gms.idUser
             ORDER BY gms.temps
