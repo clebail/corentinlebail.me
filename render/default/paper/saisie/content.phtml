@@ -8,24 +8,9 @@
 <?php else: ?>
 <dl class="login">
 	<dt>
-		<a href="#" title="Vous de vez vous identifier pour laisser un commentaire">
+		<a href="<?php echo Home_Openid_Google_Controller_Index::getUrl(); ?>" title="Vous de vez vous identifier pour laisser un commentaire">
 			<i class="material-icons">https</i>
 		</a>
-		<ul>
-			<li>
-				<i class="material-icons">https</i> Idendification
-			</li>
-			<li>
-				<div class="error" style="display: none">
-					Connexion impossible, merci de vérifier vos identifiants
-				</div>
-				<form method="post">
-					<input type="text" name="login" placeholder="Identifiant">
-					<input type="password" name="password" placeholder="Mot de passe">
-					<input type="submit" class="button red" value="OK">
-				</form>
-			</li>
-		</ul>
 	</dt>
 </dl>
 <?php endif; ?>

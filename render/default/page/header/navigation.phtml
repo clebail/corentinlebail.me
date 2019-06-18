@@ -11,11 +11,11 @@
 	</li>
 	<li>
 	<?php if(Home_Modele_Index::isLoggedIn()): ?>
-		<a href="<?php echo Home_Controller_Index::getUrl("index", "logout"); ?>" class="logout" title="Se déconnecter">
-			<i class="material-icons">power_settings_new</i>
+		<a href="<?php echo Home_Controller_Index::getUrl("index", "logout"); ?>" class="logout avatar" title="Se déconnecter">
+			<img src="<?php echo Home_Openid_Google_Modele_Index::getImage(); ?>" >
 		</a>
 	<?php else:?>
-		<a href="<?php echo Home_Login_Controller_Index::getUrl(); ?>" class="signin" title="S'identifier">
+		<a href="<?php echo Home_Openid_Google_Controller_Index::getUrl(); ?>" class="signin" title="S'identifier avec Google">
     		<i class="material-icons">https</i>
     	</a>
 	<?php endif; ?>

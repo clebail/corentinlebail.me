@@ -15,41 +15,6 @@
 </script>
 <?php endif; ?>
 <script>
-	$(".login a").click(function(e) {
-		e.preventDefault();
-	});
-
-	$(".login form input[type='submit']").click(function(e) {
-		e.preventDefault();
-
-		$(".paper .saisie .login .error").hide();
-		
-		$.ajax({
-			url: "<?php echo Home_Ajax_Paper_Controller_Index::getUrl("index", "login"); ?>",
-			type: 'POST',
-			data: { idPaper: <?php echo $this->params[0]; ?>, login: $(".login form input[name='login']").val(), password: $(".login form input[name='password']").val() },
-			dataType: "JSON",
-			success: function(data) {
-				if(data["error"]) {
-					$(".paper .comments .saisie .login .error").show();
-					$(".login form input[name='password']").val("");
-				}else {
-					$(".paper .comments .saisie dt ul").hide();
-					
-					$(".paper .comments .saisie").html(data["saisie"]);
-					$(".paper .comments .summary .nb").html(data["summary"]);
-					$("header .navigation").html(data["navigation"]);
-				}
-			},
-			beforeSend: function() {
-				$('#loading').show();
-			},
-			complete: function() {
-				$('#loading').hide();
-			}
-		});
-	});
-
 	$(document).on("keyup", ".paper .saisie .new-comment input[type='text']", function() {
 		var text = $(this).val();
 		var parent = $(this).parent();
@@ -66,8 +31,6 @@
 	$(document).on("click", ".paper .saisie .new-comment a.save", function(e) {
 		e.preventDefault();
 		var text = $(this).parent().find("input[type='text']");
-
-		console.log(text);
 
 		$.ajax({
 			url: "<?php echo Home_Ajax_Paper_Controller_Index::getUrl("index", "addComment"); ?>",

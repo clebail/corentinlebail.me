@@ -1,7 +1,7 @@
 <?php
 class Home_Modele_Index extends Core_Modele_Abstract {
     public static function isLoggedIn() {
-        return Core_Session::getInstance()->hasData(Home_Test_Modele_Index::ACCESS_TOKEN);
+        return Core_Session::getInstance()->hasData(Home_Openid_Google_Modele_Index::ACCESS_TOKEN);
     }
     
     public static function getCurrentUserId() {
@@ -15,10 +15,10 @@ class Home_Modele_Index extends Core_Modele_Abstract {
     }
     
     public function logout() {
-        $client = Home_Test_Modele_Index::getGoogleClient();
+        $client = Home_Openid_Google_Modele_Index::getGoogleClient();
         
         $client->revokeToken();
-        Core_Session::getInstance()->destroy(Home_Test_Modele_Index::ACCESS_TOKEN);
+        Core_Session::getInstance()->destroy(Home_Openid_Google_Modele_Index::ACCESS_TOKEN);
     }
     
     public function getContent() {

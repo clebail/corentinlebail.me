@@ -217,6 +217,26 @@ header .navigation li {
     margin: 0 15px 0 0;
 }
 
+header .navigation li .avatar {
+	position: relative;
+	display: block;
+}
+
+header .navigation li .avatar:after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 24px;
+	height: 24px;
+	content: '';
+	background: url('../../images/avatar_back_24.png') no-repeat 0 0;
+}
+
+header .navigation li .avatar img {
+	width: 24px;
+	height: 24px;
+}
+
 header:after {
 	content: '';
 	display: block;
