@@ -24,6 +24,11 @@ class Core_Config {
 		$config["avatars/relativepath"] = "/images/avatars/";
 		$config["avatars/path"] = "/home/corentinlebail.me/www".$config["avatars/relativepath"];
 		
+		$config["openid/github/identityurl"] = "https://github.com/login/oauth/authorize";
+		$config["openid/github/accesstokenurl"] = "https://github.com/login/oauth/access_token";
+		$config["openid/github/client_id"] = "eb38be7d82d2d5936919";
+		$config["openid/github/client_secret"] = "c349e4ab1b7e99e9c410f091c3b47ef55c4c47d8";
+		
 		if(isset($config[$path])) {
 			return $config[$path];
 		}
