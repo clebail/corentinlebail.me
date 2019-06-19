@@ -15,9 +15,33 @@
 			<img src="<?php echo Home_Openid_Modele_Abstract::getAvatar(); ?>" >
 		</a>
 	<?php else:?>
-		<a href="<?php echo Home_Openid_Google_Controller_Index::getUrl(); ?>" class="signin" title="S'identifier avec Google">
+		<a href="#" class="signin" title="S'identifier" data-dropdown="#dropdown-compte">
     		<i class="material-icons">https</i>
     	</a>
+    	<div id="dropdown-compte" class="dropdown dropdown-tip dropdown-anchor-right dropdown-relative">
+    		<ul class="dropdown-menu">
+    			<li>
+    				<span>
+    					<span class="signin google">
+    						<a href="<?php echo Home_Openid_Google_Controller_Index::getUrl(); ?>">
+        						<span class="badge"></span>
+        						<span class="title">Sign in with Google</span>
+        					</a>
+    					</span>
+    				</span>
+    			</li>
+    			<li>
+    				<span>
+    					<span class="signin github">
+    						<a href="<?php echo Home_Openid_Github_Controller_Index::getUrl(); ?>">
+        						<span class="badge"></span>
+    							<span class="title">Sign in with Github</span>
+    						</a>
+    					</span>
+    				</span>
+    			</li>
+    		</ul>
+    	</div>
 	<?php endif; ?>
 	</li>
 </ul>

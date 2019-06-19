@@ -209,7 +209,7 @@ header .navigation {
 	margin: 5px 150px 0 0;
 }
 
-header .navigation li {
+header .navigation ul:not(.dropdown-menu) > li {
 	display: inline-block;
     text-align: center;
     vertical-align: top;
@@ -943,7 +943,7 @@ button::-moz-focus-inner,input::-moz-focus-inner {
 .dropdown .dropdown-menu span
 	{
 	display: block;
-	color: #444 !important;
+	color: #444;
 	text-decoration: none;
 	line-height: 18px;
 	padding: 5px 20px;
@@ -953,16 +953,60 @@ button::-moz-focus-inner,input::-moz-focus-inner {
 }
 
 .dropdown .dropdown-menu span {
-	padding: 3px 20px;
+	padding: 10px 20px;
 }
 
-.dropdown .dropdown-menu span.disabled {
-	color: #999 !important;
+.dropdown .dropdown-menu span.signin {
+	padding: 5px 20px 5px 15px;
+	border-width: 1px;
+	border-radius: 2px;
+	border-style: solid;
 }
 
-.dropdown .dropdown-menu span.email {
-	color: #888;
-	font-style: italic;
+.dropdown .dropdown-menu span.signin a {
+	text-decoration: none;
+}
+
+.dropdown .dropdown-menu span.badge,
+.dropdown .dropdown-menu span.title {
+	padding: 0;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.dropdown .dropdown-menu span.badge {
+	width: 24px;
+	height: 24px;
+	margin-right: 10px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+
+.dropdown .dropdown-menu .google {
+	border-color: #757575;
+	background-color: #FFF;
+}
+
+.dropdown .dropdown-menu .google span.badge {
+	background-image: url(../../images/google.png);
+}
+
+.dropdown .dropdown-menu .google span.title {
+	color: #757575;
+}
+
+.dropdown .dropdown-menu .github {
+	border-color: #333;
+	background-color: #333;
+}
+
+.dropdown .dropdown-menu .github span.badge {
+	background-image: url(../../images/github.png);
+}
+
+.dropdown .dropdown-menu .github span.title {
+	color: #FFF;
 }
 
 .dropdown .dropdown-menu li>a:hover,
