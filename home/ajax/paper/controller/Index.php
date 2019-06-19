@@ -16,8 +16,8 @@ class Home_Ajax_Paper_Controller_Index extends Home_Ajax_Controller_Abstract {
             $datas = array(
                 "rang" => $this->params["post"]["rang"]+1,
                 "idParent" => $this->params["post"]["idParent"],
-                "avatar" => Home_Openid_Google_Modele_Index::getImage(),
-                "name" => Home_Openid_Google_Modele_Index::getName(),
+                "avatar" => Home_Openid_Modele_Abstract::getAvatar(),
+                "name" => Home_Openid_Modele_Abstract::getName(),
             );
             $this->vue->renderReply($datas);
         }else {

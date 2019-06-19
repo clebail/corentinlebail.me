@@ -11,8 +11,8 @@
 	</li>
 	<li>
 	<?php if(Home_Modele_Index::isLoggedIn()): ?>
-		<a href="<?php echo Home_Controller_Index::getUrl("index", "logout"); ?>" class="logout avatar" title="Se déconnecter">
-			<img src="<?php echo Home_Openid_Google_Modele_Index::getImage(); ?>" >
+		<a href="<?php echo Home_Controller_Index::getUrl("index", "logout"); ?>" class="logout avatar" title="<?php echo Home_Openid_Modele_Abstract::getName(); ?> - Se déconnecter">
+			<img src="<?php echo Home_Openid_Modele_Abstract::getAvatar(); ?>" >
 		</a>
 	<?php else:?>
 		<a href="<?php echo Home_Openid_Google_Controller_Index::getUrl(); ?>" class="signin" title="S'identifier avec Google">

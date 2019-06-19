@@ -5,7 +5,9 @@ class Home_Ajax_Game_Mine_Modele_Index extends Core_Modele_Abstract {
         
         $sql = "
             INSERT INTO GAME_MINE_SCORE (idUser, temps)
-            VALUES (:idUser, :temps)
+            SELECT u.id, :temps
+            FROM USER AS u
+            WHERE u.email = :email
             ON DUPLICATE KEY UPDATE `date` = IF(:temps < temps, :date, `date`), temps = IF(:temps < temps, :temps, temps)
         ";
         
@@ -13,9 +15,9 @@ class Home_Ajax_Game_Mine_Modele_Index extends Core_Modele_Abstract {
         
         try {
             $stmt->execute(array(
-                ":idUser" => Home_Modele_Index::getCurrentUserId(),
                 ":temps" => $temps,
                 ":date" => (new Datetime())->format("Y-m-d H:i:s"),
+                ":email" => Home_Openid_Modele_Abstract::getEmail(),
             ));
             
             $modele = new Home_Game_Mine_Modele_Index(null);

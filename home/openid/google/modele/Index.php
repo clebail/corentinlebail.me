@@ -71,9 +71,7 @@ require_once("lib/Google/Service/Plus.php");
 require_once("lib/Google/AccessToken/Revoke.php");
 
 
-class Home_Openid_Google_Modele_Index extends Core_Modele_Abstract {
-    const ACCESS_TOKEN = "access_token";   
-    
+class Home_Openid_Google_Modele_Index extends Home_Openid_Modele_Abstract {
     private static $googleClient = null;
     
     public static function getGoogleClient() {
@@ -92,61 +90,6 @@ class Home_Openid_Google_Modele_Index extends Core_Modele_Abstract {
         return self::$googleClient;
     }
     
-    public static function getImage() {
-        if(Core_Session::getInstance()->hasData(Home_Openid_Google_Modele_Index::ACCESS_TOKEN)) {
-            $accessToken = Core_Session::getInstance()->getData(Home_Openid_Google_Modele_Index::ACCESS_TOKEN);
-            
-            $client = self::getGoogleClient();
-            $client->setAccessToken($accessToken);
-            
-            $me = self::getMe($client);
-            
-            $image = $me->getImage();
-            
-            return $image["url"];
-        }
-        
-        return null;
-    }
-    
-    public static function getEmail() {
-        if(Core_Session::getInstance()->hasData(Home_Openid_Google_Modele_Index::ACCESS_TOKEN)) {
-            $accessToken = Core_Session::getInstance()->getData(Home_Openid_Google_Modele_Index::ACCESS_TOKEN);
-            
-            $client = self::getGoogleClient();
-            $client->setAccessToken($accessToken);
-            
-            $me = self::getMe($client);
-            
-            $email = $me->getEmails();
-            
-            return $email[0]["value"];
-        }
-        
-        return null;
-    }
-    
-    public static function getName() {
-        if(Core_Session::getInstance()->hasData(Home_Openid_Google_Modele_Index::ACCESS_TOKEN)) {
-            $accessToken = Core_Session::getInstance()->getData(Home_Openid_Google_Modele_Index::ACCESS_TOKEN);
-            
-            $client = self::getGoogleClient();
-            $client->setAccessToken($accessToken);
-            
-            $me = self::getMe($client);
-            
-            return $me->getDisplayName();
-        }
-        
-        return null;
-    }
-    
-    private static function getMe($client) {
-        $plus = new Google_Service_Plus($client);
-        
-        return $plus->people->get("me");
-    }
-
     public function getContent() {
         $ret = array();
         
@@ -168,8 +111,9 @@ class Home_Openid_Google_Modele_Index extends Core_Modele_Abstract {
         
         $client->fetchAccessTokenWithAuthCode($code);
         $accessToken = $client->getAccessToken();
+        $plus = new Google_Service_Plus($client);
         
-        $me = self::getMe($client);
+        $me = $plus->people->get("me");
         $email = $me->getEmails();
         $image = $me->getImage();
         
@@ -187,10 +131,16 @@ class Home_Openid_Google_Modele_Index extends Core_Modele_Abstract {
             ":avatar" => $image["url"],
         ));
         
-        Core_Session::getInstance()->setData(Home_Openid_Google_Modele_Index::ACCESS_TOKEN, $accessToken);
+        Core_Session::getInstance()->setData(Home_Openid_Modele_Abstract::ACCESS_TOKEN, $accessToken);
+        $this->storeSessionDatas($email[0]["value"], $me->getDisplayName(), $image["url"]);
         
         $ret["redirect_uri"] = Home_Controller_Index::getUrl();
         
         return $ret;
     }
 }
+
+
+
+
+

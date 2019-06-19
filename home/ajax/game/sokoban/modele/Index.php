@@ -47,7 +47,7 @@ class Home_Ajax_Game_Sokoban_Modele_Index extends Core_Modele_Abstract {
                 ":nbMove" => $nbMove,
                 ":nbPush" => $nbPush,
                 ":date" => (new Datetime())->format("Y-m-d H:i:s"),
-                ":email" => Home_Openid_Google_Modele_Index::getEmail(),
+                ":email" => Home_Openid_Modele_Abstract::getEmail(),
             ));
             
             return $this->getScores($niveau);

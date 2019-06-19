@@ -17,7 +17,7 @@ class Home_Ajax_Paper_Modele_Index extends Core_Modele_Abstract {
                 ":idParent" => isset($this->params["post"]["idParent"]) ? $this->params["post"]["idParent"] : NULL, 
                 ":idPaper" => $this->params["post"]["idPaper"],
                 ":content" => $this->params["post"]["comment"],
-                ":email" => Home_Openid_Google_Modele_Index::getEmail(),
+                ":email" => Home_Openid_Modele_Abstract::getEmail(),
             ));
         } catch(Exception $e) {
             Core_Clbfw::log($e->getMessage());
