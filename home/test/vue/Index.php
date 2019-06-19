@@ -2,8 +2,6 @@
 class Home_Test_Vue_Index extends Home_Vue_Abstract {
     public function __construct($params) {
         parent::__construct($params);
-        
-        $this->addJs("/js/jquery-dropdown.js");
     }
     
     protected function createBreadCrumbs($datas) {

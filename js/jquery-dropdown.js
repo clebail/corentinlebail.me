@@ -98,8 +98,6 @@ if(jQuery) (function($) {
 	
 	function position() {
 		
-		console.log("position");
-		
 		var dropdown = $('.dropdown:visible').eq(0),
 			trigger = dropdown.data('dropdown-trigger'),
 			hOffset = trigger ? parseInt(trigger.attr('data-horizontal-offset') || 0, 10) : null,
@@ -110,7 +108,7 @@ if(jQuery) (function($) {
 		// Position the dropdown relative-to-parent...
 		if( dropdown.hasClass('dropdown-relative') ) {
 			dropdown.css({
-				left: dropdown.hasClass('dropdown-anchor-right') ?
+				left: dropdown.hasClass('dropdown-anchor-right')  && $(window).width() > 800 ?
 					trigger.position().left - (dropdown.outerWidth(true) - trigger.outerWidth(true)) - parseInt(trigger.css('margin-right')) + hOffset :
 					trigger.position().left + parseInt(trigger.css('margin-left')) + hOffset,
 				top: trigger.position().top + trigger.outerHeight(true) - parseInt(trigger.css('margin-top')) + vOffset
@@ -118,7 +116,7 @@ if(jQuery) (function($) {
 		} else {
 			// ...or relative to document
 			dropdown.css({
-				left: dropdown.hasClass('dropdown-anchor-right') ? 
+				left: dropdown.hasClass('dropdown-anchor-right')  && $(window).width() > 800 ? 
 					trigger.offset().left - (dropdown.outerWidth() - trigger.outerWidth()) + hOffset : trigger.offset().left + hOffset,
 				top: trigger.offset().top + trigger.outerHeight() + vOffset
 			});

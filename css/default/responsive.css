@@ -198,6 +198,16 @@
 	#social-network a:hover {
 		padding-left: 0;
 	}
+	
+	.dropdown.dropdown-tip.dropdown-anchor-right:before {
+		left: 5px;
+		right: auto;
+	}
+	
+	.dropdown.dropdown-tip.dropdown-anchor-right:after {
+		left: 6px;
+		right: auto;
+	}
 }
 
 /**
