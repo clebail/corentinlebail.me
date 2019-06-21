@@ -1,0 +1,24 @@
+<div id="<?php echo $datas["id"]; ?>" class="dropdown dropdown-tip dropdown-anchor-right dropdown-relative">
+	<ul class="dropdown-menu">
+		<li>
+			<span>
+				<span class="signin google">
+					<a href="<?php echo Home_Openid_Google_Controller_Index::getUrl(); ?>">
+						<span class="badge"></span>
+						<span class="title">Sign in with Google</span>
+					</a>
+				</span>
+			</span>
+		</li>
+		<li>
+			<span>
+				<span class="signin github">
+					<a href="<?php echo Home_Openid_Github_Controller_Index::getUrl(); ?>">
+						<span class="badge"></span>
+						<span class="title">Sign in with Github</span>
+					</a>
+				</span>
+			</span>
+		</li>
+	</ul>
+</div>

@@ -922,6 +922,16 @@ button::-moz-focus-inner,input::-moz-focus-inner {
 	right: 13px;
 }
 
+.dropdown.dropdown-tip.dropdown-anchor-right.cancel-right:before {
+		left: 5px;
+		right: auto;
+	}
+	
+	.dropdown.dropdown-tip.dropdown-anchor-right.cancel-right:after {
+		left: 6px;
+		right: auto;
+	}
+
 .dropdown.dropdown-scroll .dropdown-menu,.dropdown.dropdown-scroll .dropdown-panel
 	{
 	max-height: 358px;
@@ -2188,7 +2198,7 @@ td .checkbox .switch {
 	list-style: inherit;
 }
 
-.paper .content li {
+.paper .content ul:not(.dropdown-menu) li {
 	margin-left: 25px;
 }
 
@@ -2234,7 +2244,7 @@ td .checkbox .switch {
 	text-decoration: none;
 }
 
-.paper .comments .saisie dt ul {
+.paper .comments .saisie dt ul:not(.dropdown-menu) {
 	width: 450px;
     padding: 35px 25px;
     position: absolute;
@@ -2253,7 +2263,7 @@ td .checkbox .switch {
 .paper .comments .saisie dt:hover ul {
 	display: block;	
 }
-.paper .comments .saisie dt li {
+.paper .comments .saisie dt ul:not(.dropdown-menu) li {
 	margin: 0 0 25px 0;
 }
 .paper .comments .saisie dt li:last-child {

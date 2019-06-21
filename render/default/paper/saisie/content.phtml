@@ -8,9 +8,10 @@
 <?php else: ?>
 <dl class="login">
 	<dt>
-		<a href="<?php echo Home_Openid_Google_Controller_Index::getUrl(); ?>" title="Vous de vez vous identifier pour laisser un commentaire">
+		<a href="#" title="Vous devez vous identifier pour laisser un commentaire" title="Test" data-dropdown="#dropdown-comment">
 			<i class="material-icons">https</i>
 		</a>
+		<?php echo $this->callTemplate("login/dropdown", array("id" => "dropdown-comment")); ?>
 	</dt>
 </dl>
 <?php endif; ?>

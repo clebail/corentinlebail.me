@@ -102,21 +102,34 @@ if(jQuery) (function($) {
 			trigger = dropdown.data('dropdown-trigger'),
 			hOffset = trigger ? parseInt(trigger.attr('data-horizontal-offset') || 0, 10) : null,
 			vOffset = trigger ? parseInt(trigger.attr('data-vertical-offset') || 0, 10) : null;
-		
+						
 		if( dropdown.length === 0 || !trigger ) return;
 		
 		// Position the dropdown relative-to-parent...
 		if( dropdown.hasClass('dropdown-relative') ) {
-			dropdown.css({
-				left: dropdown.hasClass('dropdown-anchor-right')  && $(window).width() > 800 ?
-					trigger.position().left - (dropdown.outerWidth(true) - trigger.outerWidth(true)) - parseInt(trigger.css('margin-right')) + hOffset :
-					trigger.position().left + parseInt(trigger.css('margin-left')) + hOffset,
-				top: trigger.position().top + trigger.outerHeight(true) - parseInt(trigger.css('margin-top')) + vOffset
-			});
+			var dWidth = (dropdown.outerWidth(true) - trigger.outerWidth(true)) - parseInt(trigger.css('margin-right')) + hOffset;
+			
+			if(trigger.offset().left > dWidth) {
+				dropdown.removeClass("cancel-right");
+				
+				dropdown.css({
+					left: dropdown.hasClass('dropdown-anchor-right') ?
+						trigger.position().left - dWidth :
+						trigger.position().left + parseInt(trigger.css('margin-left')) + hOffset,
+					top: trigger.position().top + trigger.outerHeight(true) - parseInt(trigger.css('margin-top')) + vOffset
+				});
+			} else {
+				dropdown.addClass("cancel-right");
+				
+				dropdown.css({
+					left: trigger.position().left + parseInt(trigger.css('margin-left')) + hOffset,
+					top: trigger.position().top + trigger.outerHeight(true) - parseInt(trigger.css('margin-top')) + vOffset
+				});
+			}
 		} else {
 			// ...or relative to document
 			dropdown.css({
-				left: dropdown.hasClass('dropdown-anchor-right')  && $(window).width() > 800 ? 
+				left: dropdown.hasClass('dropdown-anchor-right') ? 
 					trigger.offset().left - (dropdown.outerWidth() - trigger.outerWidth()) + hOffset : trigger.offset().left + hOffset,
 				top: trigger.offset().top + trigger.outerHeight() + vOffset
 			});
