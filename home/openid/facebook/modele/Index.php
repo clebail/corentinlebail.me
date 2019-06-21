@@ -1,5 +1,7 @@
 <?php
 class Home_Openid_Facebook_Modele_Index extends Home_Openid_Modele_Abstract {
+    protected static $provider = "facebook";
+    
     public function authenticate($code) {
         $ret = array();
         

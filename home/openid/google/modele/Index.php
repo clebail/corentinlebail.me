@@ -72,6 +72,7 @@ require_once("lib/Google/AccessToken/Revoke.php");
 
 
 class Home_Openid_Google_Modele_Index extends Home_Openid_Modele_Abstract {
+    protected static $provider = "google";
     private static $googleClient = null;
     
     public static function getGoogleClient() {
@@ -103,8 +104,6 @@ class Home_Openid_Google_Modele_Index extends Home_Openid_Modele_Abstract {
     }
     
     public function authenticate($code) {
-        $db = Core_Dbaccess::getInstance();
-        
         $ret = array();
         
         $client = self::getGoogleClient();
@@ -117,20 +116,8 @@ class Home_Openid_Google_Modele_Index extends Home_Openid_Modele_Abstract {
         $email = $me->getEmails();
         $image = $me->getImage();
         
-        $sql = "
-            INSERT INTO USER (email, name, avatar)
-            VALUES (:email, :name, :avatar)
-            ON DUPLICATE KEY UPDATE name=VALUES(name), avatar=VALUES(avatar)
-        ";
-        
-        $stmt = $db->getPdo()->prepare($sql);
-        
-        $stmt->execute(array(
-            ":email" => $email[0]["value"],
-            ":name" => $me->getDisplayName(),
-            ":avatar" => $image["url"],
-        ));
-        
+        $this->storeUserData($email[0]["value"], $me->getDisplayName(), $image["url"]);
+                
         Core_Session::getInstance()->setData(Home_Openid_Modele_Abstract::ACCESS_TOKEN, $accessToken);
         $this->storeSessionDatas($email[0]["value"], $me->getDisplayName(), $image["url"]);
         

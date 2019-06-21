@@ -1,5 +1,7 @@
 <?php
 class Home_Openid_Github_Modele_Index extends Home_Openid_Modele_Abstract {
+    protected static $provider = "github";
+    
     public function authenticate($code) {
         $ret = array();
         
@@ -16,6 +18,7 @@ class Home_Openid_Github_Modele_Index extends Home_Openid_Modele_Abstract {
             Core_Session::getInstance()->setData(Home_Openid_Modele_Abstract::ACCESS_TOKEN, $data["access_token"]);
             if(($user = $this->getUserInfo($data["access_token"])) != null) {
                 $this->storeSessionDatas($user["email"], $user["name"], $user["avatar"]);
+                $this->storeUserData($user["email"], $user["name"], $user["avatar"]);
             }
         } else {
             Core_Clbfw::log(curl_error($ch));

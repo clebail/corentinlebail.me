@@ -35,7 +35,7 @@ class Home_Ajax_Game_Sokoban_Modele_Index extends Core_Modele_Abstract {
             INSERT INTO GAME_SOKOBAN_SCORE (niveau, idUser, nbMove, nbPush)
             SELECT :niveau, u.id, :nbMove, :nbPush
             FROM USER AS u
-            WHERE u.email = :email
+            WHERE u.provider = :provider AND u.email = :email
             ON DUPLICATE KEY UPDATE `date` = IF(:nbMove < nbMove OR :nbPush < nbPush, :date, `date`), nbMove = IF(:nbMove < nbMove OR :nbPush < nbPush, :nbMove, nbMove), nbPush = IF(:nbMove < nbMove OR :nbPush < nbPush, :nbPush, nbPush)
         ";
         
@@ -47,6 +47,7 @@ class Home_Ajax_Game_Sokoban_Modele_Index extends Core_Modele_Abstract {
                 ":nbMove" => $nbMove,
                 ":nbPush" => $nbPush,
                 ":date" => (new Datetime())->format("Y-m-d H:i:s"),
+                ":provider" => Home_Openid_Modele_Abstract::getProvider(),
                 ":email" => Home_Openid_Modele_Abstract::getEmail(),
             ));
             

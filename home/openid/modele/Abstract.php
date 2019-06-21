@@ -2,6 +2,8 @@
 abstract class Home_Openid_Modele_Abstract extends Core_Modele_Abstract {
     const ACCESS_TOKEN = "access_token";
     const SESSION_DATAS = "openid_session_datas";
+     
+    protected static $provider;
     
     public static function getEmail() {
         return self::getData("email");
@@ -15,11 +17,34 @@ abstract class Home_Openid_Modele_Abstract extends Core_Modele_Abstract {
         return self::getData("avatar");
     }
     
+    public static function getProvider() {
+        return static::$provider;
+    }
+    
     protected function storeSessionDatas($email, $name, $avatar) {
         Core_Session::getInstance()->setData(Home_Openid_Modele_Abstract::SESSION_DATAS, array(
             "email" => $email,
             "name" => $name,
             "avatar" => $avatar,
+        ));
+    }
+    
+    protected function storeUserData($email, $name, $avatar) {
+        $db = Core_Dbaccess::getInstance();
+        
+        $sql = "
+            INSERT INTO USER (provider, email, name, avatar)
+            VALUES (:provider, :email, :name, :avatar)
+            ON DUPLICATE KEY UPDATE name=VALUES(name), avatar=VALUES(avatar)
+        ";
+        
+        $stmt = $db->getPdo()->prepare($sql);
+        
+        $stmt->execute(array(
+            ":provider" => static::$provider,
+            ":email" => $email,
+            ":name" => $name,
+            ":avatar" => $avatar,
         ));
     }
     
