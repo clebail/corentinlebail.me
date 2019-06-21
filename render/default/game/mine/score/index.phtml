@@ -1,7 +1,7 @@
 <?php foreach($datas as $highScore): ?>
 <tr>
-	<td class="name"><?php echo $highScore["name"]; ?></td>
-	<td><?php echo $highScore["temps"]; ?></td>
-	<td><?php echo $highScore["date"]; ?></td>
+	<td data-title="Joueur" class="name"><?php echo $highScore["name"]; ?></td>
+	<td data-title="Temps"><?php echo $highScore["temps"]; ?></td>
+	<td data-title="Le"><?php echo $highScore["date"]; ?></td>
 </tr>
 <?php endforeach; ?>

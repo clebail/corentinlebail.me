@@ -1,8 +1,8 @@
 <?php foreach($datas as $highScore): ?>
 <tr>
-	<td class="name"><?php echo $highScore["name"]; ?></td>
-	<td><?php echo $highScore["nbPush"]; ?></td>
-	<td><?php echo $highScore["nbMove"]; ?></td>
-	<td><?php echo $highScore["date"]; ?></td>
+	<td data-title="Joueur" class="name"><?php echo $highScore["name"]; ?></td>
+	<td data-title="Nombre de poussées"><?php echo $highScore["nbPush"]; ?></td>
+	<td data-title="Nombre de mouvement"><?php echo $highScore["nbMove"]; ?></td>
+	<td data-title="le"><?php echo $highScore["date"]; ?></td>
 </tr>
 <?php endforeach; ?>
