@@ -26,8 +26,13 @@ class Core_Config {
 		
 		$config["openid/github/identityurl"] = "https://github.com/login/oauth/authorize";
 		$config["openid/github/accesstokenurl"] = "https://github.com/login/oauth/access_token";
-		$config["openid/github/client_id"] = "eb38be7d82d2d5936919";
-		$config["openid/github/client_secret"] = "c349e4ab1b7e99e9c410f091c3b47ef55c4c47d8";
+		$config["openid/github/client_id"] = "xxxxx";
+		$config["openid/github/client_secret"] = "xxxxxx";
+		
+		
+		$config["openid/facebook/identityurl"] = "//www.facebook.com/v3.3/dialog/oauth";
+		$config["openid/facebook/client_id"] = "xxxxxxx";
+		$config["openid/facebook/salt"] = "xxxxxxx";
 		
 		if(isset($config[$path])) {
 			return $config[$path];

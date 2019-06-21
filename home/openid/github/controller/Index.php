@@ -9,7 +9,7 @@ class Home_Openid_Github_Controller_Index extends Core_Controller_Abstract {
             $datas = $this->modele->authenticate($this->params["code"]);
             $this->redirect($datas["redirect_uri"]);
         } else {
-            $this->redirect(Home_Test_Controller_Index::getUrl());
+            $this->redirect(Home_Controller_Index::getUrl());
         }
         
     }
