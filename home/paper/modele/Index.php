@@ -54,13 +54,17 @@ class Home_Paper_Modele_Index extends Core_Modele_Abstract {
             c.content, c.dateAdd
             FROM COMMENTS AS c
             INNER JOIN USER AS u ON u.id = c.idWriter
-            WHERE c.idPaper = :idPaper AND c.idParent IS NULL
+            WHERE c.idPaper = :idPaper AND c.idParent IS NULL AND (c.active = 1 OR (u.email = :email AND u.provider = :provider))
             ORDER BY c.dateAdd DESC
         ";
         
         $stmt = $db->getPdo()->prepare($sql);
         
-        $stmt->execute(array("idPaper" => $idPaper));
+        $stmt->execute(array(
+            ":idPaper" => $idPaper,
+            ":email" => Home_Openid_Modele_Abstract::getEmail(),
+            ":provider" => Home_Openid_Modele_Abstract::getProvider(),
+        ));
         
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $dateAdd = Datetime::createFromFormat("Y-m-d H:i:s", $row["dateAdd"]);

@@ -18,7 +18,7 @@ abstract class Home_Openid_Modele_Abstract extends Core_Modele_Abstract {
     }
     
     public static function getProvider() {
-        return static::$provider;
+        return self::getData("provider");
     }
     
     protected function storeSessionDatas($email, $name, $avatar) {
@@ -26,6 +26,7 @@ abstract class Home_Openid_Modele_Abstract extends Core_Modele_Abstract {
             "email" => $email,
             "name" => $name,
             "avatar" => $avatar,
+            "provider" => static::$provider,
         ));
     }
     
