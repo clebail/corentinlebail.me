@@ -73,28 +73,25 @@ require_once("lib/Google/AccessToken/Revoke.php");
 
 class Home_Openid_Google_Modele_Index extends Home_Openid_Modele_Abstract {
     protected static $provider = "google";
-    private static $googleClient = null;
     
-    public static function getGoogleClient() {
-        if(self::$googleClient == null) {
-            self::$googleClient = new Google_Client();
+    public function getClient() {
+        $client = new Google_Client();
             
-            self::$googleClient->setApplicationName("corentinlebail.me");
-            self::$googleClient->setAuthConfig(Core_Clbfw::getBaseDirname()."/data/credentials/client_credentials.json");
-            self::$googleClient->addScope(array(
-                "https://www.googleapis.com/auth/userinfo.email",
-                "https://www.googleapis.com/auth/userinfo.profile",
-                Google_Service_Plus::PLUS_ME,
-            ));
-        }
+        $client->setApplicationName("corentinlebail.me");
+        $client->setAuthConfig(Core_Clbfw::getBaseDirname()."/data/credentials/client_credentials.json");
+        $client->addScope(array(
+            "https://www.googleapis.com/auth/userinfo.email",
+            "https://www.googleapis.com/auth/userinfo.profile",
+            Google_Service_Plus::PLUS_ME,
+        ));
         
-        return self::$googleClient;
+        return $client;
     }
     
     public function getContent() {
         $ret = array();
         
-        $client = self::getGoogleClient();
+        $client = $this->getClient();
         
         $client->setRedirectUri(Home_Openid_Google_Controller_Index::getUrl("index", "result", array(), true));
         
@@ -106,15 +103,45 @@ class Home_Openid_Google_Modele_Index extends Home_Openid_Modele_Abstract {
     public function authenticate($code) {
         $ret = array();
         
-        $client = self::getGoogleClient();
+        $client = $this->getClient();
         
-        $client->fetchAccessTokenWithAuthCode($code);
-        $accessToken = $client->getAccessToken();
+        $tokenPath = 'token.json';
+        if(file_exists($tokenPath)) {
+            $accessToken = json_decode(file_get_contents($tokenPath), true);
+            $client->setAccessToken($accessToken);
+        }
+        
+        // If there is no previous token or it's expired.
+        if($client->isAccessTokenExpired()) {
+            // Refresh the token if possible, else fetch a new one.
+            if($client->getRefreshToken()) {
+                $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
+            } else {
+                // Exchange authorization code for an access token.
+                $accessToken = $client->fetchAccessTokenWithAuthCode($code);
+                
+                // Check to see if there was an error.
+                if(array_key_exists('error', $accessToken)) {
+                    throw new Exception(join(', ', $accessToken));
+                }
+                
+                $client->setAccessToken($accessToken);
+            }
+            // Save the token to a file.
+            if(!file_exists(dirname($tokenPath))) {
+                mkdir(dirname($tokenPath), 0700, true);
+            }
+            $accessToken = $client->getAccessToken();
+            file_put_contents($tokenPath, json_encode($accessToken));
+        }
+        
         $plus = new Google_Service_Plus($client);
         
         $me = $plus->people->get("me");
         $email = $me->getEmails();
         $image = $me->getImage();
+        
+        print_r($email);
         
         $this->storeUserData($email[0]["value"], $me->getDisplayName(), $image["url"]);
                 

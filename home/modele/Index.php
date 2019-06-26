@@ -7,9 +7,6 @@ class Home_Modele_Index extends Core_Modele_Abstract {
     }
     
     public function logout() {
-        $client = Home_Openid_Google_Modele_Index::getGoogleClient();
-        
-        $client->revokeToken();
         Core_Session::getInstance()->destroy(Home_Openid_Modele_Abstract::ACCESS_TOKEN);
     }
     
