@@ -1021,6 +1021,19 @@ button::-moz-focus-inner,input::-moz-focus-inner {
 	color: #FFF;
 }
 
+.dropdown .dropdown-menu .facebook {
+	border-color: #3b5998;
+	background-color: #3b5998;
+}
+
+.dropdown .dropdown-menu .facebook span.badge {
+	background-image: url(../../images/facebook.png);
+}
+
+.dropdown .dropdown-menu .facebook span.title {
+	color: #FFF;
+}
+
 .dropdown .dropdown-menu li>a:hover,
 .dropdown .dropdown-menu label:hover
 	{

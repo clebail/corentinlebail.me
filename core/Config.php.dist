@@ -30,8 +30,11 @@ class Core_Config {
 		$config["openid/github/client_secret"] = "xxxxxx";
 		
 		
-		$config["openid/facebook/identityurl"] = "//www.facebook.com/v3.3/dialog/oauth";
+		$config["openid/facebook/identityurl"] = "https://www.facebook.com/v3.3/dialog/oauth";
+		$config["openid/facebook/accesstokenurl"] = "https://www.facebook.com/v3.3/oauth/access_token";
+		$config["openid/facebook/user"] = "https://graph.facebook.com/me";
 		$config["openid/facebook/client_id"] = "xxxxxxx";
+		$config["openid/facebook/client_secret"] = "xxxxxxx";
 		$config["openid/facebook/salt"] = "xxxxxxx";
 		
 		if(isset($config[$path])) {

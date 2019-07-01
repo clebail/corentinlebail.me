@@ -9,20 +9,22 @@ class Home_Openid_Facebook_Controller_Index extends Core_Controller_Abstract {
         $url .= "&redirect_uri=".urlencode(Home_Openid_Facebook_Controller_Index::getUrl("index", "result", array(), true));
         $url .= "&state=".json_encode($state);
         
-        echo $url;
-        
-        //$this->redirect($url);
+        $this->redirect($url);
     }
     
     public function resultAction() {
-        if(array_key_exists("state", $this->params)) {
-            $state = json_decode($this->params["state"], true);
-            $key = md5(Core_Config::getConfigValue("openid/facebook/salt").$state["ts"]);
+       if(array_key_exists("code", $this->params)) {
+            $keyOk = true;
+            if(array_key_exists("state", $this->params)) {
+                $state = json_decode($this->params["state"], true);
+                $key = md5(Core_Config::getConfigValue("openid/facebook/salt").$state["ts"]);
             
-            echo "<pre>";
-            print_r($state);
-            print_r($key);
-            echo "</pre>";
+                $keyOk = $state["key"] == $key;
+            }
+            if($keyOk) {
+                $this->modele->authenticate($this->params["code"]);
+            }
+            $this->redirect(Home_Controller_Index::getUrl());
         } else {
             $this->redirect(Home_Controller_Index::getUrl());
         }
