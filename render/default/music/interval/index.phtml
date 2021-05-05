@@ -1,0 +1,56 @@
+<div class="intervals">
+    Mode:
+    <select id='mode'>";
+        <?php foreach($datas["modes"] as $m => $ints): ?>
+            <option value='<?php echo $m; ?>'><?php echo $m; ?></option>
+        <?php endforeach ?>
+    </select>
+
+    <table>
+        <tr>
+            <?php $nbI = count($datas["intervals"]); ?>
+            <?php $pcent = 100 / $nbI; ?>
+            <?php foreach($datas["intervals"] as $nom => $color): ?>
+                <th style='width:<?php echo $pcent; ?>%; background: <?php echo $color; ?>'><?php echo $nom; ?></td>
+            <?php endforeach ?>
+            <?php for($i=0;$i<$nbI;$i++): ?>
+                <tr>
+                <?php reset($datas["intervals"]); ?>
+                <?php $t = 0; ?>
+                <?php foreach($datas["notes"] as $note): ?>
+                    <?php $color = current($datas["intervals"]); ?>
+                    <td style='background: <?php echo $color; ?>;' class='note t<?php echo $t; ?>'>
+                        <div class=''><?php echo $note; ?></div>
+                    </td>
+                    <?php next($datas["intervals"]); ?>
+                    <?php $t++; ?>
+                <?php endforeach ?>
+                </tr>
+                
+                <?php $note = array_shift($datas["notes"]); ?>
+                <?php $datas["notes"][] = $note; ?>
+            <?php endfor ?>
+        </tr>
+    <table>
+
+	<script>
+        var modes = <?php echo json_encode($datas["modes"]); ?>
+
+        $("#mode").change(function() {
+            $(".note div").removeClass('mode');
+            var intervals = modes[$(this).val()];
+            var t=i=0;
+            var l=intervals.length;
+            do {
+                $(".note.t"+t+" div").addClass('mode');
+                
+                t += intervals[i];
+                i++;
+            }while(i <= l);
+        });
+        
+        $(document).ready(function() {
+            $("#mode").change();
+        });
+    </script>
+</div>

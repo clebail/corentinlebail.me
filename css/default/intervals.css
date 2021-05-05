@@ -1,0 +1,24 @@
+.intervals table {
+    width: 800px;
+    border-collapse: collapse;
+    border: 1px solid #666;
+    margin: auto;
+}
+    
+.intervals th {
+    border: 1px solid #666;
+    line-height: 32px;
+    font-weight: bold;
+    color: #000;
+}
+    
+.intervals td {
+    border: 1px solid #666;
+    text-align: center;
+    line-height: 32px;
+}
+
+.intervals td .mode {
+    border: 2px solid black;
+    font-weight: bold;
+}
